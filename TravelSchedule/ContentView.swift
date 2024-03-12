@@ -8,6 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    // TODO: - привести в нормальный вид (далее в спринтах)
+    // Не совсем красиво на мой взгляд кривовато использовать презентер, но не хотел здесь добавлять логику)
+    private let presenter: ContentPresenterProtocol
+    
+    init(presenter: ContentPresenterProtocol) {
+        self.presenter = presenter
+    }
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -16,9 +24,12 @@ struct ContentView: View {
             Text("Hello, world!")
         }
         .padding()
+        .onAppear {
+            presenter.nearestStations()
+        }
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(presenter: ContentPresenter())
 }
