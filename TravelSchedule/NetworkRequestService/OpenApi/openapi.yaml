@@ -8,8 +8,10 @@ servers:
 tags:
 - name: Список ближайших станций
   description: Запрос позволяет получить список станций, находящихся в указанном радиусе от указанной точки.
+- name: Информация о перевозчике
+  description: Запрос позволяет получить информацию о перевозчике по указанному коду перевозчика.
 - name: Копирайт Яндекс Расписаний
-  description: Запрос позволяет получить данные о Яндекс Расписаниях
+  description: Запрос позволяет получить данные о Яндекс Расписаниях.
 paths:
   /v3.0/nearest_stations/:
     get:
@@ -65,6 +67,55 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Stations'
+  /v3.0/carrier/:
+    get:
+      tags:
+      - getCarrier
+      summary: Информация о перевозчике
+      operationId: getCarrier
+      parameters:
+      - name: apikey
+        in: query
+        description: API key
+        required: true
+        schema:
+          type: string
+      - name: code
+        in: query
+        description: Код перевозчика
+        required: true
+        schema:
+          type: string
+      - name: system
+        in: query
+        description: Система кодирования
+        required: false
+        schema:
+          type: string
+          enum:
+            - yandex
+            - iata
+            - sirena
+            - express
+            - esr
+          default: yandex
+      - name: format
+        in: query
+        description: json или xml
+        required: false
+        schema:
+          type: string
+          enum:
+            - json
+            - xml
+          default: json
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Carriers'
   /v3.0/copyright/:
     get:
       tags:
@@ -151,6 +202,45 @@ components:
           type: string
         touch_url:
           type: string
+    Carriers:
+      type: object
+      properties:
+        carrier:
+          $ref: '#/components/schemas/CarriersItems'
+        carriers:
+          type: array
+          items:
+            $ref: '#/components/schemas/CarriersItems'
+    CarriersItems:
+      type: object
+      properties:
+        code:
+          type: integer
+        contacts:
+          type: string
+        url:
+          type: string
+        title:
+          type: string
+        phone:
+          type: string
+        codes:
+          $ref: '#/components/schemas/CarrierCodes'
+        address:
+          type: string
+        logo:
+          type: string
+        email:
+          type: string
+    CarrierCodes:
+      type: object
+      properties:
+        code:
+          icao: string
+        sirena:
+          type: string
+        iata:
+          type: string
     Copyright:
       type: object
       properties:
@@ -175,4 +265,3 @@ components:
           type: string
         text:
           type: string
-

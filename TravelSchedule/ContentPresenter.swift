@@ -13,6 +13,7 @@ enum Constants {
 
 protocol ContentPresenterProtocol: AnyObject {
     func nearestStations()
+    func carrier()
     func copyright()
 }
 
@@ -40,6 +41,26 @@ final class ContentPresenter: ContentPresenterProtocol {
                 distance: 50
             )
             print(stations)
+        }
+    }
+    
+    // Информация о перевозчике:
+    func carrier() {
+        guard let serverURL = try? Servers.server1() else { return }
+        
+        let client = Client(
+            serverURL: serverURL,
+            transport: URLSessionTransport()
+        )
+        
+        let service = NetworkRequestService(
+            client: client,
+            apikey: Constants.apiKey
+        )
+        
+        Task {
+            let copyright = try await service.getCarrier(code: "115")
+            print(copyright)
         }
     }
     

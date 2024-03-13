@@ -16,7 +16,7 @@
 		918CA5FF2BA01FA60088CA5F /* openapi-generator-config.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 918CA5FE2BA01FA60088CA5F /* openapi-generator-config.yaml */; };
 		918CA6012BA01FE00088CA5F /* NetworkRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918CA6002BA01FE00088CA5F /* NetworkRequestService.swift */; };
 		918CA6082BA0EED10088CA5F /* ContentPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918CA6072BA0EED10088CA5F /* ContentPresenter.swift */; };
-		91C0572E2BA1965A00CBD8F3 /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 918CA6062BA0EC560088CA5F /* openapi.yaml */; };
+		91C057302BA1FFB300CBD8F3 /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 918CA6062BA0EC560088CA5F /* openapi.yaml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -168,7 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9131FAA52B9D99E400B25976 /* Preview Assets.xcassets in Resources */,
-				91C0572E2BA1965A00CBD8F3 /* openapi.yaml in Resources */,
+				91C057302BA1FFB300CBD8F3 /* openapi.yaml in Resources */,
 				918CA5FF2BA01FA60088CA5F /* openapi-generator-config.yaml in Resources */,
 				9131FAA22B9D99E400B25976 /* Assets.xcassets in Resources */,
 			);

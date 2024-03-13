@@ -25,8 +25,10 @@ struct ContentView: View {
         }
         .padding()
         .onAppear {
+            // Для запроса пожалуйста расскоментируйте нужную строку:
 //            presenter.nearestStations()
-            presenter.copyright()
+//            presenter.copyright()
+            presenter.carrier()
         }
     }
 }
