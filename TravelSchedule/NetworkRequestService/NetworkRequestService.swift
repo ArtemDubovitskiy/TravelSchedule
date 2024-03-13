@@ -8,9 +8,11 @@ import OpenAPIRuntime
 import OpenAPIURLSession
 
 typealias NearestStations = Components.Schemas.Stations
+typealias CopyrightSchedule = Components.Schemas.Copyright
 
 protocol NetworkRequestServiceProtocol {
     func getNearestStations(lat: Double, lng: Double, distance: Int) async throws -> NearestStations
+    func getCopyright() async throws -> CopyrightSchedule
 }
 
 final class NetworkRequestService: NetworkRequestServiceProtocol {
@@ -29,6 +31,14 @@ final class NetworkRequestService: NetworkRequestServiceProtocol {
             lat: lat,
             lng: lng,
             distance: distance
+        ))
+        return try response.ok.body.json
+    }
+    
+    // Копирайт Яндекс Расписаний:
+    func getCopyright() async throws -> CopyrightSchedule {
+        let response = try await client.getCopyright(query: .init(
+            apikey: apikey
         ))
         return try response.ok.body.json
     }

@@ -7,7 +7,9 @@ servers:
 - url: https://api.rasp.yandex.net
 tags:
 - name: Список ближайших станций
-  description: Список ближайших станций
+  description: Запрос позволяет получить список станций, находящихся в указанном радиусе от указанной точки.
+- name: Копирайт Яндекс Расписаний
+  description: Запрос позволяет получить данные о Яндекс Расписаниях
 paths:
   /v3.0/nearest_stations/:
     get:
@@ -46,6 +48,10 @@ paths:
         required: false
         schema:
           type: string
+          enum:
+            - json
+            - xml
+          default: json
       - name: lang
         in: query
         description: lang
@@ -59,6 +65,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Stations'
+  /v3.0/copyright/:
+    get:
+      tags:
+      - getCopyright
+      summary: Копирайт Яндекс Расписаний
+      operationId: getCopyright
+      parameters:
+      - name: apikey
+        in: query
+        description: API key
+        required: true
+        schema:
+          type: string
+      - name: format
+        in: query
+        description: json или xml
+        required: false
+        schema:
+          type: string
+          enum:
+            - json
+            - xml
+          default: json
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Copyright'
 components:
   schemas:
     Stations:
@@ -115,3 +151,28 @@ components:
           type: string
         touch_url:
           type: string
+    Copyright:
+      type: object
+      properties:
+        copyright:
+          $ref: '#/components/schemas/CopyrightItems'
+    CopyrightItems:
+      type: object
+      properties:
+        logo_vm:
+          type: string
+        url:
+          type: string
+        logo_vd:
+          type: string
+        logo_hy:
+          type: string
+        logo_hd:
+          type: string
+        logo_vy:
+          type: string
+        logo_hm:
+          type: string
+        text:
+          type: string
+

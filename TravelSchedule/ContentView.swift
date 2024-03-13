@@ -25,7 +25,8 @@ struct ContentView: View {
         }
         .padding()
         .onAppear {
-            presenter.nearestStations()
+//            presenter.nearestStations()
+            presenter.copyright()
         }
     }
 }

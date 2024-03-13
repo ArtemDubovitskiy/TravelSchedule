@@ -13,6 +13,7 @@ enum Constants {
 
 protocol ContentPresenterProtocol: AnyObject {
     func nearestStations()
+    func copyright()
 }
 
 // Вероятно не лучший вариант использовать Presenter (хотел на данный момент вынести логику отдельно)
@@ -39,6 +40,26 @@ final class ContentPresenter: ContentPresenterProtocol {
                 distance: 50
             )
             print(stations)
+        }
+    }
+    
+    // Копирайт Яндекс Расписаний:
+    func copyright() {
+        guard let serverURL = try? Servers.server1() else { return }
+        
+        let client = Client(
+            serverURL: serverURL,
+            transport: URLSessionTransport()
+        )
+        
+        let service = NetworkRequestService(
+            client: client,
+            apikey: Constants.apiKey
+        )
+        
+        Task {
+            let copyright = try await service.getCopyright()
+            print(copyright)
         }
     }
 }

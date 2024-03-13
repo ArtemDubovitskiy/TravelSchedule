@@ -13,10 +13,10 @@
 		9131FAA52B9D99E400B25976 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9131FAA42B9D99E400B25976 /* Preview Assets.xcassets */; };
 		918CA5F62BA01D920088CA5F /* OpenAPIRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 918CA5F52BA01D920088CA5F /* OpenAPIRuntime */; };
 		918CA5F92BA01E640088CA5F /* OpenAPIURLSession in Frameworks */ = {isa = PBXBuildFile; productRef = 918CA5F82BA01E640088CA5F /* OpenAPIURLSession */; };
-		918CA5FD2BA01F600088CA5F /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 918CA5FC2BA01F600088CA5F /* openapi.yaml */; };
 		918CA5FF2BA01FA60088CA5F /* openapi-generator-config.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 918CA5FE2BA01FA60088CA5F /* openapi-generator-config.yaml */; };
 		918CA6012BA01FE00088CA5F /* NetworkRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918CA6002BA01FE00088CA5F /* NetworkRequestService.swift */; };
 		918CA6082BA0EED10088CA5F /* ContentPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918CA6072BA0EED10088CA5F /* ContentPresenter.swift */; };
+		91C0572E2BA1965A00CBD8F3 /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 918CA6062BA0EC560088CA5F /* openapi.yaml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +25,6 @@
 		9131FA9F2B9D99E300B25976 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9131FAA12B9D99E400B25976 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9131FAA42B9D99E400B25976 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		918CA5FC2BA01F600088CA5F /* openapi.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = openapi.yaml; path = ../../../../Downloads/openapi.yaml; sourceTree = "<group>"; };
 		918CA5FE2BA01FA60088CA5F /* openapi-generator-config.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "openapi-generator-config.yaml"; sourceTree = "<group>"; };
 		918CA6002BA01FE00088CA5F /* NetworkRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestService.swift; sourceTree = "<group>"; };
 		918CA6062BA0EC560088CA5F /* openapi.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = openapi.yaml; sourceTree = "<group>"; };
@@ -68,7 +67,6 @@
 				9131FA9F2B9D99E300B25976 /* ContentView.swift */,
 				918CA6072BA0EED10088CA5F /* ContentPresenter.swift */,
 				9131FA9D2B9D99E300B25976 /* TravelScheduleApp.swift */,
-				918CA5FC2BA01F600088CA5F /* openapi.yaml */,
 				9131FAA12B9D99E400B25976 /* Assets.xcassets */,
 				9131FAA32B9D99E400B25976 /* Preview Content */,
 			);
@@ -170,9 +168,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9131FAA52B9D99E400B25976 /* Preview Assets.xcassets in Resources */,
+				91C0572E2BA1965A00CBD8F3 /* openapi.yaml in Resources */,
 				918CA5FF2BA01FA60088CA5F /* openapi-generator-config.yaml in Resources */,
 				9131FAA22B9D99E400B25976 /* Assets.xcassets in Resources */,
-				918CA5FD2BA01F600088CA5F /* openapi.yaml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
