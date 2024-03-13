@@ -26,8 +26,9 @@ struct ContentView: View {
         .padding()
         .onAppear {
             // Для запроса пожалуйста расскоментируйте нужную строку:
+            presenter.schedule()
 //            presenter.nearestStations()
-            presenter.nearestSettlement()
+//            presenter.nearestSettlement()
 //            presenter.copyright()
 //            presenter.carrier()
         }

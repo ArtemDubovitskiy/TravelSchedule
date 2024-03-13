@@ -6,6 +6,8 @@ info:
 servers:
 - url: https://api.rasp.yandex.net
 tags:
+- name: Расписание рейсов по станции
+  description: Запрос позволяет получить список рейсов, отправляющихся от указанной станции и информацию по каждому рейсу.
 - name: Список ближайших станций
   description: Запрос позволяет получить список станций, находящихся в указанном радиусе от указанной точки.
 - name: Ближайший город
@@ -15,6 +17,103 @@ tags:
 - name: Копирайт Яндекс Расписаний
   description: Запрос позволяет получить данные о Яндекс Расписаниях.
 paths:
+  /v3.0/schedule/:
+    get:
+      tags:
+      - getSchedule
+      summary: Расписание рейсов по станции
+      operationId: getSchedule
+      parameters:
+      - name: apikey
+        in: query
+        description: API key
+        required: true
+        schema:
+          type: string
+      - name: station
+        in: query
+        description: Код станции
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: lang
+        required: false
+        schema:
+          type: string
+      - name: format
+        in: query
+        description: json или xml
+        required: false
+        schema:
+          type: string
+          enum:
+            - json
+            - xml
+          default: json
+      - name: date
+        in: query
+        description: date YYYY-MM-DD
+        required: false
+        schema:
+          type: string
+      - name: transport_types
+        in: query
+        description: Тип транспортного средства.
+        required: false
+        schema:
+          type: string
+          enum:
+            - plane
+            - train
+            - suburban
+            - bus
+            - water
+            - helicopter
+      - name: direction
+        in: query
+        description: Код направления
+        required: false
+        schema:
+          type: string
+      - name: event
+        in: query
+        description: Событие, для которого нужно отфильтровать нитки в расписании.
+        required: false
+        schema:
+          type: string
+          enum:
+            - departure
+            - arrival
+          default: departure
+      - name: system
+        in: query
+        description: Система кодирования
+        required: false
+        schema:
+          type: string
+          enum:
+            - yandex
+            - iata
+            - sirena
+            - express
+            - esr
+          default: yandex
+
+      - name: result_timezone
+        in: query
+        description: Часовой пояс
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleStation'
   /v3.0/nearest_stations/:
     get:
       tags:
@@ -258,6 +357,143 @@ components:
           type: string
         touch_url:
           type: string
+    ScheduleStation:
+      type: object
+      properties:
+        date:
+          type: string
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        station:
+          $ref: '#/components/schemas/StationSchuedel'
+        schedule:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchuedelItem'
+        schedule_direction:
+            $ref: '#/components/schemas/SchuedelDirection'
+        directions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchuedelDirection'
+    StationSchuedel:
+      type: object
+      properties:
+        code:
+          type: string
+        station_type:
+          type: string
+          enum:
+            - station
+            - platform
+            - stop
+            - checkpoint
+            - post
+            - crossing
+            - overtaking_point
+            - train_station
+            - airport
+            - bus_station
+            - bus_stop
+            - unknown
+            - port
+            - port_point
+            - wharf
+            - river_port
+            - marine_station
+        station_type_name:
+          type: string
+        title:
+          type: string
+        popular_title:
+          type: string
+        short_title:
+          type: string
+        codes:
+          $ref: '#/components/schemas/StationSchuedelCodes'
+        transport_type:
+          type: string
+          enum:
+            - plane
+            - train
+            - suburban
+            - bus
+            - water
+            - helicopter
+        type:
+          type: string
+    StationSchuedelCodes:
+      type: object
+      properties:
+        yandex:
+          type: string
+        esr:
+          type: string
+    SchuedelItem:
+      type: object
+      properties:
+        except_days:
+          type: string
+        arrival:
+          type: string
+        thread:
+          $ref: '#/components/schemas/SchuedelThread'
+        is_fuzzy:
+          type: boolean
+        days:
+          type: string
+        stops:
+          type: string
+        departure:
+          type: string
+        terminal:
+          type: string
+        platform:
+          type: string
+    SchuedelThread:
+      type: object
+      properties:
+        uid:
+          type: string
+        title:
+          type: string
+        number:
+          type: string
+        short_title:
+          type: string
+        carrier:
+          $ref: '#/components/schemas/CarriersItems'
+        transport_type:
+          type: string
+          enum:
+            - plane
+            - train
+            - suburban
+            - bus
+            - water
+            - helicopter
+        vehicle:
+          type: string
+        transport_subtype:
+          $ref: '#/components/schemas/TransportSubtype'
+        express_type:
+          type: string
+    TransportSubtype:
+      type: object
+      properties:
+        color:
+          type: string
+        code:
+          type: string
+        title:
+          type: string
+    SchuedelDirection:
+      type: object
+      properties:
+        code:
+          type: string
+        title:
+          type: string
     Settlement:
       type: object
       properties:
@@ -313,8 +549,8 @@ components:
     CarrierCodes:
       type: object
       properties:
-        code:
-          icao: string
+        icao:
+          type: string
         sirena:
           type: string
         iata:
