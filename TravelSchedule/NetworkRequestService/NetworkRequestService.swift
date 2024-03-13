@@ -8,12 +8,14 @@ import OpenAPIRuntime
 import OpenAPIURLSession
 
 typealias NearestStations = Components.Schemas.Stations
+typealias NearestSettlement = Components.Schemas.Settlement
 typealias Carrier = Components.Schemas.Carriers
 typealias CarrierSystem = Operations.getCarrier.Input.Query.systemPayload
 typealias CopyrightSchedule = Components.Schemas.Copyright
 
 protocol NetworkRequestServiceProtocol {
     func getNearestStations(lat: Double, lng: Double, distance: Int) async throws -> NearestStations
+    func getNearestSettlement(lat: Double, lng: Double) async throws -> NearestSettlement
     func getCarrier(code: String, system: CarrierSystem) async throws -> Carrier
     func getCopyright() async throws -> CopyrightSchedule
 }
@@ -34,6 +36,16 @@ final class NetworkRequestService: NetworkRequestServiceProtocol {
             lat: lat,
             lng: lng,
             distance: distance
+        ))
+        return try response.ok.body.json
+    }
+    
+    // Ближайший город:
+    func getNearestSettlement(lat: Double, lng: Double) async throws -> NearestSettlement {
+        let response = try await client.getNearestSettlement(query: .init(
+            apikey: apikey,
+            lat: lat,
+            lng: lng
         ))
         return try response.ok.body.json
     }

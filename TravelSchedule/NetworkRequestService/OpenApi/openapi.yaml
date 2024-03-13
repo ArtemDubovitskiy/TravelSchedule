@@ -8,6 +8,8 @@ servers:
 tags:
 - name: Список ближайших станций
   description: Запрос позволяет получить список станций, находящихся в указанном радиусе от указанной точки.
+- name: Ближайший город
+  description: Запрос позволяет получить информацию о ближайшем к указанной точке городе.
 - name: Информация о перевозчике
   description: Запрос позволяет получить информацию о перевозчике по указанному коду перевозчика.
 - name: Копирайт Яндекс Расписаний
@@ -67,6 +69,60 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Stations'
+  /v3.0/nearest_settlement/:
+    get:
+      tags:
+      - getNearestSettlement
+      summary: Ближайший город
+      operationId: getNearestSettlement
+      parameters:
+      - name: apikey
+        in: query
+        description: API key
+        required: true
+        schema:
+          type: string
+      - name: lat
+        in: query
+        description: широта
+        required: true
+        schema:
+          type: number
+      - name: lng
+        in: query
+        description: долгота
+        required: true
+        schema:
+          type: number
+      - name: distance
+        in: query
+        description: радиус охвата
+        required: false
+        schema:
+          type: integer
+      - name: lang
+        in: query
+        description: lang
+        required: false
+        schema:
+          type: string
+      - name: format
+        in: query
+        description: json или xml
+        required: false
+        schema:
+          type: string
+          enum:
+            - json
+            - xml
+          default: json
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settlement'
   /v3.0/carrier/:
     get:
       tags:
@@ -202,6 +258,28 @@ components:
           type: string
         touch_url:
           type: string
+    Settlement:
+      type: object
+      properties:
+        distance:
+          type: number
+        code:
+          type: string
+        title:
+          type: string
+        popular_title:
+          type: string
+        short_title:
+          type: string
+        lat:
+          type: number
+        lng:
+          type: number
+        type:
+          type: string
+          enum:
+            - station
+            - settlement
     Carriers:
       type: object
       properties:

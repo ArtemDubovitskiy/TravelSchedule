@@ -27,8 +27,9 @@ struct ContentView: View {
         .onAppear {
             // Для запроса пожалуйста расскоментируйте нужную строку:
 //            presenter.nearestStations()
+            presenter.nearestSettlement()
 //            presenter.copyright()
-            presenter.carrier()
+//            presenter.carrier()
         }
     }
 }
