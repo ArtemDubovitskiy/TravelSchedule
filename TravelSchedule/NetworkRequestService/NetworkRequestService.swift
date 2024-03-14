@@ -9,6 +9,7 @@ import OpenAPIURLSession
 
 typealias SearchRoutes = Components.Schemas.RoutesList
 typealias Schedule = Components.Schemas.ScheduleStation
+typealias Threads = Components.Schemas.ThreadList
 typealias NearestStations = Components.Schemas.Stations
 typealias NearestSettlement = Components.Schemas.Settlement
 typealias Carrier = Components.Schemas.Carriers
@@ -18,6 +19,7 @@ typealias CopyrightSchedule = Components.Schemas.Copyright
 protocol NetworkRequestServiceProtocol {
     func getSearch(from: String, to: String) async throws -> SearchRoutes
     func getSchedule(station: String, date: String) async throws -> Schedule
+    func getThread(uid: String) async throws -> Threads
     func getNearestStations(lat: Double, lng: Double, distance: Int) async throws -> NearestStations
     func getNearestSettlement(lat: Double, lng: Double) async throws -> NearestSettlement
     func getCarrier(code: String, system: CarrierSystem) async throws -> Carrier
@@ -49,6 +51,15 @@ final class NetworkRequestService: NetworkRequestServiceProtocol {
             apikey: apikey,
             station: station,
             date: date
+        ))
+        return try response.ok.body.json
+    }
+    
+    // Список станций следования:
+    func getThread(uid: String) async throws -> Threads {
+        let response = try await client.getThread(query: .init(
+            apikey: apikey,
+            uid: uid
         ))
         return try response.ok.body.json
     }

@@ -26,12 +26,14 @@ struct ContentView: View {
         .padding()
         .onAppear {
             // Для запроса пожалуйста расскоментируйте нужную строку:
-            presenter.search()
-//            presenter.schedule()
-//            presenter.nearestStations()
-//            presenter.nearestSettlement()
-//            presenter.copyright()
-//            presenter.carrier()
+            
+//            presenter.search() // Расписание рейсов между станциями
+//            presenter.schedule() // Расписание рейсов по станции
+            presenter.threads() // Список станций следования
+//            presenter.nearestStations() // Список ближайших станций
+//            presenter.nearestSettlement() // Ближайший город
+//            presenter.carrier() // Информация о перевозчике
+//            presenter.copyright() // Копирайт Яндекс Расписаний
         }
     }
 }

@@ -14,6 +14,7 @@ enum Constants {
 protocol ContentPresenterProtocol: AnyObject {
     func search()
     func schedule()
+    func threads()
     func nearestStations()
     func nearestSettlement()
     func carrier()
@@ -66,6 +67,28 @@ final class ContentPresenter: ContentPresenterProtocol {
                 date: "2024-03-15"
             )
             print(schedule)
+        }
+    }
+    
+    // Список станций следования:
+    func threads() {
+        guard let serverURL = try? Servers.server1() else { return }
+        
+        let client = Client(
+            serverURL: serverURL,
+            transport: URLSessionTransport()
+        )
+        
+        let service = NetworkRequestService(
+            client: client,
+            apikey: Constants.apiKey
+        )
+        
+        Task {
+            let threads = try await service.getThread(
+                uid: "6802_0_2006004_g24_4"
+            )
+            print(threads)
         }
     }
     
