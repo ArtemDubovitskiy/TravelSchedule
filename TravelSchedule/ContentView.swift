@@ -24,15 +24,15 @@ struct ContentView: View {
             Text("Hello, world!")
         }
         .padding()
-        .onAppear {
+        .task {
             // Для запроса пожалуйста расскоментируйте нужную строку:
-            
 //            presenter.search() // Расписание рейсов между станциями
 //            presenter.schedule() // Расписание рейсов по станции
-            presenter.threads() // Список станций следования
+//            presenter.threads() // Список станций следования
 //            presenter.nearestStations() // Список ближайших станций
 //            presenter.nearestSettlement() // Ближайший город
 //            presenter.carrier() // Информация о перевозчике
+//            presenter.stationsList() // Список всех доступных станций
 //            presenter.copyright() // Копирайт Яндекс Расписаний
         }
     }

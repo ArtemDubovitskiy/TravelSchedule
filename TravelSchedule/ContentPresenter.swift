@@ -18,6 +18,7 @@ protocol ContentPresenterProtocol: AnyObject {
     func nearestStations()
     func nearestSettlement()
     func carrier()
+    func stationsList()
     func copyright()
 }
 
@@ -156,6 +157,27 @@ final class ContentPresenter: ContentPresenterProtocol {
         Task {
             let carrier = try await service.getCarrier(code: "115")
             print(carrier)
+        }
+    }
+    
+    // Список всех доступных станций:
+    func stationsList() {
+        guard let serverURL = try? Servers.server1() else { return }
+        
+        let client = Client(
+            serverURL: serverURL,
+            transport: URLSessionTransport()
+        )
+        
+        let service = NetworkRequestService(
+            client: client,
+            apikey: Constants.apiKey
+        )
+        
+        Task {
+            let stationList = try await service.getStationsList()
+            guard let countriesCount = stationList.countries?.count else { return }
+            print("Countries count: \(countriesCount)") // Кол-во стран для ускорения процесса
         }
     }
     

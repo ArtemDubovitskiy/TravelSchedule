@@ -10,12 +10,16 @@ tags:
   description: Запрос позволяет получить список рейсов, следующих от указанной станции отправления к указанной станции прибытия и информацию по каждому рейсу.
 - name: Расписание рейсов по станции
   description: Запрос позволяет получить список рейсов, отправляющихся от указанной станции и информацию по каждому рейсу.
+- name: Список станций следования
+  description: Запрос позволяет получить список станций следования нитки по указанному идентификатору нитки, информацию о каждой нитке и о промежуточных станциях нитки.
 - name: Список ближайших станций
   description: Запрос позволяет получить список станций, находящихся в указанном радиусе от указанной точки.
 - name: Ближайший город
   description: Запрос позволяет получить информацию о ближайшем к указанной точке городе.
 - name: Информация о перевозчике
   description: Запрос позволяет получить информацию о перевозчике по указанному коду перевозчика.
+- name: Список всех доступных станций
+  description: Ресурс содержит полный список станций.
 - name: Копирайт Яндекс Расписаний
   description: Запрос позволяет получить данные о Яндекс Расписаниях.
 paths:
@@ -464,6 +468,41 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Carriers'
+  /v3.0/stations_list/:
+    get:
+      tags:
+      - getStationsList
+      summary: Список всех доступных станций
+      operationId: getStationsList
+      parameters:
+      - name: apikey
+        in: query
+        description: API key
+        required: true
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: lang
+        required: false
+        schema:
+          type: string
+      - name: format
+        in: query
+        description: json или xml
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StationsList'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/StationsList'
   /v3.0/copyright/:
     get:
       tags:
@@ -614,6 +653,78 @@ components:
           type: string
         title:
           type: string
+    StationsList:
+      type: object
+      properties:
+        countries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Country'
+    Country:
+      type: object
+      properties:
+        regions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Region'
+        codes:
+          $ref: '#/components/schemas/StationListCodes'
+        title:
+          type: string
+    Region:
+      type: object
+      properties:
+        settlements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Settlements'
+        codes:
+          $ref: '#/components/schemas/StationListCodes'
+        title:
+          type: string
+    Settlements:
+      type: object
+      properties:
+        title:
+          type: string
+        codes:
+          $ref: '#/components/schemas/StationListCodes'
+        stations:
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementsStation'
+    SettlementsStation:
+      type: object
+      properties:
+        direction:
+          type: string
+        codes:
+          $ref: '#/components/schemas/StationListCodes'
+        station_type:
+          type: string
+        title:
+          type: string
+        longitude:
+          oneOf:
+            - type: number
+            - type: string
+          nullable: true
+        transport_type:
+          type: string
+        latitude:
+          oneOf:
+            - type: number
+            - type: string
+          nullable: true
+    StationListCodes:
+      type: object
+      properties:
+        esr_code:
+          type: string
+          nullable: true
+        yandex_code:
+          type: string
+          nullable: true
     StationSearch:
       type: object
       properties:

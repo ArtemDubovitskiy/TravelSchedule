@@ -6,6 +6,7 @@
 //
 import OpenAPIRuntime
 import OpenAPIURLSession
+import Foundation
 
 typealias SearchRoutes = Components.Schemas.RoutesList
 typealias Schedule = Components.Schemas.ScheduleStation
@@ -14,6 +15,7 @@ typealias NearestStations = Components.Schemas.Stations
 typealias NearestSettlement = Components.Schemas.Settlement
 typealias Carrier = Components.Schemas.Carriers
 typealias CarrierSystem = Operations.getCarrier.Input.Query.systemPayload
+typealias Stations = Components.Schemas.StationsList
 typealias CopyrightSchedule = Components.Schemas.Copyright
 
 protocol NetworkRequestServiceProtocol {
@@ -23,6 +25,7 @@ protocol NetworkRequestServiceProtocol {
     func getNearestStations(lat: Double, lng: Double, distance: Int) async throws -> NearestStations
     func getNearestSettlement(lat: Double, lng: Double) async throws -> NearestSettlement
     func getCarrier(code: String, system: CarrierSystem) async throws -> Carrier
+    func getStationsList() async throws -> Stations
     func getCopyright() async throws -> CopyrightSchedule
 }
 
@@ -93,6 +96,17 @@ final class NetworkRequestService: NetworkRequestServiceProtocol {
             system: system
         ))
         return try response.ok.body.json
+    }
+    
+    // Список всех доступных станций:
+    func getStationsList() async throws -> Stations {
+        let response = try await client.getStationsList(query: .init(
+            apikey: apikey
+        ))
+        let httpBody = try response.ok.body.html
+        let data = try await Data(collecting: httpBody, upTo: 100 * 1024 * 1024)
+        let stationList = try JSONDecoder().decode(Stations.self, from: data)
+        return stationList
     }
     
     // Копирайт Яндекс Расписаний:
