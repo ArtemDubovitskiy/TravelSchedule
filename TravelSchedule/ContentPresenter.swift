@@ -12,6 +12,7 @@ enum Constants {
 }
 
 protocol ContentPresenterProtocol: AnyObject {
+    func search()
     func schedule()
     func nearestStations()
     func nearestSettlement()
@@ -21,6 +22,30 @@ protocol ContentPresenterProtocol: AnyObject {
 
 // Вероятно не лучший вариант использовать Presenter (хотел на данный момент вынести логику отдельно)
 final class ContentPresenter: ContentPresenterProtocol {
+    
+    // Расписание рейсов между станциями:
+    func search() {
+        guard let serverURL = try? Servers.server1() else { return }
+        
+        let client = Client(
+            serverURL: serverURL,
+            transport: URLSessionTransport()
+        )
+        
+        let service = NetworkRequestService(
+            client: client,
+            apikey: Constants.apiKey
+        )
+        
+        Task {
+            let search = try await service.getSearch(
+                from: "s9600213",
+                to: "s9623547"
+            )
+            print(search)
+        }
+    }
+    
     // Расписание рейсов по станции:
     func schedule() {
         guard let serverURL = try? Servers.server1() else { return }

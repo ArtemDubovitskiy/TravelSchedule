@@ -7,6 +7,7 @@
 import OpenAPIRuntime
 import OpenAPIURLSession
 
+typealias SearchRoutes = Components.Schemas.RoutesList
 typealias Schedule = Components.Schemas.ScheduleStation
 typealias NearestStations = Components.Schemas.Stations
 typealias NearestSettlement = Components.Schemas.Settlement
@@ -15,6 +16,7 @@ typealias CarrierSystem = Operations.getCarrier.Input.Query.systemPayload
 typealias CopyrightSchedule = Components.Schemas.Copyright
 
 protocol NetworkRequestServiceProtocol {
+    func getSearch(from: String, to: String) async throws -> SearchRoutes
     func getSchedule(station: String, date: String) async throws -> Schedule
     func getNearestStations(lat: Double, lng: Double, distance: Int) async throws -> NearestStations
     func getNearestSettlement(lat: Double, lng: Double) async throws -> NearestSettlement
@@ -30,6 +32,15 @@ final class NetworkRequestService: NetworkRequestServiceProtocol {
     init(client: Client, apikey: String) {
         self.client = client
         self.apikey = apikey
+    }
+    // Расписание рейсов между станциями:
+    func getSearch(from: String, to: String) async throws -> SearchRoutes {
+        let response = try await client.getSearch(query: .init(
+            apikey: apikey,
+            from: from,
+            to: to
+        ))
+        return try response.ok.body.json
     }
     
     // Расписание рейсов по станции:

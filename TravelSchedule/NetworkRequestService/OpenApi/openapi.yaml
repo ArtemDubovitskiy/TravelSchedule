@@ -6,6 +6,8 @@ info:
 servers:
 - url: https://api.rasp.yandex.net
 tags:
+- name: Расписание рейсов между станциями
+  description: Запрос позволяет получить список рейсов, следующих от указанной станции отправления к указанной станции прибытия и информацию по каждому рейсу.
 - name: Расписание рейсов по станции
   description: Запрос позволяет получить список рейсов, отправляющихся от указанной станции и информацию по каждому рейсу.
 - name: Список ближайших станций
@@ -17,6 +19,128 @@ tags:
 - name: Копирайт Яндекс Расписаний
   description: Запрос позволяет получить данные о Яндекс Расписаниях.
 paths:
+  /v3.0/search/:
+    get:
+      tags:
+      - getSearch
+      summary: Расписание рейсов между станциями
+      operationId: getSearch
+      parameters:
+      - name: apikey
+        in: query
+        description: API key
+        required: true
+        schema:
+          type: string
+      - name: from
+        in: query
+        description: Код станции отправления
+        required: true
+        schema:
+          type: string
+      - name: to
+        in: query
+        description: Код станции прибытия
+        required: true
+        schema:
+          type: string
+      - name: format
+        in: query
+        description: json или xml
+        required: false
+        schema:
+          type: string
+          enum:
+            - json
+            - xml
+          default: json
+      - name: lang
+        in: query
+        description: lang
+        required: false
+        schema:
+          type: string
+      - name: date
+        in: query
+        description: date YYYY-MM-DD
+        required: false
+        schema:
+          type: string
+      - name: transport_types
+        in: query
+        description: Тип транспортного средства.
+        required: false
+        schema:
+          type: string
+          enum:
+            - plane
+            - train
+            - suburban
+            - bus
+            - water
+            - helicopter
+      - name: system
+        in: query
+        description: Система кодирования (параметры form, to)
+        required: false
+        schema:
+          type: string
+          enum:
+            - yandex
+            - iata
+            - sirena
+            - express
+            - esr
+          default: yandex
+      - name: show_systems
+        in: query
+        description: Система кодирования (результат поиска)
+        required: false
+        schema:
+          type: string
+          enum:
+            - yandex
+            - esr
+          default: yandex
+      - name: offset
+        in: query
+        description: Смещение относительно первого результата поиска. Значение по умолчанию — 0.
+        required: false
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: Смещение относительно первого результата поиска. Значение по умолчанию — 100.
+        required: false
+        schema:
+          type: integer
+      - name: add_days_mask
+        in: query
+        description: Признак, который указывает, что для каждой нитки в ответе следует вернуть календарь хождения.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: result_timezone
+        in: query
+        description: Часовой пояс
+        required: false
+        schema:
+          type: string
+      - name: transfers
+        in: query
+        description: Признак, разрешающий добавить к результатам поиска маршруты с пересадками.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoutesList'
   /v3.0/schedule/:
     get:
       tags:
@@ -100,7 +224,6 @@ paths:
             - express
             - esr
           default: yandex
-
       - name: result_timezone
         in: query
         description: Часовой пояс
@@ -357,6 +480,115 @@ components:
           type: string
         touch_url:
           type: string
+    RoutesList:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        interval_segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/IntervalSegments'
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Segment'
+        search:
+          $ref: '#/components/schemas/Search'
+
+    IntervalSegments:
+      type: object
+      properties:
+        from:
+          $ref: '#/components/schemas/StationSearch'
+        thread:
+          $ref: '#/components/schemas/Thread'
+        departure_platform:
+          type: string
+        stops:
+          type: string
+        departure_terminal:
+          type: string
+        to:
+          $ref: '#/components/schemas/StationSearch'
+        has_transfers:
+          type: boolean
+        tickets_info:
+          $ref: '#/components/schemas/TicketsInfo'
+        duration:
+          type: integer
+        arrival_terminal:
+          type: string
+        start_date:
+          type: string
+        arrival_platform:
+          type: string
+    Search:
+      type: object
+      properties:
+        date:
+          type: string
+        to:
+          $ref: '#/components/schemas/Place'
+        from:
+          $ref: '#/components/schemas/Place'
+    Place:
+      type: object
+      properties:
+        code:
+          type: string
+        type:
+          type: string
+        popular_title:
+          type: string
+        short_title:
+          type: string
+        title:
+          type: string
+    StationSearch:
+      type: object
+      properties:
+        code:
+          type: string
+        title:
+          type: string
+        station_type:
+          type: string
+          enum:
+            - station
+            - platform
+            - stop
+            - checkpoint
+            - post
+            - crossing
+            - overtaking_point
+            - train_station
+            - airport
+            - bus_station
+            - bus_stop
+            - unknown
+            - port
+            - port_point
+            - wharf
+            - river_port
+            - marine_station
+        station_type_name:
+          type: string
+        popular_title:
+          type: string
+        short_title:
+          type: string
+        transport_type:
+          type: string
+          enum:
+            - plane
+            - train
+            - suburban
+            - bus
+            - water
+            - helicopter
+        type:
+          type: string
     ScheduleStation:
       type: object
       properties:
@@ -429,6 +661,31 @@ components:
           type: string
         esr:
           type: string
+    TicketsInfo:
+      type: object
+      properties:
+        et_marker:
+          type: boolean
+        places:
+          type: array
+          items:
+            $ref: '#/components/schemas/Places'
+    Places:
+      type: object
+      properties:
+        currency:
+          type: string
+        price:
+          $ref: '#/components/schemas/Price'
+        name:
+          type: string
+    Price:
+      type: object
+      properties:
+        cents:
+          type: number
+        whole:
+          type: number
     SchuedelItem:
       type: object
       properties:
@@ -449,6 +706,78 @@ components:
         terminal:
           type: string
         platform:
+          type: string
+    Thread:
+      type: object
+      properties:
+        uid:
+          type: string
+        title:
+          type: string
+        interval:
+          $ref: '#/components/schemas/Interval'
+        number:
+          type: string
+        short_title:
+          type: string
+        thread_method_link:
+          type: string
+        carrier:
+          $ref: '#/components/schemas/CarriersItems'
+        transport_type:
+          type: string
+          enum:
+            - plane
+            - train
+            - suburban
+            - bus
+            - water
+            - helicopter
+        vehicle:
+          type: string
+        transport_subtype:
+          $ref: '#/components/schemas/TransportSubtype'
+        express_type:
+          type: string
+    Interval:
+      type: object
+      properties:
+        density:
+          type: string
+        end_time:
+          type: string
+        begin_time:
+          type: string
+    Segment:
+      type: object
+      properties:
+        arrival:
+          type: string
+        from:
+          $ref: '#/components/schemas/StationSearch'
+        thread:
+          $ref: '#/components/schemas/Thread'
+        departure_platform:
+          type: string
+        departure:
+          type: string
+        stops:
+          type: string
+        departure_terminal:
+          type: string
+        to:
+          $ref: '#/components/schemas/StationSearch'
+        has_transfers:
+          type: boolean
+        tickets_info:
+          $ref: '#/components/schemas/TicketsInfo'
+        duration:
+          type: integer
+        arrival_terminal:
+          type: string
+        start_date:
+          type: string
+        arrival_platform:
           type: string
     SchuedelThread:
       type: object
@@ -533,6 +862,8 @@ components:
         contacts:
           type: string
         url:
+          type: string
+        logo_svg:
           type: string
         title:
           type: string
