@@ -26,7 +26,7 @@ struct ContentView: View {
         .padding()
         .task {
             // Для запроса пожалуйста расскоментируйте нужную строку:
-            presenter.search() // Расписание рейсов между станциями
+//            presenter.search() // Расписание рейсов между станциями
 //            presenter.schedule() // Расписание рейсов по станции
 //            presenter.threads() // Список станций следования
 //            presenter.nearestStations() // Список ближайших станций
