@@ -7,7 +7,6 @@
 import SwiftUI
 
 extension Image {
-    
     // Images from Figma
     static let settingsTab = Image("Settings").renderingMode(.template)
     static let schuedleTab = Image("Schedule").renderingMode(.template)

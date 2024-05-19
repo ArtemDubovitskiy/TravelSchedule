@@ -8,7 +8,7 @@ import Foundation
 import OpenAPIURLSession
 
 enum Constants {
-    static let apiKey = "d77ed0d2-6f01-4f92-967d-35ca9411ee0c"
+    static let apiKey = " "
 }
 
 protocol ContentPresenterProtocol: AnyObject {
@@ -22,7 +22,6 @@ protocol ContentPresenterProtocol: AnyObject {
     func copyright()
 }
 
-// Вероятно не лучший вариант использовать Presenter (хотел на данный момент вынести логику отдельно)
 final class ContentPresenter: ContentPresenterProtocol {
     
     // Расписание рейсов между станциями:

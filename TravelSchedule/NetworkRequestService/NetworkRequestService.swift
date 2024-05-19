@@ -9,22 +9,22 @@ import OpenAPIURLSession
 import Foundation
 
 typealias SearchRoutes = Components.Schemas.RoutesList
-typealias Schedule = Components.Schemas.ScheduleStation
+typealias ScheduleStation = Components.Schemas.ScheduleStation
 typealias Threads = Components.Schemas.ThreadList
 typealias NearestStations = Components.Schemas.Stations
 typealias NearestSettlement = Components.Schemas.Settlement
-typealias Carrier = Components.Schemas.Carriers
+typealias Carriers = Components.Schemas.Carriers
 typealias CarrierSystem = Operations.getCarrier.Input.Query.systemPayload
 typealias Stations = Components.Schemas.StationsList
 typealias CopyrightSchedule = Components.Schemas.Copyright
 
 protocol NetworkRequestServiceProtocol {
     func getSearch(from: String, to: String) async throws -> SearchRoutes
-    func getSchedule(station: String, date: String) async throws -> Schedule
+    func getSchedule(station: String, date: String) async throws -> ScheduleStation
     func getThread(uid: String) async throws -> Threads
     func getNearestStations(lat: Double, lng: Double, distance: Int) async throws -> NearestStations
     func getNearestSettlement(lat: Double, lng: Double) async throws -> NearestSettlement
-    func getCarrier(code: String, system: CarrierSystem) async throws -> Carrier
+    func getCarrier(code: String, system: CarrierSystem) async throws -> Carriers
     func getStationsList() async throws -> Stations
     func getCopyright() async throws -> CopyrightSchedule
 }
@@ -49,7 +49,7 @@ final class NetworkRequestService: NetworkRequestServiceProtocol {
     }
     
     // Расписание рейсов по станции:
-    func getSchedule(station: String, date: String) async throws -> Schedule {
+    func getSchedule(station: String, date: String) async throws -> ScheduleStation {
         let response = try await client.getSchedule(query: .init(
             apikey: apikey,
             station: station,
@@ -89,7 +89,7 @@ final class NetworkRequestService: NetworkRequestServiceProtocol {
     }
     
     // Информация о перевозчике:
-    func getCarrier(code: String, system: CarrierSystem = .yandex) async throws -> Carrier {
+    func getCarrier(code: String, system: CarrierSystem = .yandex) async throws -> Carriers {
         let response = try await client.getCarrier(query: .init(
             apikey: apikey,
             code: code,
