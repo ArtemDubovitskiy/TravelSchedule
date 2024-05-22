@@ -23,4 +23,7 @@ extension Image {
 
     static let changeImage = Image(systemName: "arrow.2.squarepath")
     static let closeImage = Image(systemName: "multiply.circle.fill")
+    
+    static let magnifyingGlass = Image(systemName: "magnifyingglass")
+    static let circleXmark = Image(systemName: "xmark.circle.fill")
 }

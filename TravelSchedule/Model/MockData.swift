@@ -116,4 +116,43 @@ enum MockData {
             carrier: MockData.mockCarrier[0]
         ),
     ]
+    
+    static let mockStories: [Story] = [
+        Story(
+            title: "Text Text Text Text Text Text Text Text",
+            description: "Text Text Text Text Text Text Text Text",
+            smallImage: "Preview01",
+            fullImage: ["Big01","Big02","Big03"]
+        ),
+        Story(
+            title: "Text Text Text Text Text Text Text Text",
+            description: "Text Text Text Text Text Text Text Text",
+            smallImage: "Preview02",
+            fullImage: ["Big04","Big05","Big06"]
+        ),
+        Story(
+            title: "Text Text Text Text Text Text Text Text",
+            description: "Text Text Text Text Text Text Text Text",
+            smallImage: "Preview03",
+            fullImage: ["Big07","Big08","Big09"]
+        ),
+        Story(
+            title: "Text Text Text Text Text Text Text Text",
+            description: "Text Text Text Text Text Text Text Text",
+            smallImage: "Preview04",
+            fullImage: ["Big10","Big01","Big02"]
+        ),
+        Story(
+            title: "Text Text Text Text Text Text Text Text",
+            description: "Text Text Text Text Text Text Text Text",
+            smallImage: "Preview05",
+            fullImage: ["Big04","Big05","Big06"]
+        ),
+        Story(
+            title: "Text Text Text Text Text Text Text Text",
+            description: "Text Text Text Text Text Text Text Text",
+            smallImage: "Preview01",
+            fullImage: ["Big07","Big05","Big09"]
+        ),
+    ]
 }
