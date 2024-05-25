@@ -9,7 +9,7 @@ import SwiftUI
 struct SearchBar: View {
     @Binding var searchText: String
     @State var isSearching: Bool = false
-    
+    // TODO: Добавить локализацию
     private var placeholder = "Введите запрос"
     
     var body: some View {

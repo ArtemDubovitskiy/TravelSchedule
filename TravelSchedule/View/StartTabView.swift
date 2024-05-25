@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct StartTabView: View {
+    @AppStorage("isDarkScheme") var isDarkScheme: Bool = false
     
     @State private var selectedTab = 0
     
     var body: some View {
-        VStack {
+        NavigationStack {
             TabView(selection: $selectedTab) {
                 VStack {
                     StartScreenView()
@@ -25,8 +26,7 @@ struct StartTabView: View {
                 .tag(0)
                 
                 VStack {
-                    //TODO: Добавить экран настроек:
-                    Spacer() // заглушка
+                    SettingsScreenView(isDarkScheme: $isDarkScheme)
                     Divider()
                         .padding(5)
                 }

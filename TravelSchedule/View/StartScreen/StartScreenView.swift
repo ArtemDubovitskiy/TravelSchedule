@@ -12,7 +12,6 @@ struct StartScreenView: View {
     let mockStories = MockData.mockStories
     
     var body: some View {
-        
         VStack(spacing: 20) {
             // TODO: - Добавить обработку выбора истории для StoriesView
             StoriesView(stories: mockStories.self)
