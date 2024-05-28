@@ -1,27 +1,28 @@
 //
-//  CitiesView.swift
+//  StationsScreenView.swift
 //  TravelSchedule
 //
-//  Created by Artem Dubovitsky on 27.05.2024.
+//  Created by Artem Dubovitsky on 28.05.2024.
 //
 
 import SwiftUI
 
-struct CitiesView: View {
+struct StationsScreenView: View {
     @State private var searchTextString = ""
     @StateObject var viewModel: CityViewModel
     
     @Environment(\.dismiss) private var dismiss // заглушка
     
     // TODO: Добавить локализацию
-    private let selectCityText = "Выбор города"
-    private let cityNotFoundText = "Город не найден"
+    private let selectStationText = "Выбор станции"
+    private let stationNotFoundText = "Станция не найдена"
     
-    private var searchResults: [City] {
+    // TODO: исправить метод после доработки viewModel
+    private var searchResults: [Station] {
         if searchTextString.isEmpty {
-            return viewModel.cities
+            return viewModel.cities[0].stations
         } else {
-            return viewModel.cities.filter {
+            return viewModel.cities[0].stations.filter {
                 $0.title.lowercased().contains(searchTextString.lowercased())
             }
         }
@@ -33,23 +34,22 @@ struct CitiesView: View {
             SearchBar(searchText: $searchTextString)
             if searchResults.isEmpty {
                 Spacer()
-                Text(cityNotFoundText)
+                Text(stationNotFoundText)
                     .font(.bold24)
                     .foregroundStyle(.ypBlackDual)
                     .padding(.horizontal)
                 Spacer()
             }
             LazyVStack(spacing: 0) {
-                ForEach(searchResults) { city in
-                    CityCellView(city: city)
+                ForEach(searchResults) { station in
+                    StationCellView(station: station)
                 }
             }
             .padding(.horizontal, 16)
             Spacer()
-                
         }
         .toolbar(.hidden, for: .tabBar)
-        .navigationTitle(selectCityText)
+        .navigationTitle(selectStationText)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .ignoresSafeArea(.all, edges: .bottom)
@@ -68,6 +68,6 @@ struct CitiesView: View {
 
 #Preview {
     NavigationStack {
-        CitiesView(viewModel: CityViewModel(cities: MockData.mockCity))
+        StationsScreenView(viewModel: CityViewModel(cities: MockData.mockCity))
     }
 }
