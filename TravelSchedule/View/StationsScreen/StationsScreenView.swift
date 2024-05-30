@@ -10,7 +10,7 @@ import SwiftUI
 struct StationsScreenView: View {
     @State private var searchTextString = ""
     @StateObject var viewModel: CityViewModel
-    
+
     @Environment(\.dismiss) private var dismiss // заглушка
     
     // TODO: Добавить локализацию
@@ -26,7 +26,6 @@ struct StationsScreenView: View {
                 $0.title.lowercased().contains(searchTextString.lowercased())
             }
         }
-        
     }
     
     var body: some View {
