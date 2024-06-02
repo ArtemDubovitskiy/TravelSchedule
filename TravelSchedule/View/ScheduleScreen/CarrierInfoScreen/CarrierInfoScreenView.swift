@@ -1,5 +1,5 @@
 //
-//  CarrierInfoScreen.swift
+//  CarrierInfoScreenView.swift
 //  TravelSchedule
 //
 //  Created by Artem Dubovitsky on 02.06.2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CarrierInfoScreen: View {
+struct CarrierInfoScreenView: View {
     
     var carrier: Carrier
     
@@ -87,6 +87,6 @@ struct CarrierInfoScreen: View {
 
 #Preview {
     NavigationStack {
-        CarrierInfoScreen(carrier: MockData.mockCarrier[0])
+        CarrierInfoScreenView(carrier: MockData.mockCarrier[0])
     }
 }
