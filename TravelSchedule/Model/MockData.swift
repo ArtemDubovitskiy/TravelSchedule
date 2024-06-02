@@ -63,8 +63,8 @@ enum MockData {
         Carrier(
             title: "ФГК",
             logo: "FGK",
-            email: "8-800-250-4777",
-            phone: "info@railfgk.ru"
+            email: "info@railfgk.ru",
+            phone: "8 (800) 250-47-77"
         ),
         Carrier(
             title: "Урал логистика",
