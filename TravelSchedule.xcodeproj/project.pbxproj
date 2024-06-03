@@ -16,6 +16,7 @@
 		9178F9C62BE935DE000B89A8 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9178F9C52BE935DE000B89A8 /* Image.swift */; };
 		9178F9CF2BE980C7000B89A8 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9178F9CE2BE980C7000B89A8 /* City.swift */; };
 		9178F9D12BE983CE000B89A8 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9178F9D02BE983CE000B89A8 /* ErrorView.swift */; };
+		917A50A52C0E4279005F2385 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917A50A42C0E4279005F2385 /* Destination.swift */; };
 		918CA5F62BA01D920088CA5F /* OpenAPIRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 918CA5F52BA01D920088CA5F /* OpenAPIRuntime */; };
 		918CA5F92BA01E640088CA5F /* OpenAPIURLSession in Frameworks */ = {isa = PBXBuildFile; productRef = 918CA5F82BA01E640088CA5F /* OpenAPIURLSession */; };
 		918CA5FF2BA01FA60088CA5F /* openapi-generator-config.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 918CA5FE2BA01FA60088CA5F /* openapi-generator-config.yaml */; };
@@ -63,6 +64,7 @@
 		9178F9C52BE935DE000B89A8 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		9178F9CE2BE980C7000B89A8 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		9178F9D02BE983CE000B89A8 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		917A50A42C0E4279005F2385 /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 		918CA5FE2BA01FA60088CA5F /* openapi-generator-config.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "openapi-generator-config.yaml"; sourceTree = "<group>"; };
 		918CA6002BA01FE00088CA5F /* NetworkRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestService.swift; sourceTree = "<group>"; };
 		918CA6062BA0EC560088CA5F /* openapi.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = openapi.yaml; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				91F2817D2BFB9E6E009C860F /* Story.swift */,
 				91955ECA2BF1529500BEA0FF /* ErrorType.swift */,
 				91F2815E2BF95336009C860F /* MockData.swift */,
+				917A50A42C0E4279005F2385 /* Destination.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 			files = (
 				9178F9C62BE935DE000B89A8 /* Image.swift in Sources */,
 				918CA6082BA0EED10088CA5F /* ContentPresenter.swift in Sources */,
+				917A50A52C0E4279005F2385 /* Destination.swift in Sources */,
 				91E739B72C0D0405001DDC28 /* TranferOptionCell.swift in Sources */,
 				91F2817E2BFB9E6E009C860F /* Story.swift in Sources */,
 				918FE3CF2C06707400323D1D /* CarrierCellView.swift in Sources */,

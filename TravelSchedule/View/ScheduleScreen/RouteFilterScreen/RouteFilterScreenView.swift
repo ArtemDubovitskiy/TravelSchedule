@@ -12,7 +12,7 @@ struct RouteFilterScreenView: View {
     @State private var selectedIntervals: Set<TimeFilters> = []
     @State private var selectedTransferOptions: Int?
     
-    @Environment(\.dismiss) private var dismiss // заглушка
+    @Environment(\.dismiss) private var dismiss
     
     // TODO: Добавить локализацию
     private let departureTimeText = "Время отправления"
@@ -66,7 +66,7 @@ struct RouteFilterScreenView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
-                    dismiss() // заглушка
+                    dismiss()
                 } label: {
                     Image.chevronBackward
                         .foregroundStyle(.ypBlackDual)
@@ -79,6 +79,7 @@ struct RouteFilterScreenView: View {
             selectedTransferOptions != nil {
             Button {
                 // TODO: Добавить обработку нажатия кнопки
+                dismiss()
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 16)

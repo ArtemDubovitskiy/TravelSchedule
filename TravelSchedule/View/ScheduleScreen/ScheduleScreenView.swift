@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct ScheduleScreenView: View {
+    @Binding var path: [Destination]
     @StateObject var viewModel: ScheduleViewModel
-
-    @Environment(\.dismiss) private var dismiss // заглушка
     
     // TODO: Добавить локализацию
     private let buttonText = "Уточнить время"
@@ -27,7 +26,11 @@ struct ScheduleScreenView: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVStack(spacing: 8) {
                         ForEach(viewModel.schedule) { route in
-                            CarrierCellView(schedule: route)
+                            NavigationLink {
+                                CarrierInfoScreenView(carrier: route.carrier)
+                            } label: {
+                                CarrierCellView(schedule: route)
+                            }
                         }
                     }
                 }
@@ -36,8 +39,8 @@ struct ScheduleScreenView: View {
             
             VStack {
                 Spacer()
-                Button {
-                    // TODO: Добавить переход на экран фильтра
+                NavigationLink {
+                    RouteFilterScreenView()
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 16)
@@ -53,10 +56,11 @@ struct ScheduleScreenView: View {
                                 .frame(width: 8, height: 8)
                         }
                     }
-                    .padding(.bottom, 24)
                     .padding(.horizontal, 16)
+                    .padding(.bottom, 24)
                 }
             }
+            .padding(.bottom, 24)
         }
         .toolbar(.hidden, for: .tabBar)
         .navigationBarTitleDisplayMode(.inline)
@@ -65,7 +69,7 @@ struct ScheduleScreenView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
-                    dismiss() // заглушка
+                    path.removeAll()
                 } label: {
                     Image.chevronBackward
                         .foregroundStyle(.ypBlackDual)
@@ -77,6 +81,9 @@ struct ScheduleScreenView: View {
 
 #Preview {
     NavigationStack {
-        ScheduleScreenView(viewModel: ScheduleViewModel(schedule: MockData.mockSchedule))
+        ScheduleScreenView(
+            path: .constant([]),
+            viewModel: ScheduleViewModel(schedule: MockData.mockSchedule)
+        )
     }
 }

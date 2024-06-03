@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CitiesScreenView: View {
     @State private var searchTextString = ""
+    @Binding var path: [Destination]
     @StateObject var viewModel: CityViewModel
     
     @Environment(\.dismiss) private var dismiss // заглушка
@@ -42,6 +43,9 @@ struct CitiesScreenView: View {
             LazyVStack(spacing: 0) {
                 ForEach(searchResults) { city in
                     CityCellView(city: city)
+                        .onTapGesture {
+                            path.append(.stations)
+                        }
                 }
             }
             .padding(.horizontal, 16)
@@ -67,6 +71,11 @@ struct CitiesScreenView: View {
 
 #Preview {
     NavigationStack {
-        CitiesScreenView(viewModel: CityViewModel(cities: MockData.mockCity))
+        CitiesScreenView(
+            path: .constant([]),
+            viewModel: CityViewModel(
+                cities: MockData.mockCity
+            )
+        )
     }
 }
