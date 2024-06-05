@@ -16,8 +16,10 @@ final class ScheduleViewModel: ObservableObject {
     @Published var departureStation: Station?
     @Published var arrivalStation: Station?
     
-    @Published var departureText: String = "departureText"
-    @Published var arrivalText: String = "arrivalText"
+    @Published var currentRote = CurrentRoute.empty
+    
+    @Published var departureText: String = ""
+    @Published var arrivalText: String = ""
     
     // MARK: - Initializers
     init(cities: [City], schedule: [Schedule]) {
@@ -40,6 +42,18 @@ final class ScheduleViewModel: ObservableObject {
            let arrivalStation = arrivalStation {
             self.arrivalText = arrivalCity.title + " (\(arrivalStation.title))"
         }
+    }
+    
+    func swapStations() {
+        swap(&departureCity, &arrivalCity)
+        swap(&departureStation, &arrivalStation)
+        swap(&departureText, &arrivalText)
+    }
+    
+    func clearRouteText() {
+        currentRote = .empty
+        self.departureText = ""
+        self.arrivalText = ""
     }
     
     // MARK: - Private Methods

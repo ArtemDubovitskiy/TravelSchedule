@@ -18,14 +18,26 @@ struct StationsScreenView: View {
     private let selectStationText = "Выбор станции"
     private let stationNotFoundText = "Станция не найдена"
     
-    // TODO: исправить метод после доработки viewModel
     private var searchResults: [Station] {
-        if searchTextString.isEmpty {
-            return viewModel.departureCity?.stations ?? []
-        } else {
-            return (viewModel.departureCity?.stations.filter {
-                $0.title.lowercased().contains(searchTextString.lowercased())
-            }) ?? []
+        switch viewModel.currentRote {
+        case .departure:
+            if searchTextString.isEmpty {
+                return viewModel.departureCity?.stations ?? []
+            } else {
+                return viewModel.departureCity?.stations.filter {
+                    $0.title.lowercased().contains(searchTextString.lowercased())
+                } ?? []
+            }
+        case .arrival:
+            if searchTextString.isEmpty {
+                return viewModel.arrivalCity?.stations ?? []
+            } else {
+                return viewModel.arrivalCity?.stations.filter {
+                    $0.title.lowercased().contains(searchTextString.lowercased())
+                } ?? []
+            }
+        case .empty:
+            return []
         }
     }
     
@@ -44,8 +56,16 @@ struct StationsScreenView: View {
                 ForEach(searchResults) { station in
                     StationCellView(station: station)
                         .onTapGesture {
-                            viewModel.departureStation = station
-                            viewModel.createDepartureText()
+                            switch viewModel.currentRote {
+                            case .departure:
+                                viewModel.departureStation = station
+                                viewModel.createDepartureText()
+                            case .arrival:
+                                viewModel.arrivalStation = station
+                                viewModel.createArrivalText()
+                            case .empty:
+                                break
+                            }
                             path.removeAll()
                         }
                 }
@@ -62,7 +82,8 @@ struct StationsScreenView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
-                    dismiss() // заглушка
+                    path.removeLast()
+                    dismiss()
                 } label: {
                     Image.chevronBackward
                         .foregroundStyle(.ypBlackDual)

@@ -10,6 +10,7 @@ import SwiftUI
 struct ScheduleScreenView: View {
     @Binding var path: [Destination]
     @EnvironmentObject var viewModel: ScheduleViewModel
+    @Environment(\.dismiss) private var dismiss // заглушка
     
     // TODO: Добавить локализацию
     private let buttonText = "Уточнить время"
@@ -64,6 +65,7 @@ struct ScheduleScreenView: View {
             }
             .padding(.bottom, 24)
         }
+        .environmentObject(viewModel)
         .toolbar(.hidden, for: .tabBar)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
@@ -71,7 +73,9 @@ struct ScheduleScreenView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
+                    viewModel.clearRouteText()
                     path.removeAll()
+                    dismiss()
                 } label: {
                     Image.chevronBackward
                         .foregroundStyle(.ypBlackDual)

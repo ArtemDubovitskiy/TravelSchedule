@@ -41,6 +41,7 @@ struct MainSearchView: View {
                                     .foregroundStyle(.ypBlack)
                                     .frame(height: textFieldHeight)
                                     .onTapGesture {
+                                        viewModel.currentRote = .departure
                                         path.append(.cities)
                                     }
                                     
@@ -51,6 +52,7 @@ struct MainSearchView: View {
                                     .foregroundStyle(.ypBlack)
                                     .frame(height: textFieldHeight)
                                     .onTapGesture {
+                                        viewModel.currentRote = .arrival
                                         path.append(.cities)
                                     }
                                 }
@@ -61,8 +63,7 @@ struct MainSearchView: View {
                                 .foregroundStyle(.ypWhite)
                                 .frame(width: circleWidth)
                             Button {
-                                swap(&viewModel.departureCity, &viewModel.arrivalCity)
-                                swap(&viewModel.departureText, &viewModel.arrivalText)
+                                viewModel.swapStations()
                             } label: {
                                 Image.changeImage
                                     .foregroundStyle(.ypBlue)

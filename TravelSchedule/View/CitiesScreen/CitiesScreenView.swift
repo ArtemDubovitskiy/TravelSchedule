@@ -44,7 +44,14 @@ struct CitiesScreenView: View {
                 ForEach(searchResults) { city in
                     CityCellView(city: city)
                         .onTapGesture {
-                            viewModel.departureCity = city
+                            switch viewModel.currentRote {
+                            case .departure:
+                                viewModel.departureCity = city
+                            case .arrival:
+                                viewModel.arrivalCity = city
+                            case .empty:
+                                break
+                            }
                             path.append(.stations)
                         }
                 }
@@ -61,7 +68,8 @@ struct CitiesScreenView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
-                    dismiss() // заглушка
+                    path.removeLast()
+                    dismiss()
                 } label: {
                     Image.chevronBackward
                         .foregroundStyle(.ypBlackDual)
