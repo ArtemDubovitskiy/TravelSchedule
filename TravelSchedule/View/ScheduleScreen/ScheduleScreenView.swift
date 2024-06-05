@@ -18,26 +18,35 @@ struct ScheduleScreenView: View {
     var body: some View {
         ZStack {
             VStack {
-                // TODO: Добавить вычисляемый маршрут
-                Text("Москва (Ярославский вокзал) → Санкт Петербург (Балтийский вокзал)")
+                Text(viewModel.scheduleText)
                     .font(.bold24)
                     .foregroundStyle(.ypBlackDual)
                     .padding(.horizontal, 16)
                     .padding(.top, 10)
                     .multilineTextAlignment(.leading)
-                ScrollView(.vertical, showsIndicators: false) {
-                    LazyVStack(spacing: 8) {
-                        // TODO: Добавить вычисляемый маршрут
-                        ForEach(viewModel.schedule) { route in
-                            NavigationLink {
-                                CarrierInfoScreenView(carrier: route.carrier)
-                            } label: {
-                                CarrierCellView(schedule: route)
+                
+                if viewModel.schedule.isEmpty {
+                    Spacer()
+                    Text("Вариантов нет")
+                        .font(.bold24)
+                        .foregroundStyle(.ypBlackDual)
+                        .padding(.horizontal)
+                    Spacer()
+                    Spacer()
+                } else {
+                    ScrollView(.vertical, showsIndicators: false) {
+                        LazyVStack(spacing: 8) {
+                            ForEach(viewModel.schedule) { route in
+                                NavigationLink {
+                                    CarrierInfoScreenView(carrier: route.carrier)
+                                } label: {
+                                    CarrierCellView(schedule: route)
+                                }
                             }
                         }
                     }
+                    .padding(.bottom, 16)
                 }
-                .padding(.bottom, 16)
             }
             
             VStack {
@@ -88,6 +97,6 @@ struct ScheduleScreenView: View {
 #Preview {
     NavigationStack {
         ScheduleScreenView(
-            path: .constant([])).environmentObject(ScheduleViewModel(cities: [], schedule: []))
+            path: .constant([])).environmentObject(ScheduleViewModel(cities: []))
     }
 }

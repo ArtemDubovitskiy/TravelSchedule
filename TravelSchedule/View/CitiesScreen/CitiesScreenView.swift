@@ -82,6 +82,6 @@ struct CitiesScreenView: View {
 #Preview {
     NavigationStack {
         CitiesScreenView(path: .constant([]))
-        .environmentObject(ScheduleViewModel(cities: [], schedule: []))
+            .environmentObject(ScheduleViewModel(cities: []))
     }
 }

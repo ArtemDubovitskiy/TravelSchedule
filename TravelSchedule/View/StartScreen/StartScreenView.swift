@@ -24,5 +24,5 @@ struct StartScreenView: View {
 
 #Preview {
     StartScreenView()
-        .environmentObject(ScheduleViewModel(cities: [], schedule: []))
+        .environmentObject(ScheduleViewModel(cities: []))
 }

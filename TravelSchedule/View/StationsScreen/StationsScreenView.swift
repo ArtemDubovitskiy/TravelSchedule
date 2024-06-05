@@ -95,6 +95,6 @@ struct StationsScreenView: View {
 
 #Preview {
     NavigationStack {
-        StationsScreenView(path: .constant([])).environmentObject(ScheduleViewModel(cities: [], schedule: []))
+        StationsScreenView(path: .constant([])).environmentObject(ScheduleViewModel(cities: []))
     }
 }

@@ -79,6 +79,8 @@ struct MainSearchView: View {
                     viewModel.arrivalCity != nil &&
                     viewModel.arrivalStation != nil {
                     Button {
+                        self.viewModel.createSchuedelText()
+                        self.viewModel.showSchuedel()
                         path.append(.schuedel)
                     } label: {
                         ZStack {
@@ -117,5 +119,5 @@ struct MainSearchView: View {
 }
 
 #Preview {
-    MainSearchView().environmentObject(ScheduleViewModel(cities: [], schedule: []))
+    MainSearchView().environmentObject(ScheduleViewModel(cities: []))
 }

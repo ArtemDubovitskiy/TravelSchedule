@@ -9,7 +9,7 @@ import SwiftUI
 
 struct StartTabView: View {
     @AppStorage("isDarkScheme") var isDarkScheme: Bool = false
-    @StateObject var viewModel = ScheduleViewModel(cities: [], schedule: [])
+    @StateObject var viewModel = ScheduleViewModel(cities: [])
     
     @State private var selectedTab = 0
     

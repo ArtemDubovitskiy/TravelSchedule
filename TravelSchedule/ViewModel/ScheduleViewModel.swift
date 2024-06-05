@@ -9,7 +9,7 @@ import Foundation
 final class ScheduleViewModel: ObservableObject {
     // MARK: - Public Properties
     @Published var cities: [City]
-    @Published var schedule: [Schedule]
+    @Published var schedule: [Schedule] = []
     
     @Published var departureCity: City?
     @Published var arrivalCity: City?
@@ -20,13 +20,12 @@ final class ScheduleViewModel: ObservableObject {
     
     @Published var departureText: String = ""
     @Published var arrivalText: String = ""
+    @Published var scheduleText: String = ""
     
     // MARK: - Initializers
-    init(cities: [City], schedule: [Schedule]) {
+    init(cities: [City]) {
         self.cities = cities
-        self.schedule = schedule
         getCities()
-        getSchedule()
     }
     
     // MARK: - Public Methods
@@ -44,24 +43,33 @@ final class ScheduleViewModel: ObservableObject {
         }
     }
     
+    func createSchuedelText() {
+        self.scheduleText = departureText + " → " + arrivalText
+    }
+    
     func swapStations() {
         swap(&departureCity, &arrivalCity)
         swap(&departureStation, &arrivalStation)
         swap(&departureText, &arrivalText)
     }
     
+    func showSchuedel() {
+        // Метод сделан на моках, для отображения заглушки на экране расписания
+        if departureText == "Москва (Ярославский вокзал)" &&
+            arrivalText == "Санкт Петербург (Балтийский вокзал)" {
+            self.schedule = MockData.mockSchedule
+        }
+    }
+    
     func clearRouteText() {
         currentRote = .empty
         self.departureText = ""
         self.arrivalText = ""
+        self.schedule = []
     }
     
     // MARK: - Private Methods
     private func getCities() {
         cities = MockData.mockCity
-    }
-    
-    private func getSchedule() {
-        schedule = MockData.mockSchedule
     }
 }
