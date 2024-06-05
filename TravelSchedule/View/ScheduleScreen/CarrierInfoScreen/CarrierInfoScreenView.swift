@@ -12,6 +12,7 @@ struct CarrierInfoScreenView: View {
     var carrier: Carrier
     
     @Environment(\.dismiss) private var dismiss // заглушка
+    @Environment(\.openURL) private var openURL
     
     // TODO: Добавить локализацию
     private let carrierInfoText = "Информация о перевозчике"
@@ -20,8 +21,7 @@ struct CarrierInfoScreenView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            // TODO: Добавить полноразмерное лого
-            Image(carrier.logo)
+            Image(carrier.logoFull ?? "")
                 .resizable()
                 .scaledToFit()
                 .frame(maxWidth: .infinity, maxHeight: 104, alignment: .center)
@@ -44,7 +44,7 @@ struct CarrierInfoScreenView: View {
                     .foregroundStyle(.ypBlue)
                     .onTapGesture {
                         guard let urlString = URL(string: "mailto:\(carrier.email)") else { return }
-                        UIApplication.shared.open(urlString)
+                        openURL(urlString)
                     }
             }
             .frame(maxWidth: .infinity, maxHeight: 60, alignment: .leading)
@@ -59,7 +59,7 @@ struct CarrierInfoScreenView: View {
                     .foregroundStyle(.ypBlue)
                     .onTapGesture {
                         guard let urlString = URL(string: "tel:\(carrier.phone)") else { return }
-                        UIApplication.shared.open(urlString)
+                        openURL(urlString)
                     }
             }
             .frame(maxWidth: .infinity, maxHeight: 60, alignment: .leading)

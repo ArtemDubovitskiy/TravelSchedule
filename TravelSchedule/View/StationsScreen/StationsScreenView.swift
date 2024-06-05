@@ -10,7 +10,7 @@ import SwiftUI
 struct StationsScreenView: View {
     @Binding var path: [Destination]
     @State private var searchTextString = ""
-    @StateObject var viewModel: CityViewModel
+    @EnvironmentObject var viewModel: ScheduleViewModel
 
     @Environment(\.dismiss) private var dismiss // заглушка
     
@@ -21,11 +21,11 @@ struct StationsScreenView: View {
     // TODO: исправить метод после доработки viewModel
     private var searchResults: [Station] {
         if searchTextString.isEmpty {
-            return viewModel.cities[0].stations
+            return viewModel.departureCity?.stations ?? []
         } else {
-            return viewModel.cities[0].stations.filter {
+            return (viewModel.departureCity?.stations.filter {
                 $0.title.lowercased().contains(searchTextString.lowercased())
-            }
+            }) ?? []
         }
     }
     
@@ -44,6 +44,8 @@ struct StationsScreenView: View {
                 ForEach(searchResults) { station in
                     StationCellView(station: station)
                         .onTapGesture {
+                            viewModel.departureStation = station
+                            viewModel.createDepartureText()
                             path.removeAll()
                         }
                 }
@@ -51,6 +53,7 @@ struct StationsScreenView: View {
             .padding(.horizontal, 16)
             Spacer()
         }
+        .environmentObject(viewModel)
         .toolbar(.hidden, for: .tabBar)
         .navigationTitle(selectStationText)
         .navigationBarTitleDisplayMode(.inline)
@@ -71,6 +74,6 @@ struct StationsScreenView: View {
 
 #Preview {
     NavigationStack {
-        StationsScreenView(path: .constant([]), viewModel: CityViewModel(cities: MockData.mockCity))
+        StationsScreenView(path: .constant([])).environmentObject(ScheduleViewModel(cities: [], schedule: []))
     }
 }

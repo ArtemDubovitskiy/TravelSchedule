@@ -56,19 +56,22 @@ enum MockData {
     static let mockCarrier: [Carrier] = [
         Carrier(
             title: "РЖД",
-            logo: "RZD",
+            logo: "RZD", 
+            logoFull: "RZDFull",
             email: "i.lozgkina@yandex.ru",
             phone: "+7 (904) 329-27-71"
         ),
         Carrier(
             title: "ФГК",
-            logo: "FGK",
+            logo: "FGK", 
+            logoFull: "FGK",
             email: "info@railfgk.ru",
             phone: "8 (800) 250-47-77"
         ),
         Carrier(
             title: "Урал логистика",
-            logo: "Ural",
+            logo: "Ural", 
+            logoFull: "Ural",
             email: "contact@ural-lg.ru",
             phone: "8 (800) 505-49-84"
         ),

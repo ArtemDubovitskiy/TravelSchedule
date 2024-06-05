@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ScheduleScreenView: View {
     @Binding var path: [Destination]
-    @StateObject var viewModel: ScheduleViewModel
+    @EnvironmentObject var viewModel: ScheduleViewModel
     
     // TODO: Добавить локализацию
     private let buttonText = "Уточнить время"
@@ -17,6 +17,7 @@ struct ScheduleScreenView: View {
     var body: some View {
         ZStack {
             VStack {
+                // TODO: Добавить вычисляемый маршрут
                 Text("Москва (Ярославский вокзал) → Санкт Петербург (Балтийский вокзал)")
                     .font(.bold24)
                     .foregroundStyle(.ypBlackDual)
@@ -25,6 +26,7 @@ struct ScheduleScreenView: View {
                     .multilineTextAlignment(.leading)
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVStack(spacing: 8) {
+                        // TODO: Добавить вычисляемый маршрут
                         ForEach(viewModel.schedule) { route in
                             NavigationLink {
                                 CarrierInfoScreenView(carrier: route.carrier)
@@ -82,8 +84,6 @@ struct ScheduleScreenView: View {
 #Preview {
     NavigationStack {
         ScheduleScreenView(
-            path: .constant([]),
-            viewModel: ScheduleViewModel(schedule: MockData.mockSchedule)
-        )
+            path: .constant([])).environmentObject(ScheduleViewModel(cities: [], schedule: []))
     }
 }

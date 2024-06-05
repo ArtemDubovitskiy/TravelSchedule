@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct MainSearchView: View {
-    @State private var departureStation = ""
-    @State private var arrivalStation = ""
     @State private var path: [Destination] = []
+    @EnvironmentObject var viewModel: ScheduleViewModel
     // TODO: Добавить локализацию
     private let textFrom = "Откуда"
     private let textTo = "Куда"
@@ -36,7 +35,7 @@ struct MainSearchView: View {
                             .overlay(
                                 VStack(spacing: 0) {
                                     TextField(textFrom,
-                                              text: $departureStation,
+                                              text: $viewModel.departureText,
                                               prompt: Text(textFrom).foregroundColor(.ypGray)
                                     )
                                     .foregroundStyle(.ypBlack)
@@ -46,7 +45,7 @@ struct MainSearchView: View {
                                     }
                                     
                                     TextField(textTo,
-                                              text: $arrivalStation,
+                                              text: $viewModel.arrivalText,
                                               prompt: Text(textTo).foregroundColor(.ypGray)
                                     )
                                     .foregroundStyle(.ypBlack)
@@ -62,7 +61,8 @@ struct MainSearchView: View {
                                 .foregroundStyle(.ypWhite)
                                 .frame(width: circleWidth)
                             Button {
-                                swap(&departureStation, &arrivalStation)
+                                swap(&viewModel.departureCity, &viewModel.arrivalCity)
+                                swap(&viewModel.departureText, &viewModel.arrivalText)
                             } label: {
                                 Image.changeImage
                                     .foregroundStyle(.ypBlue)
@@ -73,7 +73,10 @@ struct MainSearchView: View {
                 }
                 .padding(.horizontal, 16)
                 
-                if !departureStation.isEmpty && !arrivalStation.isEmpty {
+                if viewModel.departureCity != nil &&
+                    viewModel.departureStation != nil &&
+                    viewModel.arrivalCity != nil &&
+                    viewModel.arrivalStation != nil {
                     Button {
                         path.append(.schuedel)
                     } label: {
@@ -90,30 +93,28 @@ struct MainSearchView: View {
                 }
             }
         }
+        .environmentObject(viewModel)
         .navigationDestination(for: Destination.self) { destination in
             switch destination {
             case .cities:
                 CitiesScreenView(
-                    path: $path,
-                    viewModel: CityViewModel(
-                        cities: MockData.mockCity
-                    )
-                )
+                    path: $path
+                ).environmentObject(viewModel)
                 
             case .stations:
                 StationsScreenView(
-                    path: $path,
-                    viewModel: CityViewModel(cities: MockData.mockCity))
+                    path: $path
+                ).environmentObject(viewModel)
                 
             case .schuedel:
                 ScheduleScreenView(
-                    path: $path,
-                    viewModel: ScheduleViewModel(schedule: MockData.mockSchedule))
+                    path: $path
+                ).environmentObject(viewModel)
             }
         }
     }
 }
 
 #Preview {
-    MainSearchView()
+    MainSearchView().environmentObject(ScheduleViewModel(cities: [], schedule: []))
 }

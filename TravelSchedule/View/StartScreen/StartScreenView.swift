@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StartScreenView: View {
-    
+    @EnvironmentObject var viewModel: ScheduleViewModel
     let mockStories = MockData.mockStories
     
     var body: some View {
@@ -18,9 +18,11 @@ struct StartScreenView: View {
             MainSearchView()
             Spacer()
         }
+        .environmentObject(viewModel)
     }
 }
 
 #Preview {
     StartScreenView()
+        .environmentObject(ScheduleViewModel(cities: [], schedule: []))
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct StartTabView: View {
     @AppStorage("isDarkScheme") var isDarkScheme: Bool = false
+    @StateObject var viewModel = ScheduleViewModel(cities: [], schedule: [])
     
     @State private var selectedTab = 0
     
@@ -37,6 +38,7 @@ struct StartTabView: View {
             }
             .tint(.ypBlackDual)
         }
+        .environmentObject(viewModel)
     }
 }
 

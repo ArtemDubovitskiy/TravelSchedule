@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct CitiesScreenView: View {
-    @State private var searchTextString = ""
-    @Binding var path: [Destination]
-    @StateObject var viewModel: CityViewModel
     
+    @Binding var path: [Destination]
+    @EnvironmentObject var viewModel: ScheduleViewModel
+    
+    @State private var searchTextString = ""
     @Environment(\.dismiss) private var dismiss // заглушка
     
     // TODO: Добавить локализацию
@@ -26,7 +27,6 @@ struct CitiesScreenView: View {
                 $0.title.lowercased().contains(searchTextString.lowercased())
             }
         }
-        
     }
     
     var body: some View {
@@ -44,6 +44,7 @@ struct CitiesScreenView: View {
                 ForEach(searchResults) { city in
                     CityCellView(city: city)
                         .onTapGesture {
+                            viewModel.departureCity = city
                             path.append(.stations)
                         }
                 }
@@ -51,6 +52,7 @@ struct CitiesScreenView: View {
             .padding(.horizontal, 16)
             Spacer()
         }
+        .environmentObject(viewModel)
         .toolbar(.hidden, for: .tabBar)
         .navigationTitle(selectCityText)
         .navigationBarTitleDisplayMode(.inline)
@@ -71,11 +73,7 @@ struct CitiesScreenView: View {
 
 #Preview {
     NavigationStack {
-        CitiesScreenView(
-            path: .constant([]),
-            viewModel: CityViewModel(
-                cities: MockData.mockCity
-            )
-        )
+        CitiesScreenView(path: .constant([]))
+        .environmentObject(ScheduleViewModel(cities: [], schedule: []))
     }
 }
