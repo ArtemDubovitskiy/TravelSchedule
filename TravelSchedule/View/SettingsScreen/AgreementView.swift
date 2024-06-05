@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AgreementView: View {
-    
+    @EnvironmentObject var viewModel: ScheduleViewModel
     @Environment(\.dismiss) private var dismiss
     
     let urlString: String
@@ -16,29 +16,36 @@ struct AgreementView: View {
     private let agreementText = "Пользовательское соглашение"
     
     var body: some View {
-        VStack {
-            if let url = URL(string: urlString) {
-                WebView(url: url)
-                    .navigationTitle(agreementText)
-                    .navigationBarTitleDisplayMode(.inline)
-                    .navigationBarBackButtonHidden(true)
-                    .ignoresSafeArea(.all, edges: .bottom)
-                    .toolbar {
-                        ToolbarItem(placement: .topBarLeading) {
-                            Button {
-                                dismiss()
-                            } label: {
-                                Image.chevronBackward
-                                    .foregroundStyle(.ypBlackDual)
+        switch viewModel.state {
+        case .loading:
+            ProgressView()
+        case .content:
+            VStack {
+                if let url = URL(string: urlString) {
+                    WebView(url: url)
+                        .navigationTitle(agreementText)
+                        .navigationBarTitleDisplayMode(.inline)
+                        .navigationBarBackButtonHidden(true)
+                        .ignoresSafeArea(.all, edges: .bottom)
+                        .toolbar {
+                            ToolbarItem(placement: .topBarLeading) {
+                                Button {
+                                    dismiss()
+                                } label: {
+                                    Image.chevronBackward
+                                        .foregroundStyle(.ypBlackDual)
+                                }
                             }
                         }
-                    }
+                }
             }
+            .toolbar(.hidden, for: .tabBar)
+        case .error:
+            ErrorView(errorType: viewModel.errorType)
         }
-        .toolbar(.hidden, for: .tabBar)
     }
 }
 
 #Preview {
-    AgreementView(urlString: "https://ya.ru")
+    AgreementView(urlString: "https://ya.ru").environmentObject(ScheduleViewModel(cities: []))
 }

@@ -7,7 +7,17 @@
 import Foundation
 
 final class ScheduleViewModel: ObservableObject {
+    
+    enum State {
+        case loading
+        case content
+        case error
+    }
+    
     // MARK: - Public Properties
+    @Published var state: State = .content
+    @Published var errorType: ErrorType = .serverError
+    
     @Published var cities: [City]
     @Published var schedule: [Schedule] = []
     

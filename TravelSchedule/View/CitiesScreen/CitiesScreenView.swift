@@ -30,51 +30,60 @@ struct CitiesScreenView: View {
     }
     
     var body: some View {
-        VStack {
-            SearchBar(searchText: $searchTextString)
-            if searchResults.isEmpty {
-                Spacer()
-                Text(cityNotFoundText)
-                    .font(.bold24)
-                    .foregroundStyle(.ypBlackDual)
-                    .padding(.horizontal)
-                Spacer()
-            }
-            LazyVStack(spacing: 0) {
-                ForEach(searchResults) { city in
-                    CityCellView(city: city)
-                        .onTapGesture {
-                            switch viewModel.currentRote {
-                            case .departure:
-                                viewModel.departureCity = city
-                            case .arrival:
-                                viewModel.arrivalCity = city
-                            case .empty:
-                                break
-                            }
-                            path.append(.stations)
-                        }
-                }
-            }
-            .padding(.horizontal, 16)
-            Spacer()
-        }
-        .environmentObject(viewModel)
-        .toolbar(.hidden, for: .tabBar)
-        .navigationTitle(selectCityText)
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(true)
-        .ignoresSafeArea(.all, edges: .bottom)
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    path.removeLast()
-                    dismiss()
-                } label: {
-                    Image.chevronBackward
+        switch viewModel.state {
+        case .loading:
+            ProgressView()
+            
+        case .content:
+            VStack {
+                SearchBar(searchText: $searchTextString)
+                if searchResults.isEmpty {
+                    Spacer()
+                    Text(cityNotFoundText)
+                        .font(.bold24)
                         .foregroundStyle(.ypBlackDual)
+                        .padding(.horizontal)
+                    Spacer()
+                }
+                LazyVStack(spacing: 0) {
+                    ForEach(searchResults) { city in
+                        CityCellView(city: city)
+                            .onTapGesture {
+                                switch viewModel.currentRote {
+                                case .departure:
+                                    viewModel.departureCity = city
+                                case .arrival:
+                                    viewModel.arrivalCity = city
+                                case .empty:
+                                    break
+                                }
+                                path.append(.stations)
+                            }
+                    }
+                }
+                .padding(.horizontal, 16)
+                Spacer()
+            }
+            .environmentObject(viewModel)
+            .toolbar(.hidden, for: .tabBar)
+            .navigationTitle(selectCityText)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .ignoresSafeArea(.all, edges: .bottom)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        path.removeLast()
+                        dismiss()
+                    } label: {
+                        Image.chevronBackward
+                            .foregroundStyle(.ypBlackDual)
+                    }
                 }
             }
+            
+        case .error:
+            ErrorView(errorType: viewModel.errorType)
         }
     }
 }
