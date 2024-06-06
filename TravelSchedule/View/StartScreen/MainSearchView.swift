@@ -74,7 +74,9 @@ struct MainSearchView: View {
                 }
                 .padding(.horizontal, 16)
                 
-                if viewModel.departureCity != nil &&
+                if !viewModel.departureText.isEmpty &&
+                    !viewModel.arrivalText.isEmpty &&
+                    viewModel.departureCity != nil &&
                     viewModel.departureStation != nil &&
                     viewModel.arrivalCity != nil &&
                     viewModel.arrivalStation != nil {

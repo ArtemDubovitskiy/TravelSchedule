@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct RouteFilterScreenView: View {
-    
-    @State private var selectedIntervals: Set<TimeFilters> = []
-    @State private var selectedTransferOptions: Int?
-    
+    @EnvironmentObject var viewModel: ScheduleViewModel
     @Environment(\.dismiss) private var dismiss
     
     // TODO: Добавить локализацию
@@ -32,7 +29,7 @@ struct RouteFilterScreenView: View {
                     timeInterval in
                     TimeIntervalCell(
                         title: timeInterval.title,
-                        isSelected: selectedIntervals.contains(timeInterval),
+                        isSelected: viewModel.selectedIntervals.contains(timeInterval),
                         action: {
                             toggleSelection(at: timeInterval)
                         }
@@ -50,9 +47,9 @@ struct RouteFilterScreenView: View {
                     showTransfers in
                     TranferOptionCell(
                         title: showTransfers.title,
-                        isSelected: selectedTransferOptions == showTransfers.hashValue,
+                        isSelected: viewModel.selectedTransferOptions == showTransfers,
                         action: {
-                            selectedTransferOptions = showTransfers.hashValue
+                            viewModel.selectedTransferOptions = showTransfers
                         }
                     )
                 }
@@ -75,10 +72,14 @@ struct RouteFilterScreenView: View {
         }
         Spacer()
         
-        if !selectedIntervals.isEmpty &&
-            selectedTransferOptions != nil {
+        if !viewModel.selectedIntervals.isEmpty &&
+            viewModel.selectedTransferOptions != nil {
             Button {
-                // TODO: Добавить обработку нажатия кнопки
+                guard let selectOptions = viewModel.selectedTransferOptions else { return }
+                viewModel.applyRoteFilters(
+                    selectedIntervals: viewModel.selectedIntervals,
+                    selectedTransferOptions: selectOptions
+                )
                 dismiss()
             } label: {
                 ZStack {
@@ -98,10 +99,10 @@ struct RouteFilterScreenView: View {
     }
     
     private func toggleSelection(at timeInterval: TimeFilters) {
-        if selectedIntervals.contains(timeInterval) {
-            selectedIntervals.remove(timeInterval)
+        if viewModel.selectedIntervals.contains(timeInterval) {
+            viewModel.selectedIntervals.remove(timeInterval)
         } else {
-            selectedIntervals.insert(timeInterval)
+            viewModel.selectedIntervals.insert(timeInterval)
         }
     }
 }

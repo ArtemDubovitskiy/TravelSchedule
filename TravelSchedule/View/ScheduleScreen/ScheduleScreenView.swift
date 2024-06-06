@@ -30,7 +30,7 @@ struct ScheduleScreenView: View {
                         .padding(.top, 10)
                         .multilineTextAlignment(.leading)
                     
-                    if viewModel.schedule.isEmpty {
+                    if viewModel.filterSchedule.isEmpty {
                         Spacer()
                         Text("Вариантов нет")
                             .font(.bold24)
@@ -41,7 +41,7 @@ struct ScheduleScreenView: View {
                     } else {
                         ScrollView(.vertical, showsIndicators: false) {
                             LazyVStack(spacing: 8) {
-                                ForEach(viewModel.schedule) { route in
+                                ForEach(viewModel.filterSchedule) { route in
                                     NavigationLink {
                                         CarrierInfoScreenView(carrier: route.carrier)
                                     } label: {
@@ -67,10 +67,11 @@ struct ScheduleScreenView: View {
                                 Text(buttonText)
                                     .font(.bold17)
                                     .foregroundStyle(.ypWhite)
-                                // TODO: Добавить обработку фильтрации
-                                Circle()
-                                    .fill(.ypRed)
-                                    .frame(width: 8, height: 8)
+                                if viewModel.isFilteredSchedule {
+                                    Circle()
+                                        .fill(.ypRed)
+                                        .frame(width: 8, height: 8)
+                                }
                             }
                         }
                         .padding(.horizontal, 16)
@@ -87,7 +88,7 @@ struct ScheduleScreenView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
-                        viewModel.clearRouteText()
+                        viewModel.clearRouteResult()
                         path.removeAll()
                         dismiss()
                     } label: {

@@ -131,13 +131,12 @@
 		9131FA9C2B9D99E300B25976 /* TravelSchedule */ = {
 			isa = PBXGroup;
 			children = (
+				917A50B72C1135A2005F2385 /* Content */,
 				9178F9BB2BE6C4F8000B89A8 /* DesignSystem */,
 				918CA6042BA0EC3A0088CA5F /* NetworkRequestService */,
 				9178F9CB2BE978F0000B89A8 /* Model */,
 				9178F9CC2BE978FD000B89A8 /* ViewModel */,
 				9178F9C92BE978DE000B89A8 /* View */,
-				9131FA9F2B9D99E300B25976 /* ContentView.swift */,
-				918CA6072BA0EED10088CA5F /* ContentPresenter.swift */,
 				9178F9CD2BE97923000B89A8 /* SwiftUIProject */,
 				9131FAA32B9D99E400B25976 /* Preview Content */,
 				9178F9C42BE7A1D6000B89A8 /* Resources */,
@@ -217,6 +216,15 @@
 				9131FA9D2B9D99E300B25976 /* TravelScheduleApp.swift */,
 			);
 			path = SwiftUIProject;
+			sourceTree = "<group>";
+		};
+		917A50B72C1135A2005F2385 /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				9131FA9F2B9D99E300B25976 /* ContentView.swift */,
+				918CA6072BA0EED10088CA5F /* ContentPresenter.swift */,
+			);
+			path = Content;
 			sourceTree = "<group>";
 		};
 		918CA6042BA0EC3A0088CA5F /* NetworkRequestService */ = {
