@@ -29,7 +29,7 @@ struct CarrierInfoScreenView: View {
                 Image(carrier.logoFull ?? "")
                     .resizable()
                     .scaledToFit()
-                    .frame(maxWidth: .infinity, maxHeight: 104, alignment: .center)
+                    .frame(maxWidth: .infinity, maxHeight: 110, alignment: .center)
                     .padding(.top, 16)
                 
                 Text("ОАО «\(carrier.title)»")
