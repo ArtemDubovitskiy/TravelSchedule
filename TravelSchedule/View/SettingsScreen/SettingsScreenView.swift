@@ -11,6 +11,10 @@ struct SettingsScreenView: View {
     
     @Binding var isDarkScheme: Bool
     private let urlString = "https://yandex.ru/legal/practicum_offer/"
+    
+//    Тестовый URL для проверки темной темы WebView:
+//    private let urlString = "https://developer.apple.com"
+    
     // TODO: Добавить локализацию
     private let toggleText = "Темная тема"
     private let agreementText = "Пользовательское соглашение"

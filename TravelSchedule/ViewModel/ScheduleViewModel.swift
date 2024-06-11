@@ -164,11 +164,7 @@ final class ScheduleViewModel: ObservableObject {
             return false
         }
         
-        if startTime < departure && departure < endTime {
-            return true
-        } else {
-            return false
-        }
+        return startTime < departure && departure < endTime
     }
     
     private func stringToDate(time: String) -> Date? {
