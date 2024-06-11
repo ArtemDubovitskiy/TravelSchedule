@@ -12,8 +12,8 @@ struct ErrorView: View {
     var body: some View {
         VStack(spacing: 16) {
             Spacer()
-            Image(errorType.image)
-            Text(errorType.text)
+            Image(errorType.info.image)
+            Text(errorType.info.description)
                 .font(.bold24)
                 .foregroundStyle(.ypBlackDual)
             Spacer()

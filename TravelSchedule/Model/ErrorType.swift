@@ -6,26 +6,22 @@
 //
 import Foundation
 
+struct ErrorData {
+    let description: String
+    let image: String
+}
+
 enum ErrorType: String, CaseIterable {
     case networkConnecting
     case serverError
     
     // TODO: Добавить локализацию:
-    var text: String {
+    var info: ErrorData {
         switch self {
         case .networkConnecting:
-            return "Нет интернета"
+            return ErrorData(description: "Нет интернета", image: "No Internet")
         case .serverError:
-            return "Ошибка сервера"
-        }
-    }
-    
-    var image: String {
-        switch self {
-        case .networkConnecting:
-            return "No Internet"
-        case .serverError:
-            return "Server Error"
+            return ErrorData(description: "Ошибка сервера", image: "Server Error")
         }
     }
 }
