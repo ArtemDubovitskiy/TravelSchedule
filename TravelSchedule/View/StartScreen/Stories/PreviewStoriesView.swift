@@ -1,5 +1,5 @@
 //
-//  StoriesView.swift
+//  PreviewStoriesView.swift
 //  TravelSchedule
 //
 //  Created by Artem Dubovitsky on 20.05.2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StoriesView: View {
+struct PreviewStoriesView: View {
     var stories: [Story]
     
     private let storiesHeight: Double = 188
@@ -16,7 +16,7 @@ struct StoriesView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: 12) {
                 ForEach(stories) { story in
-                    StoryCellView(story: story, isReadStory: false)
+                    PreviewStoryCellView(story: story, isReadStory: false)
                 }
             }
             .padding(.leading, 16)
@@ -27,5 +27,5 @@ struct StoriesView: View {
 }
 
 #Preview {
-    StoriesView(stories: MockData.mockStories.self)
+    PreviewStoriesView(stories: MockData.mockStories.self)
 }

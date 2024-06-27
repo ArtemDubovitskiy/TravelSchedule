@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StoryCellView: View {
+struct PreviewStoryCellView: View {
     
     let story: Story
     let isReadStory: Bool
@@ -48,7 +48,7 @@ struct StoryCellView: View {
 }
 
 #Preview {
-    StoryCellView(
+    PreviewStoryCellView(
         story: MockData.mockStories[0].self,
         isReadStory: false
     )
