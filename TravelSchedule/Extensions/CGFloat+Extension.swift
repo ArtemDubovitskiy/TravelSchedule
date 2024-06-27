@@ -4,8 +4,7 @@
 //
 //  Created by Artem Dubovitsky on 27.06.2024.
 //
-
-import SwiftUI
+import Foundation
 
 extension CGFloat {
     // Stories progress bar
