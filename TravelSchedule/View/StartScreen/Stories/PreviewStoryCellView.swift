@@ -19,9 +19,9 @@ struct PreviewStoryCellView: View {
     
     var body: some View {
         ZStack {
-            Image(story.smallImage)
+            Image(story.image)
                 .resizable()
-                .scaledToFit()
+                .scaledToFill()
                 .frame(
                     width: imageWidth,
                     height: imageHeight
@@ -49,7 +49,7 @@ struct PreviewStoryCellView: View {
 
 #Preview {
     PreviewStoryCellView(
-        story: MockData.mockStories[0].self,
+        story: MockData.mockStories[0].stories[0],
         isReadStory: false
     )
 }

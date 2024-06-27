@@ -56,21 +56,21 @@ enum MockData {
     static let mockCarrier: [Carrier] = [
         Carrier(
             title: "РЖД",
-            logo: "RZD", 
+            logo: "RZD",
             logoFull: "RZDFull",
             email: "i.lozgkina@yandex.ru",
             phone: "+7 (904) 329-27-71"
         ),
         Carrier(
             title: "ФГК",
-            logo: "FGK", 
+            logo: "FGK",
             logoFull: "FGK",
             email: "info@railfgk.ru",
             phone: "8 (800) 250-47-77"
         ),
         Carrier(
             title: "Урал логистика",
-            logo: "Ural", 
+            logo: "Ural",
             logoFull: "Ural",
             email: "contact@ural-lg.ru",
             phone: "8 (800) 505-49-84"
@@ -120,42 +120,85 @@ enum MockData {
         ),
     ]
     
-    static let mockStories: [Story] = [
-        Story(
-            title: "Text Text Text Text Text Text Text Text",
-            description: "Text Text Text Text Text Text Text Text",
-            smallImage: "Preview01",
-            fullImage: ["Big01","Big02","Big03"]
-        ),
-        Story(
-            title: "Text Text Text Text Text Text Text Text",
-            description: "Text Text Text Text Text Text Text Text",
-            smallImage: "Preview02",
-            fullImage: ["Big04","Big05","Big06"]
-        ),
-        Story(
-            title: "Text Text Text Text Text Text Text Text",
-            description: "Text Text Text Text Text Text Text Text",
-            smallImage: "Preview03",
-            fullImage: ["Big07","Big08","Big09"]
-        ),
-        Story(
-            title: "Text Text Text Text Text Text Text Text",
-            description: "Text Text Text Text Text Text Text Text",
-            smallImage: "Preview04",
-            fullImage: ["Big10","Big01","Big02"]
-        ),
-        Story(
-            title: "Text Text Text Text Text Text Text Text",
-            description: "Text Text Text Text Text Text Text Text",
-            smallImage: "Preview05",
-            fullImage: ["Big04","Big05","Big06"]
-        ),
-        Story(
-            title: "Text Text Text Text Text Text Text Text",
-            description: "Text Text Text Text Text Text Text Text",
-            smallImage: "Preview01",
-            fullImage: ["Big07","Big05","Big09"]
-        ),
+    private static let storyTitle = "Text Text Text Text Text Text Text Text Text Text "
+    private static let storyDescription: String = storyTitle + storyTitle + storyTitle
+    
+    static let mockStories: [Stories] = [
+        Stories(stories: [
+            Story(image: "Big01",
+                  title: storyTitle,
+                  description: storyDescription),
+            Story(image: "Big02",
+                  title: storyTitle,
+                  description: storyDescription),
+            Story(image: "Big03",
+                  title: storyTitle,
+                  description: storyDescription),
+            Story(image: "Big04",
+                  title: storyTitle,
+                  description: storyDescription)
+        ]),
+        
+        Stories(stories: [
+            Story(image: "Big04",
+                  title: storyTitle,
+                  description: storyDescription),
+            Story(image: "Big05",
+                  title: storyTitle,
+                  description: storyDescription),
+            Story(image: "Big06",
+                  title: storyTitle,
+                  description: storyDescription)
+        ]),
+        
+        Stories(stories: [
+            Story(image: "Big07",
+                  title: storyTitle,
+                  description: storyDescription),
+            Story(image: "Big08",
+                  title: storyTitle,
+                  description: storyDescription),
+            Story(image: "Big09",
+                  title: storyTitle,
+                  description: storyDescription)
+        ]),
+        
+        Stories(stories: [
+            Story(image: "Big10",
+                  title: storyTitle,
+                  description: storyDescription),
+            Story(image: "Big01",
+                  title: storyTitle,
+                  description: storyDescription),
+            Story(image: "Big02",
+                  title: storyTitle,
+                  description: storyDescription)
+        ]),
+        
+        Stories(stories: [
+            Story(image: "Big06",
+                  title: storyTitle,
+                  description: storyDescription),
+            Story(image: "Big05",
+                  title: storyTitle,
+                  description: storyDescription),
+            Story(image: "Big10",
+                  title: storyTitle,
+                  description: storyDescription)
+        ]),
+        
+        Stories(stories: [
+            Story(image: "Big07",
+                  title: storyTitle,
+                  description: storyDescription
+                 ),
+            Story(image: "Big08",
+                  title: storyTitle,
+                  description: storyDescription
+                 ),
+            Story(image: "Big09",
+                  title: storyTitle,
+                  description: storyDescription)
+        ])
     ]
 }
