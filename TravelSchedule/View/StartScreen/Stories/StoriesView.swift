@@ -13,7 +13,7 @@ struct StoriesView: View {
     private var timerConfiguration: TimerConfiguration {
         .init(storiesCount: stories.count)
     }
-    
+    @State var currentStoryIndex: Int = 0
     @State var currentProgress: CGFloat = 0
     @Environment(\.dismiss) private var dismiss
     
@@ -22,14 +22,27 @@ struct StoriesView: View {
             .ignoresSafeArea()
             .overlay {
                 ZStack(alignment: .topTrailing) {
-                    // TODO: - изменить на StoriesTabView
-                    StoryView(story: stories[0]) // заглушка
+                    StoriesTabView(
+                        stories: stories,
+                        currentStoryIndex: $currentStoryIndex
+                    )
+                    .onChange(of: currentStoryIndex) { [currentStoryIndex] newValue in
+                        didChangeCurrentIndex(
+                            oldIndex: currentStoryIndex,
+                            newIndex: newValue
+                        )
+                    }
                     
                     StoriesProgressBarView(
                         storiesCount: stories.count,
                         timerConfiguration: timerConfiguration,
                         currentProgress: $currentProgress
                     )
+                    .onChange(of: currentProgress) { newValue in
+                        didChangeCurrentProgress(
+                            newProgress: newValue
+                        )
+                    }
                     
                     CloseButton(action: {
                         dismiss()
@@ -38,6 +51,23 @@ struct StoriesView: View {
                     .padding(.trailing, 12)
                 }
             }
+    }
+    // MARK: - Private Methods
+    private func didChangeCurrentIndex(oldIndex: Int, newIndex: Int) {
+        guard oldIndex != newIndex else { return }
+        let progress = timerConfiguration.progress(for: newIndex)
+        guard abs(progress - currentProgress) >= 0.01 else { return }
+        withAnimation {
+            currentProgress = progress
+        }
+    }
+    
+    private func didChangeCurrentProgress(newProgress: CGFloat) {
+        let index = timerConfiguration.index(for: newProgress)
+        guard index != currentStoryIndex else { return }
+        withAnimation {
+            currentStoryIndex = index
+        }
     }
 }
 

@@ -4,7 +4,7 @@
 //
 //  Created by Artem Dubovitsky on 29.06.2024.
 //
-import Foundation
+import SwiftUI
 
 extension TimerConfiguration {
     func progress(for storyIndex: Int) -> CGFloat {
