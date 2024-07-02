@@ -10,7 +10,7 @@ import SwiftUI
 struct PreviewStoriesView: View {
     var stories: [Stories]
     @State private var isPresented = false
-    @State private var selectedStory: [Story]?
+    @State private var selectedStories: Stories?
     
     private let storiesHeight: Double = 188
     
@@ -21,17 +21,17 @@ struct PreviewStoriesView: View {
                     index in
                     PreviewStoryCellView(
                         story: index.stories[0],
-                        isReadStory: false
+                        isReadStory: index.isRead
                     )
                     .onTapGesture {
                         isPresented = true
-                        selectedStory = index.stories
+                        selectedStories = index
                     }
                     .fullScreenCover(
                         isPresented: $isPresented,
                         content: {
                             StoriesView(
-                                stories: selectedStory ?? []
+                                stories: selectedStories?.stories ?? []
                             )
                         }
                     )

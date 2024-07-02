@@ -124,81 +124,93 @@ enum MockData {
     private static let storyDescription: String = storyTitle + storyTitle + storyTitle
     
     static let mockStories: [Stories] = [
-        Stories(stories: [
-            Story(image: "Big01",
-                  title: storyTitle,
-                  description: storyDescription),
-            Story(image: "Big02",
-                  title: storyTitle,
-                  description: storyDescription),
-            Story(image: "Big03",
-                  title: storyTitle,
-                  description: storyDescription),
-            Story(image: "Big01",
-                  title: storyTitle,
-                  description: storyDescription)
-        ]),
+        Stories(
+            stories: [
+                Story(image: "Big01",
+                      title: storyTitle,
+                      description: storyDescription),
+                Story(image: "Big02",
+                      title: storyTitle,
+                      description: storyDescription),
+                Story(image: "Big03",
+                      title: storyTitle,
+                      description: storyDescription),
+                Story(image: "Big01",
+                      title: storyTitle,
+                      description: storyDescription)],
+            isRead: false
+        ),
         
-        Stories(stories: [
-            Story(image: "Big04",
-                  title: storyTitle,
-                  description: storyDescription),
-            Story(image: "Big05",
-                  title: storyTitle,
-                  description: storyDescription),
-            Story(image: "Big06",
-                  title: storyTitle,
-                  description: storyDescription)
-        ]),
+        Stories(
+            stories: [
+                Story(image: "Big04",
+                      title: storyTitle,
+                      description: storyDescription),
+                Story(image: "Big05",
+                      title: storyTitle,
+                      description: storyDescription),
+                Story(image: "Big06",
+                      title: storyTitle,
+                      description: storyDescription)],
+            isRead: false
+        ),
         
-        Stories(stories: [
-            Story(image: "Big07",
-                  title: storyTitle,
-                  description: storyDescription),
-            Story(image: "Big08",
-                  title: storyTitle,
-                  description: storyDescription),
-            Story(image: "Big09",
-                  title: storyTitle,
-                  description: storyDescription)
-        ]),
+        Stories(
+            stories: [
+                Story(image: "Big07",
+                      title: storyTitle,
+                      description: storyDescription),
+                Story(image: "Big08",
+                      title: storyTitle,
+                      description: storyDescription),
+                Story(image: "Big09",
+                      title: storyTitle,
+                      description: storyDescription)],
+            isRead: false
+        ),
         
-        Stories(stories: [
-            Story(image: "Big10",
-                  title: storyTitle,
-                  description: storyDescription),
-            Story(image: "Big01",
-                  title: storyTitle,
-                  description: storyDescription),
-            Story(image: "Big02",
-                  title: storyTitle,
-                  description: storyDescription)
-        ]),
+        Stories(
+            stories: [
+                Story(image: "Big10",
+                      title: storyTitle,
+                      description: storyDescription),
+                Story(image: "Big01",
+                      title: storyTitle,
+                      description: storyDescription),
+                Story(image: "Big02",
+                      title: storyTitle,
+                      description: storyDescription)],
+            isRead: true
+        ),
         
-        Stories(stories: [
-            Story(image: "Big06",
-                  title: storyTitle,
-                  description: storyDescription),
-            Story(image: "Big05",
-                  title: storyTitle,
-                  description: storyDescription),
-            Story(image: "Big10",
-                  title: storyTitle,
-                  description: storyDescription)
-        ]),
+        Stories(
+            stories: [
+                Story(image: "Big06",
+                      title: storyTitle,
+                      description: storyDescription),
+                Story(image: "Big05",
+                      title: storyTitle,
+                      description: storyDescription),
+                Story(image: "Big10",
+                      title: storyTitle,
+                      description: storyDescription)],
+            isRead: false
+        ),
         
-        Stories(stories: [
-            Story(image: "Big08",
-                  title: storyTitle,
-                  description: storyDescription
-                 ),
-            Story(image: "Big09",
-                  title: storyTitle,
-                  description: storyDescription
-                 ),
-            Story(image: "Big01",
-                  title: storyTitle,
-                  description: storyDescription)
-        ])
+        Stories(
+            stories: [
+                Story(image: "Big08",
+                      title: storyTitle,
+                      description: storyDescription
+                     ),
+                Story(image: "Big09",
+                      title: storyTitle,
+                      description: storyDescription
+                     ),
+                Story(image: "Big01",
+                      title: storyTitle,
+                      description: storyDescription)],
+            isRead: false
+        )
     ]
 }

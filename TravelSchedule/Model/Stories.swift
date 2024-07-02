@@ -9,4 +9,5 @@ import Foundation
 struct Stories: Hashable, Identifiable {
     let id = UUID()
     let stories: [Story]
+    let isRead: Bool
 }
