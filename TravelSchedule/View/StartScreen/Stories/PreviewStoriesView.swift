@@ -9,16 +9,31 @@ import SwiftUI
 
 struct PreviewStoriesView: View {
     var stories: [Stories]
+    @State private var isPresented = false
+    @State private var selectedStory: [Story]?
     
     private let storiesHeight: Double = 188
-    // TODO: - Добавить обработку выбора истории для StoriesView
+    
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: 12) {
-                ForEach(stories) { story in
+                ForEach(stories) {
+                    index in
                     PreviewStoryCellView(
-                        story: story.stories[0],
+                        story: index.stories[0],
                         isReadStory: false
+                    )
+                    .onTapGesture {
+                        isPresented = true
+                        selectedStory = index.stories
+                    }
+                    .fullScreenCover(
+                        isPresented: $isPresented,
+                        content: {
+                            StoriesView(
+                                stories: selectedStory ?? []
+                            )
+                        }
                     )
                 }
             }

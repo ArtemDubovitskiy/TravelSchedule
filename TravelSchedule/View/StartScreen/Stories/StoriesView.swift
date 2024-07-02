@@ -51,6 +51,7 @@ struct StoriesView: View {
                     .padding(.trailing, 12)
                 }
             }
+            .preferredColorScheme(.dark)
     }
     // MARK: - Private Methods
     private func didChangeCurrentIndex(oldIndex: Int, newIndex: Int) {

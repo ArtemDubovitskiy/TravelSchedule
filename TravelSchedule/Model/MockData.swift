@@ -134,7 +134,7 @@ enum MockData {
             Story(image: "Big03",
                   title: storyTitle,
                   description: storyDescription),
-            Story(image: "Big04",
+            Story(image: "Big01",
                   title: storyTitle,
                   description: storyDescription)
         ]),
@@ -188,15 +188,15 @@ enum MockData {
         ]),
         
         Stories(stories: [
-            Story(image: "Big07",
-                  title: storyTitle,
-                  description: storyDescription
-                 ),
             Story(image: "Big08",
                   title: storyTitle,
                   description: storyDescription
                  ),
             Story(image: "Big09",
+                  title: storyTitle,
+                  description: storyDescription
+                 ),
+            Story(image: "Big01",
                   title: storyTitle,
                   description: storyDescription)
         ])
