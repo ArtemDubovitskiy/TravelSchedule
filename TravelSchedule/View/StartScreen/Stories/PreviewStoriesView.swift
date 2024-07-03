@@ -16,21 +16,21 @@ struct PreviewStoriesView: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: 12) {
-                ForEach(viewModel.stories) {
+                ForEach(0..<viewModel.stories.count, id: \.self) {
                     index in
                     PreviewStoryCellView(
-                        story: index.stories[0],
-                        isReadStory: index.isRead
+                        story: viewModel.stories[index].stories[0],
+                        isReadStory: viewModel.stories[index].isRead
                     )
                     .onTapGesture {
                         isPresented = true
-                        viewModel.selectedStories = index
+                        viewModel.stories[index].isRead = true
                     }
                     .fullScreenCover(
                         isPresented: $isPresented,
                         content: {
                             StoriesView(
-                                stories: viewModel.selectedStories?.stories ?? []
+                                stories: viewModel.stories[index].stories
                             )
                         }
                     )
