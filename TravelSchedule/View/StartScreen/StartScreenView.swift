@@ -9,12 +9,10 @@ import SwiftUI
 
 struct StartScreenView: View {
     @EnvironmentObject var viewModel: ScheduleViewModel
-    let mockStories = MockData.mockStories
     
     var body: some View {
         VStack(spacing: 20) {
-            // TODO: - Добавить обработку выбора истории для StoriesView
-            PreviewStoriesView(stories: mockStories.self)
+            PreviewStoriesView()
             MainSearchView()
             Spacer()
         }

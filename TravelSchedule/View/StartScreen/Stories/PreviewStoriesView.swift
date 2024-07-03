@@ -8,16 +8,15 @@
 import SwiftUI
 
 struct PreviewStoriesView: View {
-    var stories: [Stories]
     @State private var isPresented = false
-    @State private var selectedStories: Stories?
+    @EnvironmentObject var viewModel: ScheduleViewModel
     
     private let storiesHeight: Double = 188
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: 12) {
-                ForEach(stories) {
+                ForEach(viewModel.stories) {
                     index in
                     PreviewStoryCellView(
                         story: index.stories[0],
@@ -25,18 +24,19 @@ struct PreviewStoriesView: View {
                     )
                     .onTapGesture {
                         isPresented = true
-                        selectedStories = index
+                        viewModel.selectedStories = index
                     }
                     .fullScreenCover(
                         isPresented: $isPresented,
                         content: {
                             StoriesView(
-                                stories: selectedStories?.stories ?? []
+                                stories: viewModel.selectedStories?.stories ?? []
                             )
                         }
                     )
                 }
             }
+            .environmentObject(viewModel)
             .padding(.leading, 16)
             .frame(height: storiesHeight)
             .frame(maxWidth: .infinity)
@@ -45,5 +45,5 @@ struct PreviewStoriesView: View {
 }
 
 #Preview {
-    PreviewStoriesView(stories: MockData.mockStories)
+    PreviewStoriesView()
 }
