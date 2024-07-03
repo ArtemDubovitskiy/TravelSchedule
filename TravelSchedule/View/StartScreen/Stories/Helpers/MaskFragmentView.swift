@@ -8,8 +8,8 @@ import SwiftUI
 
 struct MaskFragmentView: View {
     var body: some View {
-        RoundedRectangle(cornerRadius: .progressBarCornerRadius)
-            .frame(height: .progressBarHeight)
+        RoundedRectangle(cornerRadius: ProgressBarConstants.progressBarCornerRadius)
+            .frame(height: ProgressBarConstants.progressBarHeight)
             .fixedSize(
                 horizontal: false,
                 vertical: true)

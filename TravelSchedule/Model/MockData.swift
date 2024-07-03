@@ -124,7 +124,7 @@ enum MockData {
     private static let storyDescription: String = storyTitle + storyTitle + storyTitle
     
     static let mockStories: [Stories] = [
-        Stories(
+        .init(
             stories: [
                 Story(image: "Big01",
                       title: storyTitle,
@@ -140,8 +140,7 @@ enum MockData {
                       description: storyDescription)],
             isRead: false
         ),
-        
-        Stories(
+        .init(
             stories: [
                 Story(image: "Big04",
                       title: storyTitle,
@@ -154,8 +153,7 @@ enum MockData {
                       description: storyDescription)],
             isRead: false
         ),
-        
-        Stories(
+        .init(
             stories: [
                 Story(image: "Big07",
                       title: storyTitle,
@@ -168,8 +166,7 @@ enum MockData {
                       description: storyDescription)],
             isRead: false
         ),
-        
-        Stories(
+        .init(
             stories: [
                 Story(image: "Big10",
                       title: storyTitle,
@@ -182,8 +179,7 @@ enum MockData {
                       description: storyDescription)],
             isRead: true
         ),
-        
-        Stories(
+        .init(
             stories: [
                 Story(image: "Big06",
                       title: storyTitle,
@@ -196,8 +192,7 @@ enum MockData {
                       description: storyDescription)],
             isRead: false
         ),
-        
-        Stories(
+        .init(
             stories: [
                 Story(image: "Big08",
                       title: storyTitle,

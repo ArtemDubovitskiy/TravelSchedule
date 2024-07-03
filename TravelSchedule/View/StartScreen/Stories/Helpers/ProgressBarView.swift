@@ -14,16 +14,16 @@ struct ProgressBarView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: .progressBarCornerRadius)
+                RoundedRectangle(cornerRadius: ProgressBarConstants.progressBarCornerRadius)
                     .frame(
                         width: geometry.size.width,
-                        height: .progressBarHeight
+                        height: ProgressBarConstants.progressBarHeight
                     )
                     .foregroundStyle(.ypWhite)
-                RoundedRectangle(cornerRadius: .progressBarCornerRadius)
+                RoundedRectangle(cornerRadius: ProgressBarConstants.progressBarCornerRadius)
                     .frame(
                         width: min(progress * geometry.size.width, geometry.size.width),
-                        height: .progressBarHeight
+                        height: ProgressBarConstants.progressBarHeight
                     )
                     .foregroundStyle(Color.ypBlue)
             }

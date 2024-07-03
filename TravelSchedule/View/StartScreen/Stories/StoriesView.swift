@@ -16,44 +16,52 @@ struct StoriesView: View {
     @State var currentStoryIndex: Int = 0
     @State var currentProgress: CGFloat = 0
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var viewModel: ScheduleViewModel
     
     let isReadStories: () -> Void
     
     var body: some View {
-        Color.ypBlack
-            .ignoresSafeArea()
-            .overlay {
-                ZStack(alignment: .topTrailing) {
-                    StoriesTabView(
-                        stories: stories,
-                        currentStoryIndex: $currentStoryIndex
-                    )
-                    .onChange(of: currentStoryIndex) { [currentStoryIndex] newValue in
-                        didChangeCurrentIndex(
-                            oldIndex: currentStoryIndex,
-                            newIndex: newValue
+        switch viewModel.state {
+        case .loading:
+            ProgressView()
+        case .content:
+            Color.ypBlack
+                .ignoresSafeArea()
+                .overlay {
+                    ZStack(alignment: .topTrailing) {
+                        StoriesTabView(
+                            stories: stories,
+                            currentStoryIndex: $currentStoryIndex
                         )
-                    }
-                    
-                    StoriesProgressBarView(
-                        storiesCount: stories.count,
-                        timerConfiguration: timerConfiguration,
-                        currentProgress: $currentProgress
-                    )
-                    .onChange(of: currentProgress) { newValue in
-                        didChangeCurrentProgress(
-                            newProgress: newValue
+                        .onChange(of: currentStoryIndex) { [currentStoryIndex] newValue in
+                            didChangeCurrentIndex(
+                                oldIndex: currentStoryIndex,
+                                newIndex: newValue
+                            )
+                        }
+                        
+                        StoriesProgressBarView(
+                            storiesCount: stories.count,
+                            timerConfiguration: timerConfiguration,
+                            currentProgress: $currentProgress
                         )
+                        .onChange(of: currentProgress) { newValue in
+                            didChangeCurrentProgress(
+                                newProgress: newValue
+                            )
+                        }
+                        
+                        CloseButton {
+                            storiesIsRead()
+                        }
+                        .padding(.top, 57)
+                        .padding(.trailing, 12)
                     }
-                    
-                    CloseButton(action: {
-                        storiesIsRead()
-                    })
-                    .padding(.top, 57)
-                    .padding(.trailing, 12)
                 }
-            }
-            .preferredColorScheme(.dark)
+                .preferredColorScheme(.dark)
+        case .error:
+            ErrorView(errorType: viewModel.errorType)
+        }
     }
     // MARK: - Private Methods
     private func didChangeCurrentIndex(oldIndex: Int, newIndex: Int) {
@@ -80,5 +88,7 @@ struct StoriesView: View {
 }
 
 #Preview {
-    StoriesView(stories: MockData.mockStories[0].stories, isReadStories: { })
+    NavigationStack {
+        StoriesView(stories: MockData.mockStories[0].stories, isReadStories: { } ).environmentObject(ScheduleViewModel(cities: []))
+    }
 }

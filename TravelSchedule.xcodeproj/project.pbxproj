@@ -11,7 +11,7 @@
 		9131FAA02B9D99E300B25976 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9131FA9F2B9D99E300B25976 /* ContentView.swift */; };
 		9131FAA22B9D99E400B25976 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9131FAA12B9D99E400B25976 /* Assets.xcassets */; };
 		9131FAA52B9D99E400B25976 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9131FAA42B9D99E400B25976 /* Preview Assets.xcassets */; };
-		9164C9F22C2D57C500C0F854 /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9164C9F12C2D57C500C0F854 /* CGFloat+Extension.swift */; };
+		9164C9F22C2D57C500C0F854 /* ProgressBarConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9164C9F12C2D57C500C0F854 /* ProgressBarConstants.swift */; };
 		9164C9F92C2D58D200C0F854 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9164C9F82C2D58D200C0F854 /* CloseButton.swift */; };
 		9164C9FE2C2D5C6800C0F854 /* StoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9164C9FD2C2D5C6800C0F854 /* StoriesView.swift */; };
 		9164CA022C2DBECB00C0F854 /* MaskFragmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9164CA012C2DBECB00C0F854 /* MaskFragmentView.swift */; };
@@ -71,7 +71,7 @@
 		9131FA9F2B9D99E300B25976 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9131FAA12B9D99E400B25976 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9131FAA42B9D99E400B25976 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		9164C9F12C2D57C500C0F854 /* CGFloat+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extension.swift"; sourceTree = "<group>"; };
+		9164C9F12C2D57C500C0F854 /* ProgressBarConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarConstants.swift; sourceTree = "<group>"; };
 		9164C9F82C2D58D200C0F854 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		9164C9FD2C2D5C6800C0F854 /* StoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesView.swift; sourceTree = "<group>"; };
 		9164CA012C2DBECB00C0F854 /* MaskFragmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskFragmentView.swift; sourceTree = "<group>"; };
@@ -157,7 +157,6 @@
 			children = (
 				9164CA122C307A8500C0F854 /* Algorithms */,
 				917A50B72C1135A2005F2385 /* Content */,
-				9164C9ED2C2D578900C0F854 /* Extensions */,
 				9178F9BB2BE6C4F8000B89A8 /* DesignSystem */,
 				918CA6042BA0EC3A0088CA5F /* NetworkRequestService */,
 				9178F9CB2BE978F0000B89A8 /* Model */,
@@ -190,14 +189,6 @@
 				9164C9F42C2D587900C0F854 /* Helpers */,
 			);
 			path = Stories;
-			sourceTree = "<group>";
-		};
-		9164C9ED2C2D578900C0F854 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				9164C9F12C2D57C500C0F854 /* CGFloat+Extension.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		9164C9F42C2D587900C0F854 /* Helpers */ = {
@@ -262,6 +253,7 @@
 				917A50A42C0E4279005F2385 /* Destination.swift */,
 				91955ECA2BF1529500BEA0FF /* ErrorType.swift */,
 				91E739BA2C0D2B1C001DDC28 /* Filters.swift */,
+				9164C9F12C2D57C500C0F854 /* ProgressBarConstants.swift */,
 				91F2815C2BF94E06009C860F /* Schedule.swift */,
 				91F281552BF93AC7009C860F /* Station.swift */,
 				91F2817D2BFB9E6E009C860F /* Story.swift */,
@@ -507,7 +499,7 @@
 				917A50AB2C0F41D0005F2385 /* ScheduleViewModel.swift in Sources */,
 				9164CA052C2DBF5B00C0F854 /* MaskView.swift in Sources */,
 				91A368052BFEC6DA00396463 /* AgreementView.swift in Sources */,
-				9164C9F22C2D57C500C0F854 /* CGFloat+Extension.swift in Sources */,
+				9164C9F22C2D57C500C0F854 /* ProgressBarConstants.swift in Sources */,
 				9131FA9E2B9D99E300B25976 /* TravelScheduleApp.swift in Sources */,
 				91F281782BFB9C13009C860F /* PreviewStoriesView.swift in Sources */,
 				91F2817B2BFB9E32009C860F /* PreviewStoryCellView.swift in Sources */,
