@@ -17,6 +17,8 @@ struct StoriesView: View {
     @State var currentProgress: CGFloat = 0
     @Environment(\.dismiss) private var dismiss
     
+    let isReadStories: () -> Void
+    
     var body: some View {
         Color.ypBlack
             .ignoresSafeArea()
@@ -45,7 +47,7 @@ struct StoriesView: View {
                     }
                     
                     CloseButton(action: {
-                        dismiss()
+                        storiesIsRead()
                     })
                     .padding(.top, 57)
                     .padding(.trailing, 12)
@@ -70,8 +72,13 @@ struct StoriesView: View {
             currentStoryIndex = index
         }
     }
+    
+    private func storiesIsRead() {
+        isReadStories()
+        dismiss()
+    }
 }
 
 #Preview {
-    StoriesView(stories: MockData.mockStories[0].stories)
+    StoriesView(stories: MockData.mockStories[0].stories, isReadStories: { })
 }

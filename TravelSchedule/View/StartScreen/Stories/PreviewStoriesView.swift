@@ -24,13 +24,16 @@ struct PreviewStoriesView: View {
                     )
                     .onTapGesture {
                         isPresented = true
-                        viewModel.stories[index].isRead = true
+                        viewModel.selectedStory = index
                     }
                     .fullScreenCover(
                         isPresented: $isPresented,
                         content: {
                             StoriesView(
-                                stories: viewModel.stories[index].stories
+                                stories: viewModel.stories[viewModel.selectedStory].stories,
+                                isReadStories: {
+                                    viewModel.stories[viewModel.selectedStory].isRead = true
+                                }
                             )
                         }
                     )

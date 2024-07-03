@@ -37,7 +37,7 @@ final class ScheduleViewModel: ObservableObject {
     @Published var isFilteredSchedule: Bool = false
     
     @Published var stories: [Stories] = []
-    @Published var selectedStories: Stories?
+    @Published var selectedStory: Int = 0
     
     // MARK: - Initializers
     init(cities: [City]) {
