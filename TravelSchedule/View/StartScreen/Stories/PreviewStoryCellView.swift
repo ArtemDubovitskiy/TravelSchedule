@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StoryCellView: View {
+struct PreviewStoryCellView: View {
     
     let story: Story
     let isReadStory: Bool
@@ -19,9 +19,9 @@ struct StoryCellView: View {
     
     var body: some View {
         ZStack {
-            Image(story.smallImage)
+            Image(story.image)
                 .resizable()
-                .scaledToFit()
+                .scaledToFill()
                 .frame(
                     width: imageWidth,
                     height: imageHeight
@@ -48,8 +48,8 @@ struct StoryCellView: View {
 }
 
 #Preview {
-    StoryCellView(
-        story: MockData.mockStories[0].self,
+    PreviewStoryCellView(
+        story: MockData.mockStories[0].stories[0],
         isReadStory: false
     )
 }
