@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct StartTabView: View {
-    @AppStorage("isDarkScheme") var isDarkScheme: Bool = false
+
     @StateObject var viewModel = ScheduleViewModel(cities: [])
-    
     @State private var selectedTab = 0
     
     var body: some View {
@@ -27,7 +26,7 @@ struct StartTabView: View {
                 .tag(0)
                 
                 VStack {
-                    SettingsScreenView(isDarkScheme: $isDarkScheme)
+                    SettingsScreenView()
                     Divider()
                         .padding(5)
                 }

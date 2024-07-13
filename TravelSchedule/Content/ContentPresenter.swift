@@ -7,10 +7,6 @@
 import Foundation
 import OpenAPIURLSession
 
-enum Constants {
-    static let apiKey = " "
-}
-
 protocol ContentPresenterProtocol: AnyObject {
     func search()
     func schedule()

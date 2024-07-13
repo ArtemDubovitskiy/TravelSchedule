@@ -8,12 +8,7 @@
 import SwiftUI
 
 struct SettingsScreenView: View {
-    
-    @Binding var isDarkScheme: Bool
-    private let urlString = "https://yandex.ru/legal/practicum_offer/"
-    
-//    Тестовый URL для проверки темной темы WebView:
-//    private let urlString = "https://developer.apple.com"
+    @ObservedObject var viewModel = SettingsViewModel()
     
     // TODO: Добавить локализацию
     private let toggleText = "Темная тема"
@@ -27,13 +22,16 @@ struct SettingsScreenView: View {
                 Text(toggleText)
                     .font(.regular17)
                     .foregroundStyle(.ypBlackDual)
-                Toggle(isOn: $isDarkScheme) { }
+                Toggle("", isOn: $viewModel.isDarkSchemeOn)
                     .tint(.ypBlue)
+                    .onChange(of: viewModel.isDarkSchemeOn, perform: { _ in
+                        viewModel.changeColorScheme()
+                    })
             }
             .frame(height: 60)
             
             NavigationLink {
-                AgreementView(urlString: urlString)
+                AgreementView(urlString: Constants.urlString)
             } label: {
                 HStack {
                     Text(agreementText)
@@ -66,6 +64,6 @@ struct SettingsScreenView: View {
 
 #Preview {
     NavigationStack {
-        SettingsScreenView(isDarkScheme: .constant(true))
+        SettingsScreenView()
     }
 }

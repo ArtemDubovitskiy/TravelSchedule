@@ -30,6 +30,9 @@
 		917A50A52C0E4279005F2385 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917A50A42C0E4279005F2385 /* Destination.swift */; };
 		917A50AB2C0F41D0005F2385 /* ScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917A50AA2C0F41D0005F2385 /* ScheduleViewModel.swift */; };
 		917A50B52C110402005F2385 /* CurrentRote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917A50B42C110402005F2385 /* CurrentRote.swift */; };
+		917BE6A02C42955D0004BB6A /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917BE69F2C42955D0004BB6A /* AppState.swift */; };
+		917BE6A32C42960B0004BB6A /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917BE6A22C42960B0004BB6A /* SettingsViewModel.swift */; };
+		917BE6A92C42F4D00004BB6A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917BE6A82C42F4D00004BB6A /* Constants.swift */; };
 		918CA5F62BA01D920088CA5F /* OpenAPIRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 918CA5F52BA01D920088CA5F /* OpenAPIRuntime */; };
 		918CA5F92BA01E640088CA5F /* OpenAPIURLSession in Frameworks */ = {isa = PBXBuildFile; productRef = 918CA5F82BA01E640088CA5F /* OpenAPIURLSession */; };
 		918CA5FF2BA01FA60088CA5F /* openapi-generator-config.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 918CA5FE2BA01FA60088CA5F /* openapi-generator-config.yaml */; };
@@ -90,6 +93,9 @@
 		917A50A42C0E4279005F2385 /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 		917A50AA2C0F41D0005F2385 /* ScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewModel.swift; sourceTree = "<group>"; };
 		917A50B42C110402005F2385 /* CurrentRote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentRote.swift; sourceTree = "<group>"; };
+		917BE69F2C42955D0004BB6A /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		917BE6A22C42960B0004BB6A /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		917BE6A82C42F4D00004BB6A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		918CA5FE2BA01FA60088CA5F /* openapi-generator-config.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "openapi-generator-config.yaml"; sourceTree = "<group>"; };
 		918CA6002BA01FE00088CA5F /* NetworkRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestService.swift; sourceTree = "<group>"; };
 		918CA6062BA0EC560088CA5F /* openapi.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = openapi.yaml; sourceTree = "<group>"; };
@@ -157,6 +163,7 @@
 			children = (
 				9164CA122C307A8500C0F854 /* Algorithms */,
 				917A50B72C1135A2005F2385 /* Content */,
+				917BE6A72C42F4B10004BB6A /* Constants */,
 				9178F9BB2BE6C4F8000B89A8 /* DesignSystem */,
 				918CA6042BA0EC3A0088CA5F /* NetworkRequestService */,
 				9178F9CB2BE978F0000B89A8 /* Model */,
@@ -253,7 +260,6 @@
 				917A50A42C0E4279005F2385 /* Destination.swift */,
 				91955ECA2BF1529500BEA0FF /* ErrorType.swift */,
 				91E739BA2C0D2B1C001DDC28 /* Filters.swift */,
-				9164C9F12C2D57C500C0F854 /* ProgressBarConstants.swift */,
 				91F2815C2BF94E06009C860F /* Schedule.swift */,
 				91F281552BF93AC7009C860F /* Station.swift */,
 				91F2817D2BFB9E6E009C860F /* Story.swift */,
@@ -266,7 +272,9 @@
 		9178F9CC2BE978FD000B89A8 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				917BE69F2C42955D0004BB6A /* AppState.swift */,
 				917A50AA2C0F41D0005F2385 /* ScheduleViewModel.swift */,
+				917BE6A22C42960B0004BB6A /* SettingsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -286,6 +294,15 @@
 				918CA6072BA0EED10088CA5F /* ContentPresenter.swift */,
 			);
 			path = Content;
+			sourceTree = "<group>";
+		};
+		917BE6A72C42F4B10004BB6A /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				917BE6A82C42F4D00004BB6A /* Constants.swift */,
+				9164C9F12C2D57C500C0F854 /* ProgressBarConstants.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		918CA6042BA0EC3A0088CA5F /* NetworkRequestService */ = {
@@ -472,7 +489,9 @@
 				91E739B72C0D0405001DDC28 /* TranferOptionCell.swift in Sources */,
 				9164CA022C2DBECB00C0F854 /* MaskFragmentView.swift in Sources */,
 				9164CA1B2C30811300C0F854 /* StoriesProgressBarView.swift in Sources */,
+				917BE6A92C42F4D00004BB6A /* Constants.swift in Sources */,
 				91F2817E2BFB9E6E009C860F /* Story.swift in Sources */,
+				917BE6A32C42960B0004BB6A /* SettingsViewModel.swift in Sources */,
 				918FE3CF2C06707400323D1D /* CarrierCellView.swift in Sources */,
 				9164C9F92C2D58D200C0F854 /* CloseButton.swift in Sources */,
 				91F281662BFA9525009C860F /* SearchBar.swift in Sources */,
@@ -488,6 +507,7 @@
 				9164C9FE2C2D5C6800C0F854 /* StoriesView.swift in Sources */,
 				9164CA102C2E1A0200C0F854 /* Stories.swift in Sources */,
 				9164CA192C3080AF00C0F854 /* TimerConfiguration+Calculations.swift in Sources */,
+				917BE6A02C42955D0004BB6A /* AppState.swift in Sources */,
 				918FE3C82C05310200323D1D /* StationsScreenView.swift in Sources */,
 				918FE3B72C050C2A00323D1D /* CityCellView.swift in Sources */,
 				91F2815D2BF94E06009C860F /* Schedule.swift in Sources */,
@@ -587,6 +607,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
 			};
 			name = Debug;
 		};
@@ -642,6 +663,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
