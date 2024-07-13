@@ -8,10 +8,8 @@
 import SwiftUI
 
 struct AgreementView: View {
-    @EnvironmentObject var viewModel: ScheduleViewModel
+    @StateObject var viewModel = AgreementViewModel()
     @Environment(\.dismiss) private var dismiss
-    
-    let urlString: String
     // TODO: Добавить локализацию
     private let agreementText = "Пользовательское соглашение"
     
@@ -21,7 +19,7 @@ struct AgreementView: View {
             ProgressView()
         case .content:
             VStack {
-                if let url = URL(string: urlString) {
+                if let url = URL(string: viewModel.usrString) {
                     WebView(url: url)
                         .navigationTitle(agreementText)
                         .navigationBarTitleDisplayMode(.inline)
@@ -47,5 +45,5 @@ struct AgreementView: View {
 }
 
 #Preview {
-    AgreementView(urlString: "https://ya.ru").environmentObject(ScheduleViewModel(cities: []))
+    AgreementView()
 }

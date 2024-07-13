@@ -33,6 +33,7 @@
 		917BE6A02C42955D0004BB6A /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917BE69F2C42955D0004BB6A /* AppState.swift */; };
 		917BE6A32C42960B0004BB6A /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917BE6A22C42960B0004BB6A /* SettingsViewModel.swift */; };
 		917BE6A92C42F4D00004BB6A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917BE6A82C42F4D00004BB6A /* Constants.swift */; };
+		917BE6AB2C42F6390004BB6A /* AgreementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917BE6AA2C42F6390004BB6A /* AgreementViewModel.swift */; };
 		918CA5F62BA01D920088CA5F /* OpenAPIRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 918CA5F52BA01D920088CA5F /* OpenAPIRuntime */; };
 		918CA5F92BA01E640088CA5F /* OpenAPIURLSession in Frameworks */ = {isa = PBXBuildFile; productRef = 918CA5F82BA01E640088CA5F /* OpenAPIURLSession */; };
 		918CA5FF2BA01FA60088CA5F /* openapi-generator-config.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 918CA5FE2BA01FA60088CA5F /* openapi-generator-config.yaml */; };
@@ -96,6 +97,7 @@
 		917BE69F2C42955D0004BB6A /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		917BE6A22C42960B0004BB6A /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		917BE6A82C42F4D00004BB6A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		917BE6AA2C42F6390004BB6A /* AgreementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementViewModel.swift; sourceTree = "<group>"; };
 		918CA5FE2BA01FA60088CA5F /* openapi-generator-config.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "openapi-generator-config.yaml"; sourceTree = "<group>"; };
 		918CA6002BA01FE00088CA5F /* NetworkRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestService.swift; sourceTree = "<group>"; };
 		918CA6062BA0EC560088CA5F /* openapi.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = openapi.yaml; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 			children = (
 				917BE69F2C42955D0004BB6A /* AppState.swift */,
 				917A50AA2C0F41D0005F2385 /* ScheduleViewModel.swift */,
+				917BE6AA2C42F6390004BB6A /* AgreementViewModel.swift */,
 				917BE6A22C42960B0004BB6A /* SettingsViewModel.swift */,
 			);
 			path = ViewModel;
@@ -514,6 +517,7 @@
 				91F281882BFEB441009C860F /* SettingsScreenView.swift in Sources */,
 				9164CA0D2C2DFC6600C0F854 /* StoryView.swift in Sources */,
 				918FE3C32C052F7F00323D1D /* StationCellView.swift in Sources */,
+				917BE6AB2C42F6390004BB6A /* AgreementViewModel.swift in Sources */,
 				918FE3BA2C050EC200323D1D /* CitiesScreenView.swift in Sources */,
 				91E739B42C0D0254001DDC28 /* TimeIntervalCell.swift in Sources */,
 				917A50AB2C0F41D0005F2385 /* ScheduleViewModel.swift in Sources */,

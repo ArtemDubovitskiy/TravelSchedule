@@ -8,8 +8,12 @@ import SwiftUI
 
 final class SettingsViewModel: ObservableObject {
     @AppStorage("isDarkScheme") private var isDarkScheme: Bool = false
-    @Published var isDarkSchemeOn = false
+    @Published var isDarkSchemeOn: Bool = false
     
+    init() {
+        self.isDarkSchemeOn = isDarkScheme
+    }
+    // MARK: - Public Methods
     func changeColorScheme() {
         isDarkScheme = isDarkSchemeOn
     }

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SettingsScreenView: View {
     @ObservedObject var viewModel = SettingsViewModel()
-    
     // TODO: Добавить локализацию
     private let toggleText = "Темная тема"
     private let agreementText = "Пользовательское соглашение"
@@ -22,7 +21,7 @@ struct SettingsScreenView: View {
                 Text(toggleText)
                     .font(.regular17)
                     .foregroundStyle(.ypBlackDual)
-                Toggle("", isOn: $viewModel.isDarkSchemeOn)
+                Toggle(isOn: $viewModel.isDarkSchemeOn) { }
                     .tint(.ypBlue)
                     .onChange(of: viewModel.isDarkSchemeOn, perform: { _ in
                         viewModel.changeColorScheme()
@@ -31,7 +30,7 @@ struct SettingsScreenView: View {
             .frame(height: 60)
             
             NavigationLink {
-                AgreementView(urlString: Constants.urlString)
+                AgreementView()
             } label: {
                 HStack {
                     Text(agreementText)
