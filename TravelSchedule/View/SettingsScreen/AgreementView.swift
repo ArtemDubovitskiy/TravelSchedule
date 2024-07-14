@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AgreementView: View {
-    @StateObject var viewModel = AgreementViewModel()
+    @ObservedObject var viewModel = AgreementViewModel()
     @Environment(\.dismiss) private var dismiss
     // TODO: Добавить локализацию
     private let agreementText = "Пользовательское соглашение"

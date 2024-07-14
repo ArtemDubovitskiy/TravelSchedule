@@ -16,7 +16,7 @@ struct StoriesView: View {
     @State var currentStoryIndex: Int = 0
     @State var currentProgress: CGFloat = 0
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var viewModel: ScheduleViewModel
+    @EnvironmentObject var viewModel: StoriesViewModel
     
     let isReadStories: () -> Void
     

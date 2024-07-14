@@ -29,14 +29,10 @@ final class ScheduleViewModel: ObservableObject {
     @Published var selectedTransferOptions: TransferFilters?
     @Published var isFilteredSchedule: Bool = false
     
-    @Published var stories: [Stories] = []
-    @Published var selectedStory: Int = 0
-    
     // MARK: - Initializers
     init(cities: [City]) {
         self.cities = cities
         getCities()
-        getStories()
     }
     
     // MARK: - Public Methods
@@ -101,10 +97,6 @@ final class ScheduleViewModel: ObservableObject {
     // MARK: - Private Methods
     private func getCities() {
         cities = MockData.mockCity
-    }
-    
-    private func getStories() {
-        stories = MockData.mockStories
     }
     
     private func roteTransfers(
