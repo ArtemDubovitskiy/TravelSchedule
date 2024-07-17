@@ -12,52 +12,66 @@ struct SettingsScreenView: View {
     // TODO: Добавить локализацию
     private let toggleText = "Темная тема"
     private let agreementText = "Пользовательское соглашение"
-    private let apiText = "Приложение использует API «Яндекс.Расписания»"
+    //    private let apiText = "Приложение использует API «Яндекс.Расписания»"
     private let versionText = "Версия 1.0 (beta)"
     
     var body: some View {
-        VStack(spacing: 0) {
-            HStack {
-                Text(toggleText)
-                    .font(.regular17)
-                    .foregroundStyle(.ypBlackDual)
-                Toggle(isOn: $viewModel.isDarkSchemeOn) { }
-                    .tint(.ypBlue)
-                    .onChange(of: viewModel.isDarkSchemeOn, perform: { _ in
-                        viewModel.changeColorScheme()
-                    })
-            }
-            .frame(height: 60)
-            
-            NavigationLink {
-                AgreementView()
-            } label: {
+        switch viewModel.state {
+            // здесь непонятное повидение вью, но цикличная загрузка
+        case .loading:
+            ProgressView()
+        case .content:
+            // в этом варианте нет загрузки (текст подгружвается позже):
+            //        case .loading, .content:
+            VStack(spacing: 0) {
                 HStack {
-                    Text(agreementText)
+                    Text(toggleText)
                         .font(.regular17)
                         .foregroundStyle(.ypBlackDual)
-                    Spacer()
-                    Image.chevronForward
-                        .frame(width: 24, height: 24)
-                        .foregroundStyle(.ypBlackDual)
+                    Toggle(isOn: $viewModel.isDarkSchemeOn) { }
+                        .tint(.ypBlue)
+                        .onChange(of: viewModel.isDarkSchemeOn, perform: { _ in
+                            viewModel.changeColorScheme()
+                        })
                 }
                 .frame(height: 60)
+                
+                NavigationLink {
+                    AgreementView()
+                } label: {
+                    HStack {
+                        Text(agreementText)
+                            .font(.regular17)
+                            .foregroundStyle(.ypBlackDual)
+                        Spacer()
+                        Image.chevronForward
+                            .frame(width: 24, height: 24)
+                            .foregroundStyle(.ypBlackDual)
+                    }
+                    .frame(height: 60)
+                }
+                
+                Spacer()
+                
+                VStack(alignment: .center, spacing: 16) {
+                    Text(viewModel.copyright_text)
+                    Text(versionText)
+                }
+                .frame(height: 44)
+                .font(.regular12)
+                .foregroundStyle(.ypBlackDual)
+                
             }
-            
-            Spacer()
-            
-            VStack(alignment: .center, spacing: 16) {
-                Text(apiText)
-                Text(versionText)
+            .task {
+                await viewModel.getCopyright()
             }
-            .frame(height: 44)
-            .font(.regular12)
-            .foregroundStyle(.ypBlackDual)
+            .padding(.top, 24)
+            .padding(.horizontal, 16)
+            .padding(.bottom)
             
+        case .error:
+            ErrorView(errorType: viewModel.errorType)
         }
-        .padding(.top, 24)
-        .padding(.horizontal, 16)
-        .padding(.bottom)
     }
 }
 

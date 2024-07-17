@@ -4,6 +4,7 @@
 //
 //  Created by Artem Dubovitsky on 12.03.2024.
 //
+// TODO: Удалить
 import OpenAPIRuntime
 import OpenAPIURLSession
 import Foundation
@@ -16,7 +17,7 @@ typealias NearestSettlement = Components.Schemas.Settlement
 typealias Carriers = Components.Schemas.Carriers
 typealias CarrierSystem = Operations.getCarrier.Input.Query.systemPayload
 typealias Stations = Components.Schemas.StationsList
-typealias CopyrightSchedule = Components.Schemas.Copyright
+//typealias CopyrightSchedule = Components.Schemas.Copyright
 
 protocol NetworkRequestServiceProtocol {
     func getSearch(from: String, to: String) async throws -> SearchRoutes
@@ -26,10 +27,10 @@ protocol NetworkRequestServiceProtocol {
     func getNearestSettlement(lat: Double, lng: Double) async throws -> NearestSettlement
     func getCarrier(code: String, system: CarrierSystem) async throws -> Carriers
     func getStationsList() async throws -> Stations
-    func getCopyright() async throws -> CopyrightSchedule
+//    func getCopyright() async throws -> CopyrightSchedule
 }
 
-final class NetworkRequestService: NetworkRequestServiceProtocol {
+actor NetworkRequestService: NetworkRequestServiceProtocol {
 
     private let client: Client
     private let apikey: String
@@ -110,10 +111,10 @@ final class NetworkRequestService: NetworkRequestServiceProtocol {
     }
     
     // Копирайт Яндекс Расписаний:
-    func getCopyright() async throws -> CopyrightSchedule {
-        let response = try await client.getCopyright(query: .init(
-            apikey: apikey
-        ))
-        return try response.ok.body.json
-    }
+//    func getCopyright() async throws -> CopyrightSchedule {
+//        let response = try await client.getCopyright(query: .init(
+//            apikey: apikey
+//        ))
+//        return try response.ok.body.json
+//    }
 }

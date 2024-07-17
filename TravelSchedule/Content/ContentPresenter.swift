@@ -6,7 +6,7 @@
 //
 import Foundation
 import OpenAPIURLSession
-
+// TODO: Удалить
 protocol ContentPresenterProtocol: AnyObject {
     func search()
     func schedule()
@@ -15,7 +15,7 @@ protocol ContentPresenterProtocol: AnyObject {
     func nearestSettlement()
     func carrier()
     func stationsList()
-    func copyright()
+//    func copyright()
 }
 
 final class ContentPresenter: ContentPresenterProtocol {
@@ -177,22 +177,22 @@ final class ContentPresenter: ContentPresenterProtocol {
     }
     
     // Копирайт Яндекс Расписаний:
-    func copyright() {
-        guard let serverURL = try? Servers.server1() else { return }
-        
-        let client = Client(
-            serverURL: serverURL,
-            transport: URLSessionTransport()
-        )
-        
-        let service = NetworkRequestService(
-            client: client,
-            apikey: Constants.apiKey
-        )
-        
-        Task {
-            let copyright = try await service.getCopyright()
-            print(copyright)
-        }
-    }
+//    func copyright() {
+//        guard let serverURL = try? Servers.server1() else { return }
+//        
+//        let client = Client(
+//            serverURL: serverURL,
+//            transport: URLSessionTransport()
+//        )
+//        
+//        let service = NetworkRequestService(
+//            client: client,
+//            apikey: Constants.apiKey
+//        )
+//        
+//        Task {
+//            let copyright = try await service.getCopyright()
+//            print(copyright)
+//        }
+//    }
 }
