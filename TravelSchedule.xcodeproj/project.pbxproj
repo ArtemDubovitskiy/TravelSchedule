@@ -35,6 +35,8 @@
 		917BE6A92C42F4D00004BB6A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917BE6A82C42F4D00004BB6A /* Constants.swift */; };
 		917BE6AB2C42F6390004BB6A /* AgreementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917BE6AA2C42F6390004BB6A /* AgreementViewModel.swift */; };
 		917BE6AE2C43CF700004BB6A /* StoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917BE6AD2C43CF700004BB6A /* StoriesViewModel.swift */; };
+		917BE6B22C47094B0004BB6A /* CopyrightRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917BE6B12C47094B0004BB6A /* CopyrightRequestService.swift */; };
+		917BE6B52C470E9F0004BB6A /* CopyrightService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917BE6B42C470E9F0004BB6A /* CopyrightService.swift */; };
 		918CA5F62BA01D920088CA5F /* OpenAPIRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 918CA5F52BA01D920088CA5F /* OpenAPIRuntime */; };
 		918CA5F92BA01E640088CA5F /* OpenAPIURLSession in Frameworks */ = {isa = PBXBuildFile; productRef = 918CA5F82BA01E640088CA5F /* OpenAPIURLSession */; };
 		918CA5FF2BA01FA60088CA5F /* openapi-generator-config.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 918CA5FE2BA01FA60088CA5F /* openapi-generator-config.yaml */; };
@@ -100,6 +102,8 @@
 		917BE6A82C42F4D00004BB6A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		917BE6AA2C42F6390004BB6A /* AgreementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementViewModel.swift; sourceTree = "<group>"; };
 		917BE6AD2C43CF700004BB6A /* StoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesViewModel.swift; sourceTree = "<group>"; };
+		917BE6B12C47094B0004BB6A /* CopyrightRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyrightRequestService.swift; sourceTree = "<group>"; };
+		917BE6B42C470E9F0004BB6A /* CopyrightService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyrightService.swift; sourceTree = "<group>"; };
 		918CA5FE2BA01FA60088CA5F /* openapi-generator-config.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "openapi-generator-config.yaml"; sourceTree = "<group>"; };
 		918CA6002BA01FE00088CA5F /* NetworkRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestService.swift; sourceTree = "<group>"; };
 		918CA6062BA0EC560088CA5F /* openapi.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = openapi.yaml; sourceTree = "<group>"; };
@@ -315,6 +319,8 @@
 			isa = PBXGroup;
 			children = (
 				918CA6002BA01FE00088CA5F /* NetworkRequestService.swift */,
+				917BE6B12C47094B0004BB6A /* CopyrightRequestService.swift */,
+				917BE6B42C470E9F0004BB6A /* CopyrightService.swift */,
 				918CA6052BA0EC4C0088CA5F /* OpenApi */,
 			);
 			path = NetworkRequestService;
@@ -495,6 +501,7 @@
 				91E739B72C0D0405001DDC28 /* TranferOptionCell.swift in Sources */,
 				9164CA022C2DBECB00C0F854 /* MaskFragmentView.swift in Sources */,
 				9164CA1B2C30811300C0F854 /* StoriesProgressBarView.swift in Sources */,
+				917BE6B22C47094B0004BB6A /* CopyrightRequestService.swift in Sources */,
 				917BE6A92C42F4D00004BB6A /* Constants.swift in Sources */,
 				91F2817E2BFB9E6E009C860F /* Story.swift in Sources */,
 				917BE6A32C42960B0004BB6A /* SettingsViewModel.swift in Sources */,
@@ -514,6 +521,7 @@
 				9164CA102C2E1A0200C0F854 /* Stories.swift in Sources */,
 				9164CA192C3080AF00C0F854 /* TimerConfiguration+Calculations.swift in Sources */,
 				917BE6A02C42955D0004BB6A /* AppState.swift in Sources */,
+				917BE6B52C470E9F0004BB6A /* CopyrightService.swift in Sources */,
 				918FE3C82C05310200323D1D /* StationsScreenView.swift in Sources */,
 				918FE3B72C050C2A00323D1D /* CityCellView.swift in Sources */,
 				91F2815D2BF94E06009C860F /* Schedule.swift in Sources */,

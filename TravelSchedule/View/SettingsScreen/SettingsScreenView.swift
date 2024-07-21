@@ -12,7 +12,6 @@ struct SettingsScreenView: View {
     // TODO: Добавить локализацию
     private let toggleText = "Темная тема"
     private let agreementText = "Пользовательское соглашение"
-    private let apiText = "Приложение использует API «Яндекс.Расписания»"
     private let versionText = "Версия 1.0 (beta)"
     
     var body: some View {
@@ -47,7 +46,15 @@ struct SettingsScreenView: View {
             Spacer()
             
             VStack(alignment: .center, spacing: 16) {
-                Text(apiText)
+                switch viewModel.state {
+                case .loading:
+                    ProgressView()
+                        .task {
+                            await viewModel.getCopyright()
+                        }
+                case .content, .error:
+                    Text(viewModel.copyright_text)
+                }
                 Text(versionText)
             }
             .frame(height: 44)

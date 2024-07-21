@@ -11,44 +11,44 @@ enum MockData {
         City(
             title: "Москва",
             stations: [
-                Station(title: "Киевский вокзал"),
-                Station(title: "Курский вокзал"),
-                Station(title: "Ярославский вокзал"),
-                Station(title: "Белорусский вокзал"),
-                Station(title: "Савеловский вокзал"),
-                Station(title: "Ленинградский вокзал")
+                Station(title: "Киевский вокзал", code: ""),
+                Station(title: "Курский вокзал", code: ""),
+                Station(title: "Ярославский вокзал", code: ""),
+                Station(title: "Белорусский вокзал", code: ""),
+                Station(title: "Савеловский вокзал", code: ""),
+                Station(title: "Ленинградский вокзал", code: "")
             ]
         ),
         City(
             title: "Санкт Петербург",
             stations: [
-                Station(title: "Балтийский вокзал"),
-                Station(title: "Московский вокзал")
+                Station(title: "Балтийский вокзал", code: ""),
+                Station(title: "Московский вокзал", code: "")
             ]
         ),
         City(
             title: "Сочи",
             stations: [
-                Station(title: "Сочи")
+                Station(title: "Сочи", code: "")
             ]
         ),
         City(
             title: "Горный воздух",
             stations: [
-                Station(title: "Горный Воздух")
+                Station(title: "Горный Воздух", code: "")
             ]
         ),
         City(
             title: "Краснодар",
             stations: [
-                Station(title: "Краснодар-1"),
-                Station(title: "Краснодар-2")
+                Station(title: "Краснодар-1", code: ""),
+                Station(title: "Краснодар-2", code: "")
             ]
         ),
         City(
             title: "Казань",
             stations: [
-                Station(title: "Казань-Пасс.")
+                Station(title: "Казань-Пасс.", code: "")
             ]
         ),
     ]
