@@ -10,7 +10,7 @@ import OpenAPIURLSession
 final class CopyrightService {
     
     // Копирайт Яндекс Расписаний:
-    func copyright() async throws -> String {
+    func copyright() async throws -> String? {
         guard let serverURL = try? Servers.server1() else { return "" }
         
         let client = Client(
@@ -23,7 +23,7 @@ final class CopyrightService {
             apikey: Constants.apiKey
         )
         
-        let copyright = try? await service.getCopyright()
-        return copyright?.copyright?.text ?? ""
+        let copyright = try await service.getCopyright()
+        return copyright.copyright?.text
     }
 }
