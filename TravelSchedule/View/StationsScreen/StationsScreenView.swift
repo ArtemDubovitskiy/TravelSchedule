@@ -49,33 +49,37 @@ struct StationsScreenView: View {
             VStack {
                 SearchBar(searchText: $searchTextString)
                 if searchResults.isEmpty {
-                    Spacer()
-                    Text(stationNotFoundText)
-                        .font(.bold24)
-                        .foregroundStyle(.ypBlackDual)
-                        .padding(.horizontal)
-                    Spacer()
-                }
-                LazyVStack(spacing: 0) {
-                    ForEach(searchResults) { station in
-                        StationCellView(station: station)
-                            .onTapGesture {
-                                switch viewModel.currentRote {
-                                case .departure:
-                                    viewModel.departureStation = station
-                                    viewModel.createDepartureText()
-                                case .arrival:
-                                    viewModel.arrivalStation = station
-                                    viewModel.createArrivalText()
-                                case .empty:
-                                    break
-                                }
-                                path.removeAll()
-                            }
+                    VStack {
+                        Spacer()
+                        Text(stationNotFoundText)
+                            .font(.bold24)
+                            .foregroundStyle(.ypBlackDual)
+                            .padding(.horizontal)
+                        Spacer()
                     }
                 }
-                .padding(.horizontal, 16)
-                Spacer()
+                ScrollView {
+                    LazyVStack(spacing: 0) {
+                        ForEach(searchResults) { station in
+                            StationCellView(station: station)
+                                .onTapGesture {
+                                    switch viewModel.currentRote {
+                                    case .departure:
+                                        viewModel.departureStation = station
+                                        viewModel.createDepartureText()
+                                    case .arrival:
+                                        viewModel.arrivalStation = station
+                                        viewModel.createArrivalText()
+                                    case .empty:
+                                        break
+                                    }
+                                    path.removeAll()
+                                }
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                    Spacer()
+                }
             }
             .environmentObject(viewModel)
             .toolbar(.hidden, for: .tabBar)

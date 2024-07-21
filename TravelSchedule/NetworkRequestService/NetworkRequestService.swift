@@ -16,7 +16,7 @@ typealias NearestStations = Components.Schemas.Stations
 typealias NearestSettlement = Components.Schemas.Settlement
 typealias Carriers = Components.Schemas.Carriers
 typealias CarrierSystem = Operations.getCarrier.Input.Query.systemPayload
-typealias Stations = Components.Schemas.StationsList
+//typealias Stations = Components.Schemas.StationsList
 //typealias CopyrightSchedule = Components.Schemas.Copyright
 
 protocol NetworkRequestServiceProtocol {
@@ -26,7 +26,7 @@ protocol NetworkRequestServiceProtocol {
     func getNearestStations(lat: Double, lng: Double, distance: Int) async throws -> NearestStations
     func getNearestSettlement(lat: Double, lng: Double) async throws -> NearestSettlement
     func getCarrier(code: String, system: CarrierSystem) async throws -> Carriers
-    func getStationsList() async throws -> Stations
+//    func getStationsList() async throws -> Stations
 //    func getCopyright() async throws -> CopyrightSchedule
 }
 
@@ -100,15 +100,15 @@ actor NetworkRequestService: NetworkRequestServiceProtocol {
     }
     
     // Список всех доступных станций:
-    func getStationsList() async throws -> Stations {
-        let response = try await client.getStationsList(query: .init(
-            apikey: apikey
-        ))
-        let httpBody = try response.ok.body.html
-        let data = try await Data(collecting: httpBody, upTo: 100 * 1024 * 1024)
-        let stationList = try JSONDecoder().decode(Stations.self, from: data)
-        return stationList
-    }
+//    func getStationsList() async throws -> Stations {
+//        let response = try await client.getStationsList(query: .init(
+//            apikey: apikey
+//        ))
+//        let httpBody = try response.ok.body.html
+//        let data = try await Data(collecting: httpBody, upTo: 100 * 1024 * 1024)
+//        let stationList = try JSONDecoder().decode(Stations.self, from: data)
+//        return stationList
+//    }
     
     // Копирайт Яндекс Расписаний:
 //    func getCopyright() async throws -> CopyrightSchedule {

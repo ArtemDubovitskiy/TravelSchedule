@@ -34,26 +34,35 @@ struct MainSearchView: View {
                             .frame(height: smallRectangleHeight)
                             .overlay(
                                 VStack(spacing: 0) {
-                                    TextField(textFrom,
-                                              text: $viewModel.departureText,
-                                              prompt: Text(textFrom).foregroundColor(.ypGray)
-                                    )
-                                    .foregroundStyle(.ypBlack)
-                                    .frame(height: textFieldHeight)
-                                    .onTapGesture {
-                                        viewModel.currentRote = .departure
-                                        path.append(.cities)
-                                    }
-                                    
-                                    TextField(textTo,
-                                              text: $viewModel.arrivalText,
-                                              prompt: Text(textTo).foregroundColor(.ypGray)
-                                    )
-                                    .foregroundStyle(.ypBlack)
-                                    .frame(height: textFieldHeight)
-                                    .onTapGesture {
-                                        viewModel.currentRote = .arrival
-                                        path.append(.cities)
+                                    switch viewModel.state {
+                                    case .loading:
+                                        ProgressView()
+                                            .tint(Color.ypBlack)
+                                            .task {
+                                                await viewModel.getCities()
+                                            }
+                                    case .content, .error:
+                                        TextField(textFrom,
+                                                  text: $viewModel.departureText,
+                                                  prompt: Text(textFrom).foregroundColor(.ypGray)
+                                        )
+                                        .foregroundStyle(.ypBlack)
+                                        .frame(height: textFieldHeight)
+                                        .onTapGesture {
+                                            viewModel.currentRote = .departure
+                                            path.append(.cities)
+                                        }
+                                        
+                                        TextField(textTo,
+                                                  text: $viewModel.arrivalText,
+                                                  prompt: Text(textTo).foregroundColor(.ypGray)
+                                        )
+                                        .foregroundStyle(.ypBlack)
+                                        .frame(height: textFieldHeight)
+                                        .onTapGesture {
+                                            viewModel.currentRote = .arrival
+                                            path.append(.cities)
+                                        }
                                     }
                                 }
                                     .padding(.leading, 10)

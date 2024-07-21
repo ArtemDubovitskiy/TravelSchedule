@@ -38,31 +38,36 @@ struct CitiesScreenView: View {
             VStack {
                 SearchBar(searchText: $searchTextString)
                 if searchResults.isEmpty {
-                    Spacer()
-                    Text(cityNotFoundText)
-                        .font(.bold24)
-                        .foregroundStyle(.ypBlackDual)
-                        .padding(.horizontal)
-                    Spacer()
-                }
-                LazyVStack(spacing: 0) {
-                    ForEach(searchResults) { city in
-                        CityCellView(city: city)
-                            .onTapGesture {
-                                switch viewModel.currentRote {
-                                case .departure:
-                                    viewModel.departureCity = city
-                                case .arrival:
-                                    viewModel.arrivalCity = city
-                                case .empty:
-                                    break
-                                }
-                                path.append(.stations)
-                            }
+                    VStack {
+                        Spacer()
+                        Text(cityNotFoundText)
+                            .font(.bold24)
+                            .foregroundStyle(.ypBlackDual)
+                            .padding(.horizontal)
+                            .padding(.vertical)
+                        Spacer()
                     }
                 }
-                .padding(.horizontal, 16)
-                Spacer()
+                ScrollView {
+                    LazyVStack(spacing: 0) {
+                        ForEach(searchResults) { city in
+                            CityCellView(city: city)
+                                .onTapGesture {
+                                    switch viewModel.currentRote {
+                                    case .departure:
+                                        viewModel.departureCity = city
+                                    case .arrival:
+                                        viewModel.arrivalCity = city
+                                    case .empty:
+                                        break
+                                    }
+                                    path.append(.stations)
+                                }
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                    Spacer()
+                }
             }
             .environmentObject(viewModel)
             .toolbar(.hidden, for: .tabBar)

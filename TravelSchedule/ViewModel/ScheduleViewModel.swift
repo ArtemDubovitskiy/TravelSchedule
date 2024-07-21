@@ -6,9 +6,10 @@
 //
 import Foundation
 
+@MainActor
 final class ScheduleViewModel: ObservableObject {
     // MARK: - Public Properties
-    @Published var state: AppState = .content
+    @Published var state: AppState = .loading
     @Published var errorType: ErrorType = .serverError
     @Published var currentRote = CurrentRoute.empty
     
@@ -29,10 +30,11 @@ final class ScheduleViewModel: ObservableObject {
     @Published var selectedTransferOptions: TransferFilters?
     @Published var isFilteredSchedule: Bool = false
     
+    private let service = StationsListService()
+    
     // MARK: - Initializers
     init(cities: [City]) {
         self.cities = cities
-        getCities()
     }
     
     // MARK: - Public Methods
@@ -95,8 +97,19 @@ final class ScheduleViewModel: ObservableObject {
     }
     
     // MARK: - Private Methods
-    private func getCities() {
-        cities = MockData.mockCity
+    func getCities() async {
+        do {
+            cities.removeAll()
+            state = .loading
+//            guard let cities = try await service.stationsList() else { return }
+            let cities = try await service.stationsList()
+            let sortedCity = cities.sorted { $0.title < $1.title }
+            self.cities = sortedCity
+            state = .content
+        } catch {
+            self.cities = []
+            state = .error
+        }
     }
     
     private func roteTransfers(
