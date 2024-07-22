@@ -8,7 +8,7 @@ import Foundation
 import OpenAPIURLSession
 // TODO: Удалить
 protocol ContentPresenterProtocol: AnyObject {
-    func search()
+//    func search()
     func schedule()
     func threads()
     func nearestStations()
@@ -21,27 +21,27 @@ protocol ContentPresenterProtocol: AnyObject {
 final class ContentPresenter: ContentPresenterProtocol {
     
     // Расписание рейсов между станциями:
-    func search() {
-        guard let serverURL = try? Servers.server1() else { return }
-        
-        let client = Client(
-            serverURL: serverURL,
-            transport: URLSessionTransport()
-        )
-        
-        let service = NetworkRequestService(
-            client: client,
-            apikey: Constants.apiKey
-        )
-        
-        Task {
-            let search = try await service.getSearch(
-                from: "s9600213",
-                to: "s9623547"
-            )
-            print(search)
-        }
-    }
+//    func search() {
+//        guard let serverURL = try? Servers.server1() else { return }
+//        
+//        let client = Client(
+//            serverURL: serverURL,
+//            transport: URLSessionTransport()
+//        )
+//        
+//        let service = NetworkRequestService(
+//            client: client,
+//            apikey: Constants.apiKey
+//        )
+//        
+//        Task {
+//            let search = try await service.getSearch(
+//                from: "s9600213",
+//                to: "s9623547"
+//            )
+//            print(search)
+//        }
+//    }
     
     // Расписание рейсов по станции:
     func schedule() {

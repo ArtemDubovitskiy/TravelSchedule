@@ -11,7 +11,7 @@ struct StationsScreenView: View {
     @Binding var path: [Destination]
     @State private var searchTextString = ""
     @EnvironmentObject var viewModel: ScheduleViewModel
-    @Environment(\.dismiss) private var dismiss // заглушка
+    @Environment(\.dismiss) private var dismiss
     
     // TODO: Добавить локализацию
     private let selectStationText = "Выбор станции"

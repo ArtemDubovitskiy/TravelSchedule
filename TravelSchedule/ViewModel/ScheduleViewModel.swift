@@ -31,6 +31,7 @@ final class ScheduleViewModel: ObservableObject {
     @Published var isFilteredSchedule: Bool = false
     
     private let service = StationsListService()
+    private let searchService = SearchService()
     
     // MARK: - Initializers
     init(cities: [City]) {
@@ -101,7 +102,6 @@ final class ScheduleViewModel: ObservableObject {
         do {
             cities.removeAll()
             state = .loading
-//            guard let cities = try await service.stationsList() else { return }
             let cities = try await service.stationsList()
             let sortedCity = cities.sorted { $0.title < $1.title }
             self.cities = sortedCity
@@ -110,7 +110,32 @@ final class ScheduleViewModel: ObservableObject {
             self.cities = []
             state = .error
         }
+    }    
+    
+    func getSchedule() async {
+        do {
+            schedule.removeAll()
+            guard let departure = departureStation?.code,
+                  let arrival = arrivalStation?.code
+            else { return }
+            
+            let scheduleSearch = try await searchService.search(
+                from: departure,
+                to: arrival,
+                date: "2024-07-22" // test - исправить
+            )
+            
+            let sortedSchedule = scheduleSearch.sorted { $0.departureTime < $1.departureTime}
+            self.schedule = sortedSchedule
+            self.filterSchedule = schedule
+            state = .content
+        } catch {
+            self.schedule = []
+            state = .error
+        }
     }
+    
+    
     
     private func roteTransfers(
         _ schedule: Schedule,

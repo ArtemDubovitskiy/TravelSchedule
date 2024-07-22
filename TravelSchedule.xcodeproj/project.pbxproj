@@ -13,6 +13,9 @@
 		9131FAA02B9D99E300B25976 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9131FA9F2B9D99E300B25976 /* ContentView.swift */; };
 		9131FAA22B9D99E400B25976 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9131FAA12B9D99E400B25976 /* Assets.xcassets */; };
 		9131FAA52B9D99E400B25976 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9131FAA42B9D99E400B25976 /* Preview Assets.xcassets */; };
+		916250292C4DD9A500A53732 /* SearchRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916250282C4DD9A500A53732 /* SearchRequestService.swift */; };
+		9162502B2C4DD9BE00A53732 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9162502A2C4DD9BE00A53732 /* SearchService.swift */; };
+		9162502D2C4E65F200A53732 /* DateComponentsFormatter+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9162502C2C4E65F200A53732 /* DateComponentsFormatter+Ext.swift */; };
 		9164C9F22C2D57C500C0F854 /* ProgressBarConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9164C9F12C2D57C500C0F854 /* ProgressBarConstants.swift */; };
 		9164C9F92C2D58D200C0F854 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9164C9F82C2D58D200C0F854 /* CloseButton.swift */; };
 		9164C9FE2C2D5C6800C0F854 /* StoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9164C9FD2C2D5C6800C0F854 /* StoriesView.swift */; };
@@ -82,6 +85,9 @@
 		9131FA9F2B9D99E300B25976 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9131FAA12B9D99E400B25976 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9131FAA42B9D99E400B25976 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		916250282C4DD9A500A53732 /* SearchRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRequestService.swift; sourceTree = "<group>"; };
+		9162502A2C4DD9BE00A53732 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
+		9162502C2C4E65F200A53732 /* DateComponentsFormatter+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponentsFormatter+Ext.swift"; sourceTree = "<group>"; };
 		9164C9F12C2D57C500C0F854 /* ProgressBarConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarConstants.swift; sourceTree = "<group>"; };
 		9164C9F82C2D58D200C0F854 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		9164C9FD2C2D5C6800C0F854 /* StoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesView.swift; sourceTree = "<group>"; };
@@ -177,6 +183,7 @@
 				917A50B72C1135A2005F2385 /* Content */,
 				917BE6A72C42F4B10004BB6A /* Constants */,
 				9178F9BB2BE6C4F8000B89A8 /* DesignSystem */,
+				9162502E2C4E65F700A53732 /* Extensions */,
 				918CA6042BA0EC3A0088CA5F /* NetworkRequestService */,
 				9178F9CB2BE978F0000B89A8 /* Model */,
 				9178F9CC2BE978FD000B89A8 /* ViewModel */,
@@ -194,6 +201,14 @@
 				9131FAA42B9D99E400B25976 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9162502E2C4E65F700A53732 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9162502C2C4E65F200A53732 /* DateComponentsFormatter+Ext.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		9164C9E92C2D4DD400C0F854 /* Stories */ = {
@@ -285,9 +300,9 @@
 			isa = PBXGroup;
 			children = (
 				917BE69F2C42955D0004BB6A /* AppState.swift */,
-				917A50AA2C0F41D0005F2385 /* ScheduleViewModel.swift */,
 				917BE6AA2C42F6390004BB6A /* AgreementViewModel.swift */,
 				917BE6A22C42960B0004BB6A /* SettingsViewModel.swift */,
+				917A50AA2C0F41D0005F2385 /* ScheduleViewModel.swift */,
 				917BE6AD2C43CF700004BB6A /* StoriesViewModel.swift */,
 			);
 			path = ViewModel;
@@ -327,6 +342,8 @@
 				917BE6B42C470E9F0004BB6A /* CopyrightService.swift */,
 				91132F652C4D1D0100DC261B /* StationsListRequestService.swift */,
 				91132F672C4D1E8500DC261B /* StationsListService.swift */,
+				916250282C4DD9A500A53732 /* SearchRequestService.swift */,
+				9162502A2C4DD9BE00A53732 /* SearchService.swift */,
 				918CA6052BA0EC4C0088CA5F /* OpenApi */,
 			);
 			path = NetworkRequestService;
@@ -504,6 +521,7 @@
 				918CA6082BA0EED10088CA5F /* ContentPresenter.swift in Sources */,
 				91EFDB8B2C333213005328F9 /* StoriesTabView.swift in Sources */,
 				917A50A52C0E4279005F2385 /* Destination.swift in Sources */,
+				9162502D2C4E65F200A53732 /* DateComponentsFormatter+Ext.swift in Sources */,
 				91E739B72C0D0405001DDC28 /* TranferOptionCell.swift in Sources */,
 				9164CA022C2DBECB00C0F854 /* MaskFragmentView.swift in Sources */,
 				9164CA1B2C30811300C0F854 /* StoriesProgressBarView.swift in Sources */,
@@ -517,6 +535,7 @@
 				91132F682C4D1E8500DC261B /* StationsListService.swift in Sources */,
 				9131FAA02B9D99E300B25976 /* ContentView.swift in Sources */,
 				91F2815F2BF95336009C860F /* MockData.swift in Sources */,
+				916250292C4DD9A500A53732 /* SearchRequestService.swift in Sources */,
 				91F281742BFAC1AD009C860F /* MainSearchView.swift in Sources */,
 				91F281592BF93C62009C860F /* Carrier.swift in Sources */,
 				918CA6012BA01FE00088CA5F /* NetworkRequestService.swift in Sources */,
@@ -556,6 +575,7 @@
 				91132F662C4D1D0100DC261B /* StationsListRequestService.swift in Sources */,
 				9164CA092C2DC01F00C0F854 /* ProgressBarView.swift in Sources */,
 				91A368022BFEC33100396463 /* WebView.swift in Sources */,
+				9162502B2C4DD9BE00A53732 /* SearchService.swift in Sources */,
 				91E739BB2C0D2B1C001DDC28 /* Filters.swift in Sources */,
 				91E739A82C0C9BD7001DDC28 /* CarrierInfoScreenView.swift in Sources */,
 			);

@@ -91,7 +91,6 @@ struct MainSearchView: View {
                     viewModel.arrivalStation != nil {
                     Button {
                         self.viewModel.createSchuedelText()
-                        self.viewModel.showSchuedel()
                         path.append(.schuedel)
                     } label: {
                         ZStack {

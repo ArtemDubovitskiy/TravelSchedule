@@ -9,7 +9,7 @@ import OpenAPIRuntime
 import OpenAPIURLSession
 import Foundation
 
-typealias SearchRoutes = Components.Schemas.RoutesList
+//typealias SearchRoutes = Components.Schemas.RoutesList
 typealias ScheduleStation = Components.Schemas.ScheduleStation
 typealias Threads = Components.Schemas.ThreadList
 typealias NearestStations = Components.Schemas.Stations
@@ -20,7 +20,7 @@ typealias CarrierSystem = Operations.getCarrier.Input.Query.systemPayload
 //typealias CopyrightSchedule = Components.Schemas.Copyright
 
 protocol NetworkRequestServiceProtocol {
-    func getSearch(from: String, to: String) async throws -> SearchRoutes
+//    func getSearch(from: String, to: String) async throws -> SearchRoutes
     func getSchedule(station: String, date: String) async throws -> ScheduleStation
     func getThread(uid: String) async throws -> Threads
     func getNearestStations(lat: Double, lng: Double, distance: Int) async throws -> NearestStations
@@ -40,14 +40,14 @@ actor NetworkRequestService: NetworkRequestServiceProtocol {
         self.apikey = apikey
     }
     // Расписание рейсов между станциями:
-    func getSearch(from: String, to: String) async throws -> SearchRoutes {
-        let response = try await client.getSearch(query: .init(
-            apikey: apikey,
-            from: from,
-            to: to
-        ))
-        return try response.ok.body.json
-    }
+//    func getSearch(from: String, to: String) async throws -> SearchRoutes {
+//        let response = try await client.getSearch(query: .init(
+//            apikey: apikey,
+//            from: from,
+//            to: to
+//        ))
+//        return try response.ok.body.json
+//    }
     
     // Расписание рейсов по станции:
     func getSchedule(station: String, date: String) async throws -> ScheduleStation {

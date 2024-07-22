@@ -11,7 +11,7 @@ struct CarrierInfoScreenView: View {
     
     var carrier: Carrier
     
-    @Environment(\.dismiss) private var dismiss // заглушка
+    @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
     @EnvironmentObject var viewModel: ScheduleViewModel
     
@@ -26,7 +26,7 @@ struct CarrierInfoScreenView: View {
             ProgressView()
         case .content:
             VStack(spacing: 0) {
-                Image(carrier.logoFull ?? "")
+                Image("")
                     .resizable()
                     .scaledToFit()
                     .frame(maxWidth: .infinity, maxHeight: 110, alignment: .center)
@@ -44,11 +44,11 @@ struct CarrierInfoScreenView: View {
                         .font(.regular17)
                         .foregroundStyle(.ypBlackDual)
                         .frame(alignment: .leading)
-                    Text(carrier.email)
+                    Text(carrier.email ?? "")
                         .font(.regular12)
                         .foregroundStyle(.ypBlue)
                         .onTapGesture {
-                            guard let urlString = URL(string: "mailto:\(carrier.email)") else { return }
+                            guard let urlString = URL(string: "mailto:\(carrier.email ?? "")") else { return }
                             openURL(urlString)
                         }
                 }
@@ -59,11 +59,11 @@ struct CarrierInfoScreenView: View {
                         .font(.regular17)
                         .foregroundStyle(.ypBlackDual)
                         .frame(alignment: .leading)
-                    Text(carrier.phone)
+                    Text(carrier.phone ?? "")
                         .font(.regular12)
                         .foregroundStyle(.ypBlue)
                         .onTapGesture {
-                            guard let urlString = URL(string: "tel:\(carrier.phone)") else { return }
+                            guard let urlString = URL(string: "tel:\(carrier.phone ?? "")") else { return }
                             openURL(urlString)
                         }
                 }
@@ -81,7 +81,7 @@ struct CarrierInfoScreenView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
-                        dismiss() // заглушка
+                        dismiss()
                     } label: {
                         Image.chevronBackward
                             .foregroundStyle(.ypBlackDual)

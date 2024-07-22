@@ -18,7 +18,7 @@ struct CarrierCellView: View {
                 .frame(height: 104)
             VStack(spacing: 4) {
                 HStack {
-                    Image(schedule.carrier.logo)
+                    Image(schedule.carrier.logo ?? "")
                         .resizable()
                         .frame(width: 38, height: 38)
                         .padding(.leading, 14)
