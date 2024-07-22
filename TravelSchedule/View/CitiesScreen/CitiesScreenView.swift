@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct CitiesScreenView: View {
-    
+    @EnvironmentObject var mainSearchViewModel: MainSearchViewModel
+    @StateObject var viewModel = CitiesViewModel()
     @Binding var path: [Destination]
-    @EnvironmentObject var viewModel: ScheduleViewModel
-    
     @State private var searchTextString = ""
-    @Environment(\.dismiss) private var dismiss // заглушка
+    @Environment(\.dismiss) private var dismiss
     
     // TODO: Добавить локализацию
     private let selectCityText = "Выбор города"
@@ -30,12 +29,14 @@ struct CitiesScreenView: View {
     }
     
     var body: some View {
-        switch viewModel.state {
-        case .loading:
-            ProgressView()
-            
-        case .content:
-            VStack {
+        VStack {
+            switch viewModel.state {
+            case .loading:
+                ProgressView()
+                    .task {
+                        await viewModel.getCities()
+                    }
+            case .content:
                 SearchBar(searchText: $searchTextString)
                 if searchResults.isEmpty {
                     VStack {
@@ -53,11 +54,11 @@ struct CitiesScreenView: View {
                         ForEach(searchResults) { city in
                             CityCellView(city: city)
                                 .onTapGesture {
-                                    switch viewModel.currentRote {
+                                    switch mainSearchViewModel.currentRote {
                                     case .departure:
-                                        viewModel.departureCity = city
+                                        mainSearchViewModel.departureCity = city
                                     case .arrival:
-                                        viewModel.arrivalCity = city
+                                        mainSearchViewModel.arrivalCity = city
                                     case .empty:
                                         break
                                     }
@@ -68,34 +69,32 @@ struct CitiesScreenView: View {
                     .padding(.horizontal, 16)
                     Spacer()
                 }
+            case .error:
+                ErrorView(errorType: viewModel.errorType)
             }
-            .environmentObject(viewModel)
-            .toolbar(.hidden, for: .tabBar)
-            .navigationTitle(selectCityText)
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackButtonHidden(true)
-            .ignoresSafeArea(.all, edges: .bottom)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        path.removeLast()
-                        dismiss()
-                    } label: {
-                        Image.chevronBackward
-                            .foregroundStyle(.ypBlackDual)
-                    }
+        }
+        .environmentObject(mainSearchViewModel)
+        .toolbar(.hidden, for: .tabBar)
+        .navigationTitle(selectCityText)
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .ignoresSafeArea(.all, edges: .bottom)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    path.removeLast()
+                    dismiss()
+                } label: {
+                    Image.chevronBackward
+                        .foregroundStyle(.ypBlackDual)
                 }
             }
-            
-        case .error:
-            ErrorView(errorType: viewModel.errorType)
         }
     }
 }
 
 #Preview {
     NavigationStack {
-        CitiesScreenView(path: .constant([]))
-            .environmentObject(ScheduleViewModel(cities: []))
+        CitiesScreenView(viewModel: CitiesViewModel(), path: .constant([]))
     }
 }

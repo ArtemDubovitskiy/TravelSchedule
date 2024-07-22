@@ -9,18 +9,18 @@ import SwiftUI
 
 struct ScheduleScreenView: View {
     @Binding var path: [Destination]
-    @EnvironmentObject var viewModel: ScheduleViewModel
+    @EnvironmentObject var viewModel: MainSearchViewModel
     @Environment(\.dismiss) private var dismiss
     
     // TODO: Добавить локализацию
     private let buttonText = "Уточнить время"
     
     var body: some View {
-        switch viewModel.state {
-        case .loading:
-            ProgressView()
-            
-        case .content:
+//        switch viewModel.state {
+//        case .loading:
+//            ProgressView()
+//            
+//        case .content:
             ZStack {
                 VStack {
                     Text(viewModel.scheduleText)
@@ -101,15 +101,16 @@ struct ScheduleScreenView: View {
                 }
             }
             
-        case.error:
-            ErrorView(errorType: viewModel.errorType)
-        }
+//        case.error:
+//            ErrorView(errorType: viewModel.errorType)
+//        }
     }
 }
 
 #Preview {
     NavigationStack {
         ScheduleScreenView(
-            path: .constant([])).environmentObject(ScheduleViewModel(cities: []))
+            path: .constant([]))
+//        .environmentObject(MainSearchViewModel(cities: []))
     }
 }

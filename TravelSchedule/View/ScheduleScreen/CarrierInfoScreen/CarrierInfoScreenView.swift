@@ -13,7 +13,7 @@ struct CarrierInfoScreenView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
-    @EnvironmentObject var viewModel: ScheduleViewModel
+    @EnvironmentObject var viewModel: MainSearchViewModel
     
     // TODO: Добавить локализацию
     private let carrierInfoText = "Информация о перевозчике"
@@ -21,10 +21,10 @@ struct CarrierInfoScreenView: View {
     private let phoneText = "Телефон"
     
     var body: some View {
-        switch viewModel.state {
-        case .loading:
-            ProgressView()
-        case .content:
+//        switch viewModel.state {
+//        case .loading:
+//            ProgressView()
+//        case .content:
             VStack(spacing: 0) {
                 Image("")
                     .resizable()
@@ -88,14 +88,15 @@ struct CarrierInfoScreenView: View {
                     }
                 }
             }
-        case .error:
-            ErrorView(errorType: viewModel.errorType)
-        }
+//        case .error:
+//            ErrorView(errorType: viewModel.errorType)
+//        }
     }
 }
 
 #Preview {
     NavigationStack {
-        CarrierInfoScreenView(carrier: MockData.mockCarrier[0]).environmentObject(ScheduleViewModel(cities: []))
+        CarrierInfoScreenView(carrier: MockData.mockCarrier[0])
+//            .environmentObject(MainSearchViewModel(cities: []))
     }
 }

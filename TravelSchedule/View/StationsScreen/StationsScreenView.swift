@@ -10,7 +10,7 @@ import SwiftUI
 struct StationsScreenView: View {
     @Binding var path: [Destination]
     @State private var searchTextString = ""
-    @EnvironmentObject var viewModel: ScheduleViewModel
+    @EnvironmentObject var viewModel: MainSearchViewModel
     @Environment(\.dismiss) private var dismiss
     
     // TODO: Добавить локализацию
@@ -41,11 +41,11 @@ struct StationsScreenView: View {
     }
     
     var body: some View {
-        switch viewModel.state {
-        case .loading:
-            ProgressView()
-            
-        case .content:
+//        switch viewModel.state {
+//        case .loading:
+//            ProgressView()
+//            
+//        case .content:
             VStack {
                 SearchBar(searchText: $searchTextString)
                 if searchResults.isEmpty {
@@ -99,14 +99,15 @@ struct StationsScreenView: View {
                 }
             }
             
-        case .error:
-            ErrorView(errorType: viewModel.errorType)
-        }
+//        case .error:
+//            ErrorView(errorType: viewModel.errorType)
+//        }
     }
 }
 
 #Preview {
     NavigationStack {
-        StationsScreenView(path: .constant([])).environmentObject(ScheduleViewModel(cities: []))
+        StationsScreenView(path: .constant([]))
+//            .environmentObject(MainSearchViewModel(cities: []))
     }
 }

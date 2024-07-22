@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RouteFilterScreenView: View {
-    @EnvironmentObject var viewModel: ScheduleViewModel
+    @EnvironmentObject var viewModel: MainSearchViewModel
     @Environment(\.dismiss) private var dismiss
     
     // TODO: Добавить локализацию

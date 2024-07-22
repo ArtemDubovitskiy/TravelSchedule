@@ -89,6 +89,6 @@ struct StoriesView: View {
 
 #Preview {
     NavigationStack {
-        StoriesView(stories: MockData.mockStories[0].stories, isReadStories: { } ).environmentObject(ScheduleViewModel(cities: []))
+        StoriesView(stories: MockData.mockStories[0].stories, isReadStories: { } ).environmentObject(MainSearchViewModel())
     }
 }
