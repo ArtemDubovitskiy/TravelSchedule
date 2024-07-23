@@ -94,5 +94,6 @@ struct CarrierInfoScreenView: View {
 #Preview {
     NavigationStack {
         CarrierInfoScreenView(carrier: MockData.mockCarrier[0])
+            .environmentObject(MainSearchViewModel())
     }
 }
