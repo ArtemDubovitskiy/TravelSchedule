@@ -21,12 +21,6 @@ struct WebView: UIViewRepresentable {
     func updateUIView(_ webView: WKWebView, context: Context) {
         let request = URLRequest(url: url)
         webView.load(request)
-        /*
-         Реализована поддержка темной темы для webview пользовательского соглашения из ТЗ.
-         Но кастомный CSS не применяется к URL: https://yandex.ru/legal/practicum_offer (стр. 30-46)
-         Для проверки темной темы добавлен URL: https://developer.apple.com в SettingsScreenView
-         Прошу не считать критическим замечанием.
-         */
         let lightDarkCSS = ":root { color-scheme: light dark; }"
         
         guard let base64 = lightDarkCSS.data(using: .utf8)?.base64EncodedString() else { return }
