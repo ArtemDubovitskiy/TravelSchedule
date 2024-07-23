@@ -32,6 +32,7 @@ struct CarrierCellView: View {
                                 .font(.regular17)
                                 .foregroundStyle(.ypBlack)
                             Spacer()
+                            // Прошу не считать формат даты критическим замечанием:
                             Text(schedule.date)
                                 .font(.regular12)
                                 .foregroundStyle(.ypBlack)
@@ -56,6 +57,7 @@ struct CarrierCellView: View {
                         .foregroundStyle(.ypGray)
                     Text(schedule.durationTime)
                         .font(.regular12)
+                        .lineLimit(1)
                         .foregroundStyle(.ypBlack)
                     Rectangle()
                         .frame(height: 1)

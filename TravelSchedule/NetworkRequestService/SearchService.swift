@@ -31,6 +31,7 @@ final class SearchService {
         )
         
         let schudule = search.segments?.compactMap { segment -> Schedule? in
+            let date = segment.start_date
             let departure = segment.departure
             let arrival = segment.arrival
             let transfers = segment.has_transfers ?? false
@@ -39,9 +40,9 @@ final class SearchService {
             guard let carrier = segment.thread?.carrier else { return nil }
             
             return Schedule(
-                date: departure ?? "",
-                departureTime: departure ?? "",
-                arrivalTime: arrival ?? "",
+                date: date ?? "",
+                departureTime: timeToHour(from: departure),
+                arrivalTime: timeToHour(from: arrival),
                 durationTime: durationToTime(from: duration),
                 transferPoint: transfersTitle,
                 carrier: Carrier(
@@ -57,6 +58,12 @@ final class SearchService {
         return schudules
     }
     // MARK: - Private Methods
+    private func timeToHour(from: String?) -> String {
+        guard let from else { return "" }
+        let time = String(from.dropLast(3))
+        return time
+    }
+    
     private func durationToTime(from duration_seconds: Int?) -> String {
         guard let duration = duration_seconds else { return "" }
         let durationDouble = Double(duration)
