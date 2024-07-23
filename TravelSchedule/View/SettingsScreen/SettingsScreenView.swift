@@ -53,7 +53,7 @@ struct SettingsScreenView: View {
                             await viewModel.getCopyright()
                         }
                 case .content, .error:
-                    Text(viewModel.copyright_text)
+                    Text(viewModel.copyrightText)
                 }
                 Text(versionText)
             }

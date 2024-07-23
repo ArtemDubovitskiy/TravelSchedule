@@ -56,6 +56,7 @@
 		91B94CD32C4F058800407C82 /* CitiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B94CD22C4F058800407C82 /* CitiesViewModel.swift */; };
 		91B94CD72C4F24C600407C82 /* ScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B94CD62C4F24C600407C82 /* ScheduleViewModel.swift */; };
 		91B94CDB2C4F70D800407C82 /* DateFormatter+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B94CDA2C4F70D800407C82 /* DateFormatter+Ext.swift */; };
+		91B94CDF2C4FB2CC00407C82 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B94CDE2C4FB2CB00407C82 /* String+Ext.swift */; };
 		91C057302BA1FFB300CBD8F3 /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 918CA6062BA0EC560088CA5F /* openapi.yaml */; };
 		91E739A82C0C9BD7001DDC28 /* CarrierInfoScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E739A72C0C9BD7001DDC28 /* CarrierInfoScreenView.swift */; };
 		91E739B02C0CBE04001DDC28 /* RouteFilterScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E739AF2C0CBE04001DDC28 /* RouteFilterScreenView.swift */; };
@@ -127,6 +128,7 @@
 		91B94CD22C4F058800407C82 /* CitiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesViewModel.swift; sourceTree = "<group>"; };
 		91B94CD62C4F24C600407C82 /* ScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewModel.swift; sourceTree = "<group>"; };
 		91B94CDA2C4F70D800407C82 /* DateFormatter+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Ext.swift"; sourceTree = "<group>"; };
+		91B94CDE2C4FB2CB00407C82 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		91E739A72C0C9BD7001DDC28 /* CarrierInfoScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrierInfoScreenView.swift; sourceTree = "<group>"; };
 		91E739AF2C0CBE04001DDC28 /* RouteFilterScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFilterScreenView.swift; sourceTree = "<group>"; };
 		91E739B32C0D0254001DDC28 /* TimeIntervalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalCell.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				9178F9BB2BE6C4F8000B89A8 /* DesignSystem */,
 				9162502C2C4E65F200A53732 /* DateComponentsFormatter+Ext.swift */,
 				91B94CDA2C4F70D800407C82 /* DateFormatter+Ext.swift */,
+				91B94CDE2C4FB2CB00407C82 /* String+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				91E739B72C0D0405001DDC28 /* TranferOptionCell.swift in Sources */,
 				9164CA022C2DBECB00C0F854 /* MaskFragmentView.swift in Sources */,
 				9164CA1B2C30811300C0F854 /* StoriesProgressBarView.swift in Sources */,
+				91B94CDF2C4FB2CC00407C82 /* String+Ext.swift in Sources */,
 				917BE6B22C47094B0004BB6A /* CopyrightRequestService.swift in Sources */,
 				917BE6A92C42F4D00004BB6A /* Constants.swift in Sources */,
 				91F2817E2BFB9E6E009C860F /* Story.swift in Sources */,

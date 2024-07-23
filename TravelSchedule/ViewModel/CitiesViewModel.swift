@@ -7,7 +7,7 @@
 import Foundation
 
 @MainActor
-final class CitiesViewModel: ObservableObject, @unchecked Sendable {
+final class CitiesViewModel: ObservableObject, Sendable {
     @Published var state: AppState = .loading
     @Published var errorType: ErrorType = .serverError
     @Published var cities: [City] = []
@@ -18,8 +18,7 @@ final class CitiesViewModel: ObservableObject, @unchecked Sendable {
     // MARK: - Public Methods
     func getCities() async {
         do {
-            cities.removeAll()
-            state = .loading
+//            state = .loading
             let cities = try await stationService.stationsList()
             let sortedCity = cities.sorted { $0.title < $1.title }
             self.cities = sortedCity

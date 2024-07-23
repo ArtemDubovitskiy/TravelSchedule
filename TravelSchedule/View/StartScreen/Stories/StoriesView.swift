@@ -16,7 +16,7 @@ struct StoriesView: View {
     @State var currentStoryIndex: Int = 0
     @State var currentProgress: CGFloat = 0
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var viewModel: StoriesViewModel
+    @ObservedObject var viewModel = StoriesViewModel()
     
     let isReadStories: () -> Void
     
@@ -89,6 +89,7 @@ struct StoriesView: View {
 
 #Preview {
     NavigationStack {
-        StoriesView(stories: MockData.mockStories[0].stories, isReadStories: { } ).environmentObject(MainSearchViewModel())
+        StoriesView(stories: MockData.mockStories[0].stories, isReadStories: { } )
+//            .environmentObject(MainSearchViewModel())
     }
 }

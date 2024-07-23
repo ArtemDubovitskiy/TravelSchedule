@@ -10,6 +10,7 @@ import Foundation
 final class MainSearchViewModel: ObservableObject {
     // MARK: - Public Properties
     @Published var currentRote = CurrentRoute.empty
+    @Published var cities: [City] = []
     
     @Published var departureCity: City?
     @Published var arrivalCity: City?
@@ -19,6 +20,8 @@ final class MainSearchViewModel: ObservableObject {
     @Published var departureText: String = ""
     @Published var arrivalText: String = ""
     @Published var scheduleText: String = ""
+    
+//    let citiesViewModel = CitiesViewModel()
     
     // MARK: - Public Methods
     func createDepartureText() {

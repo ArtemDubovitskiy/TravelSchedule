@@ -7,7 +7,7 @@
 import Foundation
 
 @MainActor
-final class AgreementViewModel: ObservableObject, @unchecked Sendable {
+final class AgreementViewModel: ObservableObject, Sendable {
     @Published var state: AppState = .content
     @Published var errorType: ErrorType = .serverError
     @Published var usrString: String = ""

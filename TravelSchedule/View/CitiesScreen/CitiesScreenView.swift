@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct CitiesScreenView: View {
-    @EnvironmentObject var mainSearchViewModel: MainSearchViewModel
-    @StateObject var viewModel = CitiesViewModel()
+    @ObservedObject var mainSearchViewModel = MainSearchViewModel()
+    @ObservedObject var viewModel = CitiesViewModel()
     @Binding var path: [Destination]
     @State private var searchTextString = ""
     @Environment(\.dismiss) private var dismiss
-    
     // TODO: Добавить локализацию
     private let selectCityText = "Выбор города"
     private let cityNotFoundText = "Город не найден"
@@ -73,7 +72,7 @@ struct CitiesScreenView: View {
                 ErrorView(errorType: viewModel.errorType)
             }
         }
-        .environmentObject(mainSearchViewModel)
+//        .environmentObject(mainSearchViewModel)
         .toolbar(.hidden, for: .tabBar)
         .navigationTitle(selectCityText)
         .navigationBarTitleDisplayMode(.inline)
@@ -95,6 +94,6 @@ struct CitiesScreenView: View {
 
 #Preview {
     NavigationStack {
-        CitiesScreenView(viewModel: CitiesViewModel(), path: .constant([]))
+        CitiesScreenView(path: .constant([]))
     }
 }

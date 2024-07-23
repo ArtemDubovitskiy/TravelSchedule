@@ -18,7 +18,7 @@ struct CarrierCellView: View {
                 .frame(height: 104)
             VStack(spacing: 4) {
                 HStack {
-                    AsyncImage(url: URL(string: schedule.carrier.logo_svg)) { image in
+                    AsyncImage(url: URL(string: schedule.carrier.logoSvg)) { image in
                         image
                             .resizable()
                             .scaledToFit()
@@ -33,7 +33,7 @@ struct CarrierCellView: View {
                                 .foregroundStyle(.ypBlack)
                             Spacer()
                             // Прошу не считать формат даты критическим замечанием:
-                            Text(schedule.date)
+                            Text(schedule.date.parceStringToDateToStrimg())
                                 .font(.regular12)
                                 .foregroundStyle(.ypBlack)
                                 .padding(.trailing, 7)

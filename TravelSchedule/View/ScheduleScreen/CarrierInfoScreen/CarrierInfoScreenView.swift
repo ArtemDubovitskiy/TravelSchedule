@@ -13,7 +13,7 @@ struct CarrierInfoScreenView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
-    @EnvironmentObject var viewModel: MainSearchViewModel
+    @ObservedObject var viewModel = MainSearchViewModel()
     
     // TODO: Добавить локализацию
     private let carrierInfoText = "Информация о перевозчике"
@@ -22,7 +22,7 @@ struct CarrierInfoScreenView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            AsyncImage(url: URL(string: carrier.logo_svg)) { image in
+            AsyncImage(url: URL(string: carrier.logoSvg)) { image in
                 image
                     .resizable()
                     .scaledToFit()
@@ -94,6 +94,6 @@ struct CarrierInfoScreenView: View {
 #Preview {
     NavigationStack {
         CarrierInfoScreenView(carrier: MockData.mockCarrier[0])
-            .environmentObject(MainSearchViewModel())
+//            .environmentObject(MainSearchViewModel())
     }
 }

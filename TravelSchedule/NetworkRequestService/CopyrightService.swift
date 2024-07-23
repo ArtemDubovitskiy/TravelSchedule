@@ -7,7 +7,7 @@
 import Foundation
 import OpenAPIURLSession
 
-final class CopyrightService {
+actor CopyrightService: Sendable {
     
     // Копирайт Яндекс Расписаний:
     func copyright() async throws -> String? {

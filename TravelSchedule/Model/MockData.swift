@@ -7,6 +7,7 @@
 import Foundation
 
 enum MockData {
+    // TODO: моковые данные для Preview:
     static let mockCity: [City] = [
         City(
             title: "Москва",
@@ -56,21 +57,21 @@ enum MockData {
     static let mockCarrier: [Carrier] = [
         Carrier(
             title: "РЖД",
-            logo_svg: "RZD",
+            logoSvg: "RZD",
             logo: "RZDFull",
             email: "i.lozgkina@yandex.ru",
             phone: "+7 (904) 329-27-71"
         ),
         Carrier(
             title: "ФГК",
-            logo_svg: "FGK",
+            logoSvg: "FGK",
             logo: "FGK",
             email: "info@railfgk.ru",
             phone: "8 (800) 250-47-77"
         ),
         Carrier(
             title: "Урал логистика",
-            logo_svg: "Ural",
+            logoSvg: "Ural",
             logo: "Ural",
             email: "contact@ural-lg.ru",
             phone: "8 (800) 505-49-84"
@@ -119,7 +120,7 @@ enum MockData {
             carrier: MockData.mockCarrier[0]
         ),
     ]
-    
+    // TODO: Моковые данные для Stories:
     private static let storyTitle = "Text Text Text Text Text Text Text Text Text Text "
     private static let storyDescription: String = storyTitle + storyTitle + storyTitle
     

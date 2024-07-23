@@ -7,7 +7,7 @@
 import Foundation
 
 @MainActor
-final class ScheduleViewModel: ObservableObject, @unchecked Sendable {
+final class ScheduleViewModel: ObservableObject, Sendable {
     @Published var state: AppState = .loading
     @Published var errorType: ErrorType = .serverError
     
@@ -20,6 +20,7 @@ final class ScheduleViewModel: ObservableObject, @unchecked Sendable {
     
     // MARK: - Private properties
     private let searchService = SearchService()
+//    private let currentDate = Date()
     private let currentDate = DateFormatter.dateFormatter.string(from: Date())
     // MARK: - Public Methods
     func getSchedule(departure: String, arrival: String) async {
@@ -29,7 +30,7 @@ final class ScheduleViewModel: ObservableObject, @unchecked Sendable {
             let scheduleSearch = try await searchService.search(
                 from: departure,
                 to: arrival,
-                date: self.currentDate
+                date: "2024-07-23"
             )
             
             let sortedSchedule = scheduleSearch.sorted { $0.date < $1.date }

@@ -7,7 +7,7 @@
 import Foundation
 import OpenAPIURLSession
 
-final class StationsListService {
+actor StationsListService: Sendable {
     // Список всех доступных станций:
     func stationsList() async throws -> [City] {
         guard let serverURL = try? Servers.server1() else {

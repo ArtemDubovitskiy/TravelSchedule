@@ -14,7 +14,7 @@ protocol SearchRequestServiceProtocol {
     func getSearch(from: String, to: String, date: String) async throws -> SearchRoutes
 }
 
-actor SearchRequestService: SearchRequestServiceProtocol, @unchecked Sendable {
+actor SearchRequestService: SearchRequestServiceProtocol, Sendable {
     
     private let client: Client
     private let apikey: String
@@ -31,6 +31,7 @@ actor SearchRequestService: SearchRequestServiceProtocol, @unchecked Sendable {
             apikey: apikey,
             from: from,
             to: to,
+            date: date,
             transfers: true
         ))
         return try response.ok.body.json

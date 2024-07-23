@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainSearchView: View {
     @State private var path: [Destination] = []
-    @EnvironmentObject var mainSearchViewModel: MainSearchViewModel
+    @ObservedObject var mainSearchViewModel = MainSearchViewModel()
     // TODO: Добавить локализацию
     private let textFrom = "Откуда"
     private let textTo = "Куда"
@@ -97,31 +97,31 @@ struct MainSearchView: View {
                 }
             }
         }
-        .environmentObject(mainSearchViewModel)
+//        .environmentObject(mainSearchViewModel)
         .navigationDestination(for: Destination.self) { destination in
             switch destination {
             case .cities:
                 CitiesScreenView(
                     path: $path
                 )
-                .environmentObject(mainSearchViewModel)
+//                .environmentObject(mainSearchViewModel)
                 
             case .stations:
                 StationsScreenView(
                     path: $path
                 )
-                .environmentObject(mainSearchViewModel)
+//                .environmentObject(mainSearchViewModel)
                 
             case .schuedel:
                 ScheduleScreenView(
                     path: $path
                 )
-                .environmentObject(mainSearchViewModel)
+//                .environmentObject(mainSearchViewModel)
             }
         }
     }
 }
 
 #Preview {
-    MainSearchView().environmentObject(MainSearchViewModel())
+    MainSearchView()
 }

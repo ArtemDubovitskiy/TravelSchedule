@@ -7,10 +7,10 @@
 import SwiftUI
 
 @MainActor
-final class SettingsViewModel: ObservableObject, @unchecked Sendable {
+final class SettingsViewModel: ObservableObject, Sendable {
     @AppStorage("isDarkScheme") private var isDarkScheme: Bool = false
     @Published var isDarkSchemeOn: Bool = false
-    @Published var copyright_text: String = ""
+    @Published var copyrightText: String = ""
     @Published var state: AppState = .loading
     
     private let service = CopyrightService()
@@ -27,10 +27,10 @@ final class SettingsViewModel: ObservableObject, @unchecked Sendable {
     func getCopyright() async {
         do {
             guard let text = try await service.copyright() else { return }
-            self.copyright_text = text
+            self.copyrightText = text
             state = .content
         } catch {
-            self.copyright_text = mock_copyright_text
+            self.copyrightText = mock_copyright_text
             state = .error
         }
     }

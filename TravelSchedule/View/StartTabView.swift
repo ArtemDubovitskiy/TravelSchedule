@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct StartTabView: View {
-
-    @StateObject var mainSearchViewModel = MainSearchViewModel()
+//
+//    @ObservedObject var mainSearchViewModel = MainSearchViewModel()
     @State private var selectedTab = 0
     
     var body: some View {
@@ -37,7 +37,7 @@ struct StartTabView: View {
             }
             .tint(.ypBlackDual)
         }
-        .environmentObject(mainSearchViewModel)
+//        .environmentObject(mainSearchViewModel)
     }
 }
 

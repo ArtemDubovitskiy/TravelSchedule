@@ -10,7 +10,7 @@ import SwiftUI
 struct StationsScreenView: View {
     @Binding var path: [Destination]
     @State private var searchTextString = ""
-    @EnvironmentObject var viewModel: MainSearchViewModel
+    @ObservedObject var viewModel = MainSearchViewModel()
     @Environment(\.dismiss) private var dismiss
     
     // TODO: Добавить локализацию

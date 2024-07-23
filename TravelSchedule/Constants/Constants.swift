@@ -7,6 +7,6 @@
 import Foundation
 
 enum Constants {
-    static let apiKey = " "
+    static let apiKey = "d77ed0d2-6f01-4f92-967d-35ca9411ee0c"
     static let urlString = "https://yandex.ru/legal/practicum_offer/"
 }

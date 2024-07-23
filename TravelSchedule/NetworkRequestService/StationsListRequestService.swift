@@ -14,7 +14,7 @@ protocol StationsListRequestServiceProtocol {
     func getStationsList() async throws -> Stations
 }
 
-actor StationsListRequestService: StationsListRequestServiceProtocol, @unchecked Sendable {
+actor StationsListRequestService: StationsListRequestServiceProtocol, Sendable {
     
     private let client: Client
     private let apikey: String

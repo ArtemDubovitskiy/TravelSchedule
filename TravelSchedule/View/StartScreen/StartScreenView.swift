@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct StartScreenView: View {
-    @EnvironmentObject var mainSearchViewModel: MainSearchViewModel
+//    @ObservedObject var mainSearchViewModel = MainSearchViewModel()
     var body: some View {
         VStack(spacing: 20) {
             PreviewStoriesView()
             MainSearchView()
             Spacer()
         }
-        .environmentObject(mainSearchViewModel)
+//        .environmentObject(mainSearchViewModel)
     }
 }
 
 #Preview {
     StartScreenView()
-        .environmentObject(MainSearchViewModel())
+//        .environmentObject(MainSearchViewModel())
 }
