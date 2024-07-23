@@ -41,73 +41,63 @@ struct StationsScreenView: View {
     }
     
     var body: some View {
-//        switch viewModel.state {
-//        case .loading:
-//            ProgressView()
-//            
-//        case .content:
-            VStack {
-                SearchBar(searchText: $searchTextString)
-                if searchResults.isEmpty {
-                    VStack {
-                        Spacer()
-                        Text(stationNotFoundText)
-                            .font(.bold24)
-                            .foregroundStyle(.ypBlackDual)
-                            .padding(.horizontal)
-                        Spacer()
-                    }
-                }
-                ScrollView {
-                    LazyVStack(spacing: 0) {
-                        ForEach(searchResults) { station in
-                            StationCellView(station: station)
-                                .onTapGesture {
-                                    switch viewModel.currentRote {
-                                    case .departure:
-                                        viewModel.departureStation = station
-                                        viewModel.createDepartureText()
-                                    case .arrival:
-                                        viewModel.arrivalStation = station
-                                        viewModel.createArrivalText()
-                                    case .empty:
-                                        break
-                                    }
-                                    path.removeAll()
-                                }
-                        }
-                    }
-                    .padding(.horizontal, 16)
+        VStack {
+            SearchBar(searchText: $searchTextString)
+            if searchResults.isEmpty {
+                VStack {
+                    Spacer()
+                    Text(stationNotFoundText)
+                        .font(.bold24)
+                        .foregroundStyle(.ypBlackDual)
+                        .padding(.horizontal)
                     Spacer()
                 }
             }
-            .environmentObject(viewModel)
-            .toolbar(.hidden, for: .tabBar)
-            .navigationTitle(selectStationText)
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackButtonHidden(true)
-            .ignoresSafeArea(.all, edges: .bottom)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        path.removeLast()
-                        dismiss()
-                    } label: {
-                        Image.chevronBackward
-                            .foregroundStyle(.ypBlackDual)
+            ScrollView {
+                LazyVStack(spacing: 0) {
+                    ForEach(searchResults) { station in
+                        StationCellView(station: station)
+                            .onTapGesture {
+                                switch viewModel.currentRote {
+                                case .departure:
+                                    viewModel.departureStation = station
+                                    viewModel.createDepartureText()
+                                case .arrival:
+                                    viewModel.arrivalStation = station
+                                    viewModel.createArrivalText()
+                                case .empty:
+                                    break
+                                }
+                                path.removeAll()
+                            }
                     }
                 }
+                .padding(.horizontal, 16)
+                Spacer()
             }
-            
-//        case .error:
-//            ErrorView(errorType: viewModel.errorType)
-//        }
+        }
+        .environmentObject(viewModel)
+        .toolbar(.hidden, for: .tabBar)
+        .navigationTitle(selectStationText)
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .ignoresSafeArea(.all, edges: .bottom)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    path.removeLast()
+                    dismiss()
+                } label: {
+                    Image.chevronBackward
+                        .foregroundStyle(.ypBlackDual)
+                }
+            }
+        }
     }
 }
 
 #Preview {
     NavigationStack {
         StationsScreenView(path: .constant([]))
-//            .environmentObject(MainSearchViewModel(cities: []))
     }
 }

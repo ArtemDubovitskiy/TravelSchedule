@@ -1,77 +1,45 @@
 //
-//  MainSearchViewModel.swift
+//  ScheduleViewModel.swift
 //  TravelSchedule
 //
-//  Created by Artem Dubovitsky on 30.05.2024.
+//  Created by Artem Dubovitsky on 23.07.2024.
 //
 import Foundation
 
 @MainActor
-final class MainSearchViewModel: ObservableObject {
-    // MARK: - Public Properties
-    @Published var currentRote = CurrentRoute.empty
-
+final class ScheduleViewModel: ObservableObject {
+    @Published var state: AppState = .loading
+    @Published var errorType: ErrorType = .serverError
+    
     @Published var schedule: [Schedule] = []
     @Published var filterSchedule: [Schedule] = []
-    
-    @Published var departureCity: City?
-    @Published var arrivalCity: City?
-    @Published var departureStation: Station?
-    @Published var arrivalStation: Station?
-    
-    @Published var departureText: String = ""
-    @Published var arrivalText: String = ""
-    @Published var scheduleText: String = ""
     
     @Published var selectedIntervals: Set<TimeFilters> = []
     @Published var selectedTransferOptions: TransferFilters?
     @Published var isFilteredSchedule: Bool = false
     
+    // MARK: - Private properties
     private let searchService = SearchService()
-
+    
     // MARK: - Public Methods
-    func createDepartureText() {
-        if let departureCity = departureCity,
-           let departureStation = departureStation {
-            self.departureText = departureCity.title + " (\(departureStation.title))"
+    func getSchedule(departure: String, arrival: String) async {
+        do {
+            schedule.removeAll()
+            filterSchedule.removeAll()
+            let scheduleSearch = try await searchService.search(
+                from: departure,
+                to: arrival,
+                date: "2024-07-23" // test - исправить
+            )
+            
+            let sortedSchedule = scheduleSearch.sorted { $0.departureTime < $1.departureTime}
+            self.schedule = sortedSchedule
+            self.filterSchedule = schedule
+            state = .content
+        } catch {
+            self.schedule = []
+            state = .error
         }
-    }
-    
-    func createArrivalText() {
-        if let arrivalCity = arrivalCity,
-           let arrivalStation = arrivalStation {
-            self.arrivalText = arrivalCity.title + " (\(arrivalStation.title))"
-        }
-    }
-    
-    func createSchuedelText() {
-        self.scheduleText = departureText + " → " + arrivalText
-    }
-    
-    func swapStations() {
-        swap(&departureCity, &arrivalCity)
-        swap(&departureStation, &arrivalStation)
-        swap(&departureText, &arrivalText)
-    }
-    
-//    func showSchuedel() {
-//        // Метод сделан на моках, для отображения заглушки на экране расписания
-//        if departureText == "Москва (Ярославский вокзал)" &&
-//            arrivalText == "Санкт Петербург (Балтийский вокзал)" {
-//            self.schedule = MockData.mockSchedule
-//            self.filterSchedule = schedule
-//        }
-//    }
-    
-    func clearRouteResult() {
-        currentRote = .empty
-        self.departureText = ""
-        self.arrivalText = ""
-        self.schedule = []
-        self.filterSchedule = []
-        self.selectedIntervals = []
-        self.selectedTransferOptions = nil
-        self.isFilteredSchedule = false
     }
     
     func applyRoteFilters(
@@ -87,28 +55,13 @@ final class MainSearchViewModel: ObservableObject {
         }
         isFilteredSchedule = true
     }
-
-    func getSchedule() async {
-        do {
-            schedule.removeAll()
-            guard let departure = departureStation?.code,
-                  let arrival = arrivalStation?.code
-            else { return }
-            
-            let scheduleSearch = try await searchService.search(
-                from: departure,
-                to: arrival,
-                date: "2024-07-22" // test - исправить
-            )
-            
-            let sortedSchedule = scheduleSearch.sorted { $0.departureTime < $1.departureTime}
-            self.schedule = sortedSchedule
-            self.filterSchedule = schedule
-//            state = .content
-        } catch {
-            self.schedule = []
-//            state = .error
-        }
+    
+    func clearScheduleResult() {
+        self.schedule = []
+        self.filterSchedule = []
+        self.selectedIntervals = []
+        self.selectedTransferOptions = nil
+        self.isFilteredSchedule = false
     }
     // MARK: - Private Methods
     private func roteTransfers(

@@ -57,6 +57,7 @@
 		91A368022BFEC33100396463 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A368012BFEC33100396463 /* WebView.swift */; };
 		91A368052BFEC6DA00396463 /* AgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A368042BFEC6DA00396463 /* AgreementView.swift */; };
 		91B94CD32C4F058800407C82 /* CitiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B94CD22C4F058800407C82 /* CitiesViewModel.swift */; };
+		91B94CD72C4F24C600407C82 /* ScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B94CD62C4F24C600407C82 /* ScheduleViewModel.swift */; };
 		91C057302BA1FFB300CBD8F3 /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 918CA6062BA0EC560088CA5F /* openapi.yaml */; };
 		91E739A82C0C9BD7001DDC28 /* CarrierInfoScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E739A72C0C9BD7001DDC28 /* CarrierInfoScreenView.swift */; };
 		91E739B02C0CBE04001DDC28 /* RouteFilterScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E739AF2C0CBE04001DDC28 /* RouteFilterScreenView.swift */; };
@@ -129,6 +130,7 @@
 		91A368012BFEC33100396463 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		91A368042BFEC6DA00396463 /* AgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementView.swift; sourceTree = "<group>"; };
 		91B94CD22C4F058800407C82 /* CitiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesViewModel.swift; sourceTree = "<group>"; };
+		91B94CD62C4F24C600407C82 /* ScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewModel.swift; sourceTree = "<group>"; };
 		91E739A72C0C9BD7001DDC28 /* CarrierInfoScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrierInfoScreenView.swift; sourceTree = "<group>"; };
 		91E739AF2C0CBE04001DDC28 /* RouteFilterScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFilterScreenView.swift; sourceTree = "<group>"; };
 		91E739B32C0D0254001DDC28 /* TimeIntervalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalCell.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 				91B94CD22C4F058800407C82 /* CitiesViewModel.swift */,
 				917BE6A22C42960B0004BB6A /* SettingsViewModel.swift */,
 				917A50AA2C0F41D0005F2385 /* MainSearchViewModel.swift */,
+				91B94CD62C4F24C600407C82 /* ScheduleViewModel.swift */,
 				917BE6AD2C43CF700004BB6A /* StoriesViewModel.swift */,
 			);
 			path = ViewModel;
@@ -551,6 +554,7 @@
 				9164CA102C2E1A0200C0F854 /* Stories.swift in Sources */,
 				9164CA192C3080AF00C0F854 /* TimerConfiguration+Calculations.swift in Sources */,
 				917BE6A02C42955D0004BB6A /* AppState.swift in Sources */,
+				91B94CD72C4F24C600407C82 /* ScheduleViewModel.swift in Sources */,
 				917BE6B52C470E9F0004BB6A /* CopyrightService.swift in Sources */,
 				918FE3C82C05310200323D1D /* StationsScreenView.swift in Sources */,
 				918FE3B72C050C2A00323D1D /* CityCellView.swift in Sources */,
