@@ -6,7 +6,8 @@
 //
 import Foundation
 
-final class StoriesViewModel: ObservableObject {
+@MainActor
+final class StoriesViewModel: ObservableObject, @unchecked Sendable {
     @Published var state: AppState = .content
     @Published var errorType: ErrorType = .serverError
     @Published var stories: [Stories] = []

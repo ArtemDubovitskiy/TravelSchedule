@@ -14,7 +14,7 @@ protocol CopyrightRequestServiceProtocol {
     func getCopyright() async throws -> CopyrightSchedule
 }
 
-actor CopyrightRequestService: CopyrightRequestServiceProtocol {
+actor CopyrightRequestService: CopyrightRequestServiceProtocol, @unchecked Sendable {
     
     private let client: Client
     private let apikey: String

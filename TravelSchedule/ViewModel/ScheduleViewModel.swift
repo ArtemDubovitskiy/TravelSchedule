@@ -7,7 +7,7 @@
 import Foundation
 
 @MainActor
-final class ScheduleViewModel: ObservableObject {
+final class ScheduleViewModel: ObservableObject, @unchecked Sendable {
     @Published var state: AppState = .loading
     @Published var errorType: ErrorType = .serverError
     

@@ -7,7 +7,7 @@
 import SwiftUI
 
 @MainActor
-final class SettingsViewModel: ObservableObject {
+final class SettingsViewModel: ObservableObject, @unchecked Sendable {
     @AppStorage("isDarkScheme") private var isDarkScheme: Bool = false
     @Published var isDarkSchemeOn: Bool = false
     @Published var copyright_text: String = ""

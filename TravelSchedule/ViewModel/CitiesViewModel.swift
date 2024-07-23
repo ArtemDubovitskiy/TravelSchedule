@@ -7,7 +7,7 @@
 import Foundation
 
 @MainActor
-final class CitiesViewModel: ObservableObject {
+final class CitiesViewModel: ObservableObject, @unchecked Sendable {
     @Published var state: AppState = .loading
     @Published var errorType: ErrorType = .serverError
     @Published var cities: [City] = []
