@@ -34,21 +34,20 @@ final class SearchService {
             let departure = segment.departure
             let arrival = segment.arrival
             let transfers = segment.has_transfers ?? false
-            let transfersTitle = segment.stops
+            let transfersTitle = transfers ? "С пересадкой в: \(segment.stops ?? "")" : ""
             let duration = segment.duration
             guard let carrier = segment.thread?.carrier else { return nil }
             
-            // TODO: - исправить после рефакторинга
             return Schedule(
                 date: departure ?? "",
                 departureTime: departure ?? "",
                 arrivalTime: arrival ?? "",
                 durationTime: durationToTime(from: duration),
-                transferPoint: transfersTitle ?? "",
+                transferPoint: transfersTitle,
                 carrier: Carrier(
                     title: carrier.title ?? "",
-                    logo: "", // carrier.logo ?? ""
-                    logoFull: "", // carrier.logo_svg ?? ""
+                    logo_svg: carrier.logo_svg ?? "",
+                    logo: carrier.logo ?? "",
                     email: carrier.email ?? "",
                     phone: carrier.phone ?? ""
                 )

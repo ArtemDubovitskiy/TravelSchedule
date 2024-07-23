@@ -18,9 +18,13 @@ struct CarrierCellView: View {
                 .frame(height: 104)
             VStack(spacing: 4) {
                 HStack {
-                    Image(schedule.carrier.logo ?? "")
-                        .resizable()
-                        .frame(width: 38, height: 38)
+                    AsyncImage(url: URL(string: schedule.carrier.logo_svg)) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .frame(width: 38, height: 38)
+                    } placeholder: { Image("StubIcon") }
                         .padding(.leading, 14)
                     VStack(alignment: .leading, spacing: 2) {
                         HStack {
@@ -35,7 +39,7 @@ struct CarrierCellView: View {
                         }
                         // TODO: Добавить локализацию
                         if let transferPoint = schedule.transferPoint {
-                            Text("C пересадкой в \(transferPoint)")
+                            Text(transferPoint)
                                 .font(.regular12)
                                 .foregroundStyle(.ypRed)
                         }
