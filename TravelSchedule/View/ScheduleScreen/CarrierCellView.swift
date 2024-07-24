@@ -18,9 +18,13 @@ struct CarrierCellView: View {
                 .frame(height: 104)
             VStack(spacing: 4) {
                 HStack {
-                    Image(schedule.carrier.logo)
-                        .resizable()
-                        .frame(width: 38, height: 38)
+                    AsyncImage(url: URL(string: schedule.carrier.logoSvg)) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .frame(width: 38, height: 38)
+                    } placeholder: { Image("StubIcon") }
                         .padding(.leading, 14)
                     VStack(alignment: .leading, spacing: 2) {
                         HStack {
@@ -28,14 +32,14 @@ struct CarrierCellView: View {
                                 .font(.regular17)
                                 .foregroundStyle(.ypBlack)
                             Spacer()
-                            Text(schedule.date)
+                            Text(DateFormatterHelper.stringFormatter(schedule.date))
                                 .font(.regular12)
                                 .foregroundStyle(.ypBlack)
                                 .padding(.trailing, 7)
                         }
                         // TODO: Добавить локализацию
                         if let transferPoint = schedule.transferPoint {
-                            Text("C пересадкой в \(transferPoint)")
+                            Text(transferPoint)
                                 .font(.regular12)
                                 .foregroundStyle(.ypRed)
                         }
@@ -52,6 +56,7 @@ struct CarrierCellView: View {
                         .foregroundStyle(.ypGray)
                     Text(schedule.durationTime)
                         .font(.regular12)
+                        .lineLimit(1)
                         .foregroundStyle(.ypBlack)
                     Rectangle()
                         .frame(height: 1)

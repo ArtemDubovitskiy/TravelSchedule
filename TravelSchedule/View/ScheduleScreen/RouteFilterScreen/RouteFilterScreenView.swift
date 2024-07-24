@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RouteFilterScreenView: View {
-    @EnvironmentObject var viewModel: ScheduleViewModel
+    @ObservedObject var viewModel: ScheduleViewModel
     @Environment(\.dismiss) private var dismiss
     
     // TODO: Добавить локализацию
@@ -109,6 +109,8 @@ struct RouteFilterScreenView: View {
 
 #Preview {
     NavigationStack {
-        RouteFilterScreenView()
+        RouteFilterScreenView(
+            viewModel: ScheduleViewModel()
+        )
     }
 }

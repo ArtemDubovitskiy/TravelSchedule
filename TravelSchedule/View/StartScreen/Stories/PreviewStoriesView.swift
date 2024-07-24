@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PreviewStoriesView: View {
     @State private var isPresented = false
-    @EnvironmentObject var viewModel: ScheduleViewModel
+    @ObservedObject var viewModel = StoriesViewModel()
     
     private let storiesHeight: Double = 188
     
@@ -39,7 +39,6 @@ struct PreviewStoriesView: View {
                     )
                 }
             }
-            .environmentObject(viewModel)
             .padding(.leading, 16)
             .frame(height: storiesHeight)
             .frame(maxWidth: .infinity)

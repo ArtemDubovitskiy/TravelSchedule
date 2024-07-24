@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainSearchView: View {
     @State private var path: [Destination] = []
-    @EnvironmentObject var viewModel: ScheduleViewModel
+    @ObservedObject var mainSearchViewModel = MainSearchViewModel()
     // TODO: Добавить локализацию
     private let textFrom = "Откуда"
     private let textTo = "Куда"
@@ -35,24 +35,24 @@ struct MainSearchView: View {
                             .overlay(
                                 VStack(spacing: 0) {
                                     TextField(textFrom,
-                                              text: $viewModel.departureText,
+                                              text: $mainSearchViewModel.departureText,
                                               prompt: Text(textFrom).foregroundColor(.ypGray)
                                     )
                                     .foregroundStyle(.ypBlack)
                                     .frame(height: textFieldHeight)
                                     .onTapGesture {
-                                        viewModel.currentRote = .departure
+                                        mainSearchViewModel.currentRote = .departure
                                         path.append(.cities)
                                     }
                                     
                                     TextField(textTo,
-                                              text: $viewModel.arrivalText,
+                                              text: $mainSearchViewModel.arrivalText,
                                               prompt: Text(textTo).foregroundColor(.ypGray)
                                     )
                                     .foregroundStyle(.ypBlack)
                                     .frame(height: textFieldHeight)
                                     .onTapGesture {
-                                        viewModel.currentRote = .arrival
+                                        mainSearchViewModel.currentRote = .arrival
                                         path.append(.cities)
                                     }
                                 }
@@ -63,7 +63,7 @@ struct MainSearchView: View {
                                 .foregroundStyle(.ypWhite)
                                 .frame(width: circleWidth)
                             Button {
-                                viewModel.swapStations()
+                                mainSearchViewModel.swapStations()
                             } label: {
                                 Image.changeImage
                                     .foregroundStyle(.ypBlue)
@@ -74,15 +74,14 @@ struct MainSearchView: View {
                 }
                 .padding(.horizontal, 16)
                 
-                if !viewModel.departureText.isEmpty &&
-                    !viewModel.arrivalText.isEmpty &&
-                    viewModel.departureCity != nil &&
-                    viewModel.departureStation != nil &&
-                    viewModel.arrivalCity != nil &&
-                    viewModel.arrivalStation != nil {
+                if !mainSearchViewModel.departureText.isEmpty &&
+                    !mainSearchViewModel.arrivalText.isEmpty &&
+                    mainSearchViewModel.departureCity != nil &&
+                    mainSearchViewModel.departureStation != nil &&
+                    mainSearchViewModel.arrivalCity != nil &&
+                    mainSearchViewModel.arrivalStation != nil {
                     Button {
-                        self.viewModel.createSchuedelText()
-                        self.viewModel.showSchuedel()
+                        self.mainSearchViewModel.createSchuedelText()
                         path.append(.schuedel)
                     } label: {
                         ZStack {
@@ -98,28 +97,31 @@ struct MainSearchView: View {
                 }
             }
         }
-        .environmentObject(viewModel)
         .navigationDestination(for: Destination.self) { destination in
             switch destination {
             case .cities:
                 CitiesScreenView(
+                    mainSearchViewModel: mainSearchViewModel, 
+                    viewModel: mainSearchViewModel.citiesViewModel,
                     path: $path
-                ).environmentObject(viewModel)
+                )
                 
             case .stations:
                 StationsScreenView(
+                    mainSearchViewModel: mainSearchViewModel,
                     path: $path
-                ).environmentObject(viewModel)
+                )
                 
             case .schuedel:
                 ScheduleScreenView(
+                    mainSearchViewModel: mainSearchViewModel,
                     path: $path
-                ).environmentObject(viewModel)
+                )
             }
         }
     }
 }
 
 #Preview {
-    MainSearchView().environmentObject(ScheduleViewModel(cities: []))
+    MainSearchView()
 }

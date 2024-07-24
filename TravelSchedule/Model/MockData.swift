@@ -7,48 +7,49 @@
 import Foundation
 
 enum MockData {
+    // TODO: моковые данные для Preview:
     static let mockCity: [City] = [
         City(
             title: "Москва",
             stations: [
-                Station(title: "Киевский вокзал"),
-                Station(title: "Курский вокзал"),
-                Station(title: "Ярославский вокзал"),
-                Station(title: "Белорусский вокзал"),
-                Station(title: "Савеловский вокзал"),
-                Station(title: "Ленинградский вокзал")
+                Station(title: "Киевский вокзал", code: ""),
+                Station(title: "Курский вокзал", code: ""),
+                Station(title: "Ярославский вокзал", code: ""),
+                Station(title: "Белорусский вокзал", code: ""),
+                Station(title: "Савеловский вокзал", code: ""),
+                Station(title: "Ленинградский вокзал", code: "")
             ]
         ),
         City(
             title: "Санкт Петербург",
             stations: [
-                Station(title: "Балтийский вокзал"),
-                Station(title: "Московский вокзал")
+                Station(title: "Балтийский вокзал", code: ""),
+                Station(title: "Московский вокзал", code: "")
             ]
         ),
         City(
             title: "Сочи",
             stations: [
-                Station(title: "Сочи")
+                Station(title: "Сочи", code: "")
             ]
         ),
         City(
             title: "Горный воздух",
             stations: [
-                Station(title: "Горный Воздух")
+                Station(title: "Горный Воздух", code: "")
             ]
         ),
         City(
             title: "Краснодар",
             stations: [
-                Station(title: "Краснодар-1"),
-                Station(title: "Краснодар-2")
+                Station(title: "Краснодар-1", code: ""),
+                Station(title: "Краснодар-2", code: "")
             ]
         ),
         City(
             title: "Казань",
             stations: [
-                Station(title: "Казань-Пасс.")
+                Station(title: "Казань-Пасс.", code: "")
             ]
         ),
     ]
@@ -56,22 +57,22 @@ enum MockData {
     static let mockCarrier: [Carrier] = [
         Carrier(
             title: "РЖД",
-            logo: "RZD",
-            logoFull: "RZDFull",
+            logoSvg: "RZD",
+            logo: "RZDFull",
             email: "i.lozgkina@yandex.ru",
             phone: "+7 (904) 329-27-71"
         ),
         Carrier(
             title: "ФГК",
+            logoSvg: "FGK",
             logo: "FGK",
-            logoFull: "FGK",
             email: "info@railfgk.ru",
             phone: "8 (800) 250-47-77"
         ),
         Carrier(
             title: "Урал логистика",
+            logoSvg: "Ural",
             logo: "Ural",
-            logoFull: "Ural",
             email: "contact@ural-lg.ru",
             phone: "8 (800) 505-49-84"
         ),
@@ -119,7 +120,7 @@ enum MockData {
             carrier: MockData.mockCarrier[0]
         ),
     ]
-    
+    // TODO: Моковые данные для Stories:
     private static let storyTitle = "Text Text Text Text Text Text Text Text Text Text "
     private static let storyDescription: String = storyTitle + storyTitle + storyTitle
     

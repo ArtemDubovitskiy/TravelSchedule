@@ -8,17 +8,10 @@
 import SwiftUI
 
 struct SettingsScreenView: View {
-    
-    @Binding var isDarkScheme: Bool
-    private let urlString = "https://yandex.ru/legal/practicum_offer/"
-    
-//    Тестовый URL для проверки темной темы WebView:
-//    private let urlString = "https://developer.apple.com"
-    
+    @ObservedObject var viewModel = SettingsViewModel()
     // TODO: Добавить локализацию
     private let toggleText = "Темная тема"
     private let agreementText = "Пользовательское соглашение"
-    private let apiText = "Приложение использует API «Яндекс.Расписания»"
     private let versionText = "Версия 1.0 (beta)"
     
     var body: some View {
@@ -27,13 +20,16 @@ struct SettingsScreenView: View {
                 Text(toggleText)
                     .font(.regular17)
                     .foregroundStyle(.ypBlackDual)
-                Toggle(isOn: $isDarkScheme) { }
+                Toggle(isOn: $viewModel.isDarkSchemeOn) { }
                     .tint(.ypBlue)
+                    .onChange(of: viewModel.isDarkSchemeOn, perform: { _ in
+                        viewModel.changeColorScheme()
+                    })
             }
             .frame(height: 60)
             
             NavigationLink {
-                AgreementView(urlString: urlString)
+                AgreementView()
             } label: {
                 HStack {
                     Text(agreementText)
@@ -50,7 +46,15 @@ struct SettingsScreenView: View {
             Spacer()
             
             VStack(alignment: .center, spacing: 16) {
-                Text(apiText)
+                switch viewModel.state {
+                case .loading:
+                    ProgressView()
+                        .task {
+                            await viewModel.getCopyright()
+                        }
+                case .content, .error:
+                    Text(viewModel.copyrightText)
+                }
                 Text(versionText)
             }
             .frame(height: 44)
@@ -66,6 +70,6 @@ struct SettingsScreenView: View {
 
 #Preview {
     NavigationStack {
-        SettingsScreenView(isDarkScheme: .constant(true))
+        SettingsScreenView()
     }
 }

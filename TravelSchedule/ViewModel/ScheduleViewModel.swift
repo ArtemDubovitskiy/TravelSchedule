@@ -2,93 +2,44 @@
 //  ScheduleViewModel.swift
 //  TravelSchedule
 //
-//  Created by Artem Dubovitsky on 30.05.2024.
+//  Created by Artem Dubovitsky on 23.07.2024.
 //
 import Foundation
 
-final class ScheduleViewModel: ObservableObject {
-    
-    enum State {
-        case loading
-        case content
-        case error
-    }
-    
+@MainActor
+final class ScheduleViewModel: ObservableObject, Sendable {
     // MARK: - Public Properties
-    @Published var state: State = .content
+    @Published var state: AppState = .loading
     @Published var errorType: ErrorType = .serverError
-    @Published var currentRote = CurrentRoute.empty
     
-    @Published var cities: [City]
     @Published var schedule: [Schedule] = []
     @Published var filterSchedule: [Schedule] = []
-    
-    @Published var departureCity: City?
-    @Published var arrivalCity: City?
-    @Published var departureStation: Station?
-    @Published var arrivalStation: Station?
-    
-    @Published var departureText: String = ""
-    @Published var arrivalText: String = ""
-    @Published var scheduleText: String = ""
     
     @Published var selectedIntervals: Set<TimeFilters> = []
     @Published var selectedTransferOptions: TransferFilters?
     @Published var isFilteredSchedule: Bool = false
     
-    @Published var stories: [Stories] = []
-    @Published var selectedStory: Int = 0
-    
-    // MARK: - Initializers
-    init(cities: [City]) {
-        self.cities = cities
-        getCities()
-        getStories()
-    }
+    // MARK: - Private properties
+    private let searchService = SearchService()
     
     // MARK: - Public Methods
-    func createDepartureText() {
-        if let departureCity = departureCity,
-           let departureStation = departureStation {
-            self.departureText = departureCity.title + " (\(departureStation.title))"
-        }
-    }
-    
-    func createArrivalText() {
-        if let arrivalCity = arrivalCity,
-           let arrivalStation = arrivalStation {
-            self.arrivalText = arrivalCity.title + " (\(arrivalStation.title))"
-        }
-    }
-    
-    func createSchuedelText() {
-        self.scheduleText = departureText + " → " + arrivalText
-    }
-    
-    func swapStations() {
-        swap(&departureCity, &arrivalCity)
-        swap(&departureStation, &arrivalStation)
-        swap(&departureText, &arrivalText)
-    }
-    
-    func showSchuedel() {
-        // Метод сделан на моках, для отображения заглушки на экране расписания
-        if departureText == "Москва (Ярославский вокзал)" &&
-            arrivalText == "Санкт Петербург (Балтийский вокзал)" {
-            self.schedule = MockData.mockSchedule
+    func getSchedule(departure: String, arrival: String) async {
+        do {
+            schedule.removeAll()
+            filterSchedule.removeAll()
+            let scheduleSearch = try await searchService.search(
+                from: departure,
+                to: arrival
+            )
+            
+            let sortedSchedule = scheduleSearch.sorted { $0.date < $1.date }
+            self.schedule = sortedSchedule
             self.filterSchedule = schedule
+            state = .content
+        } catch {
+            self.schedule = []
+            state = .error
         }
-    }
-    
-    func clearRouteResult() {
-        currentRote = .empty
-        self.departureText = ""
-        self.arrivalText = ""
-        self.schedule = []
-        self.filterSchedule = []
-        self.selectedIntervals = []
-        self.selectedTransferOptions = nil
-        self.isFilteredSchedule = false
     }
     
     func applyRoteFilters(
@@ -105,15 +56,15 @@ final class ScheduleViewModel: ObservableObject {
         isFilteredSchedule = true
     }
     
+    func clearScheduleResult() {
+        self.schedule = []
+        self.filterSchedule = []
+        self.selectedIntervals = []
+        self.selectedTransferOptions = nil
+        self.isFilteredSchedule = false
+    }
+    
     // MARK: - Private Methods
-    private func getCities() {
-        cities = MockData.mockCity
-    }
-    
-    private func getStories() {
-        stories = MockData.mockStories
-    }
-    
     private func roteTransfers(
         _ schedule: Schedule,
         transferFilter: TransferFilters
@@ -121,9 +72,9 @@ final class ScheduleViewModel: ObservableObject {
         let transferPoint = schedule.transferPoint
         switch transferFilter {
         case .yes:
-            return transferPoint != nil
-        case .no:
             return transferPoint == nil
+        case .no:
+            return transferPoint != nil
         }
     }
     

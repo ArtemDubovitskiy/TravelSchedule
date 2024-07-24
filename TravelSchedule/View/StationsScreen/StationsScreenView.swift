@@ -8,30 +8,30 @@
 import SwiftUI
 
 struct StationsScreenView: View {
+    @ObservedObject var mainSearchViewModel: MainSearchViewModel
     @Binding var path: [Destination]
     @State private var searchTextString = ""
-    @EnvironmentObject var viewModel: ScheduleViewModel
-    @Environment(\.dismiss) private var dismiss // заглушка
+    @Environment(\.dismiss) private var dismiss
     
     // TODO: Добавить локализацию
     private let selectStationText = "Выбор станции"
     private let stationNotFoundText = "Станция не найдена"
     
     private var searchResults: [Station] {
-        switch viewModel.currentRote {
+        switch mainSearchViewModel.currentRote {
         case .departure:
             if searchTextString.isEmpty {
-                return viewModel.departureCity?.stations ?? []
+                return mainSearchViewModel.departureCity?.stations ?? []
             } else {
-                return viewModel.departureCity?.stations.filter {
+                return mainSearchViewModel.departureCity?.stations.filter {
                     $0.title.lowercased().contains(searchTextString.lowercased())
                 } ?? []
             }
         case .arrival:
             if searchTextString.isEmpty {
-                return viewModel.arrivalCity?.stations ?? []
+                return mainSearchViewModel.arrivalCity?.stations ?? []
             } else {
-                return viewModel.arrivalCity?.stations.filter {
+                return mainSearchViewModel.arrivalCity?.stations.filter {
                     $0.title.lowercased().contains(searchTextString.lowercased())
                 } ?? []
             }
@@ -41,14 +41,10 @@ struct StationsScreenView: View {
     }
     
     var body: some View {
-        switch viewModel.state {
-        case .loading:
-            ProgressView()
-            
-        case .content:
-            VStack {
-                SearchBar(searchText: $searchTextString)
-                if searchResults.isEmpty {
+        VStack {
+            SearchBar(searchText: $searchTextString)
+            if searchResults.isEmpty {
+                VStack {
                     Spacer()
                     Text(stationNotFoundText)
                         .font(.bold24)
@@ -56,17 +52,19 @@ struct StationsScreenView: View {
                         .padding(.horizontal)
                     Spacer()
                 }
+            }
+            ScrollView {
                 LazyVStack(spacing: 0) {
                     ForEach(searchResults) { station in
                         StationCellView(station: station)
                             .onTapGesture {
-                                switch viewModel.currentRote {
+                                switch mainSearchViewModel.currentRote {
                                 case .departure:
-                                    viewModel.departureStation = station
-                                    viewModel.createDepartureText()
+                                    mainSearchViewModel.departureStation = station
+                                    mainSearchViewModel.createDepartureText()
                                 case .arrival:
-                                    viewModel.arrivalStation = station
-                                    viewModel.createArrivalText()
+                                    mainSearchViewModel.arrivalStation = station
+                                    mainSearchViewModel.createArrivalText()
                                 case .empty:
                                     break
                                 }
@@ -77,32 +75,31 @@ struct StationsScreenView: View {
                 .padding(.horizontal, 16)
                 Spacer()
             }
-            .environmentObject(viewModel)
-            .toolbar(.hidden, for: .tabBar)
-            .navigationTitle(selectStationText)
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackButtonHidden(true)
-            .ignoresSafeArea(.all, edges: .bottom)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        path.removeLast()
-                        dismiss()
-                    } label: {
-                        Image.chevronBackward
-                            .foregroundStyle(.ypBlackDual)
-                    }
+        }
+        .toolbar(.hidden, for: .tabBar)
+        .navigationTitle(selectStationText)
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .ignoresSafeArea(.all, edges: .bottom)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    path.removeLast()
+                    dismiss()
+                } label: {
+                    Image.chevronBackward
+                        .foregroundStyle(.ypBlackDual)
                 }
             }
-            
-        case .error:
-            ErrorView(errorType: viewModel.errorType)
         }
     }
 }
 
 #Preview {
     NavigationStack {
-        StationsScreenView(path: .constant([])).environmentObject(ScheduleViewModel(cities: []))
+        StationsScreenView(
+            mainSearchViewModel: MainSearchViewModel(),
+            path: .constant([])
+        )
     }
 }

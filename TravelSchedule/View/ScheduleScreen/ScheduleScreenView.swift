@@ -8,22 +8,28 @@
 import SwiftUI
 
 struct ScheduleScreenView: View {
+    @ObservedObject var mainSearchViewModel: MainSearchViewModel
+    @ObservedObject var viewModel = ScheduleViewModel()
     @Binding var path: [Destination]
-    @EnvironmentObject var viewModel: ScheduleViewModel
-    @Environment(\.dismiss) private var dismiss // заглушка
+    @Environment(\.dismiss) private var dismiss
     
     // TODO: Добавить локализацию
     private let buttonText = "Уточнить время"
     
     var body: some View {
-        switch viewModel.state {
-        case .loading:
-            ProgressView()
-            
-        case .content:
-            ZStack {
+        ZStack {
+            switch viewModel.state {
+            case .loading:
+                ProgressView()
+                    .task {
+                        await viewModel.getSchedule(
+                            departure: mainSearchViewModel.departureStation?.code ?? "",
+                            arrival: mainSearchViewModel.arrivalStation?.code ?? ""
+                        )
+                    }
+            case .content:
                 VStack {
-                    Text(viewModel.scheduleText)
+                    Text(mainSearchViewModel.scheduleText)
                         .font(.bold24)
                         .foregroundStyle(.ypBlackDual)
                         .padding(.horizontal, 16)
@@ -57,7 +63,7 @@ struct ScheduleScreenView: View {
                 VStack {
                     Spacer()
                     NavigationLink {
-                        RouteFilterScreenView()
+                        RouteFilterScreenView(viewModel: viewModel)
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 16)
@@ -79,27 +85,26 @@ struct ScheduleScreenView: View {
                     }
                 }
                 .padding(.bottom, 24)
+            case.error:
+                ErrorView(errorType: viewModel.errorType)
             }
-            .environmentObject(viewModel)
-            .toolbar(.hidden, for: .tabBar)
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackButtonHidden(true)
-            .ignoresSafeArea(.all, edges: .bottom)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        viewModel.clearRouteResult()
-                        path.removeAll()
-                        dismiss()
-                    } label: {
-                        Image.chevronBackward
-                            .foregroundStyle(.ypBlackDual)
-                    }
+        }
+        .toolbar(.hidden, for: .tabBar)
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .ignoresSafeArea(.all, edges: .bottom)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    mainSearchViewModel.clearRouteResult()
+                    viewModel.clearScheduleResult()
+                    path.removeAll()
+                    dismiss()
+                } label: {
+                    Image.chevronBackward
+                        .foregroundStyle(.ypBlackDual)
                 }
             }
-            
-        case.error:
-            ErrorView(errorType: viewModel.errorType)
         }
     }
 }
@@ -107,6 +112,8 @@ struct ScheduleScreenView: View {
 #Preview {
     NavigationStack {
         ScheduleScreenView(
-            path: .constant([])).environmentObject(ScheduleViewModel(cities: []))
+            mainSearchViewModel: MainSearchViewModel(),
+            path: .constant([])
+        )
     }
 }

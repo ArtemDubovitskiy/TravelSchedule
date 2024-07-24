@@ -6,11 +6,11 @@
 //
 import Foundation
 
-struct Carrier: Hashable, Identifiable {
+struct Carrier: Hashable, Identifiable, Sendable {
     let id = UUID()
     let title: String
+    let logoSvg: String
     let logo: String
-    let logoFull: String?
-    let email: String
-    let phone: String
+    let email: String?
+    let phone: String?
 }
