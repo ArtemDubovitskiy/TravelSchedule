@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ScheduleScreenView: View {
-    @Binding var path: [Destination]
-    @ObservedObject var mainSearchViewModel = MainSearchViewModel()
+    @ObservedObject var mainSearchViewModel: MainSearchViewModel
     @ObservedObject var viewModel = ScheduleViewModel()
+    @Binding var path: [Destination]
     @Environment(\.dismiss) private var dismiss
     
     // TODO: Добавить локализацию
@@ -63,8 +63,7 @@ struct ScheduleScreenView: View {
                 VStack {
                     Spacer()
                     NavigationLink {
-                        RouteFilterScreenView()
-//                            .environmentObject(viewModel)
+                        RouteFilterScreenView(viewModel: viewModel)
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 16)
@@ -90,7 +89,6 @@ struct ScheduleScreenView: View {
                 ErrorView(errorType: viewModel.errorType)
             }
         }
-//        .environmentObject(mainSearchViewModel)
         .toolbar(.hidden, for: .tabBar)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
@@ -114,7 +112,8 @@ struct ScheduleScreenView: View {
 #Preview {
     NavigationStack {
         ScheduleScreenView(
-            path: .constant([]))
-//        .environmentObject(MainSearchViewModel())
+            mainSearchViewModel: MainSearchViewModel(),
+            path: .constant([])
+        )
     }
 }

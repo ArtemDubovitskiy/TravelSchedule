@@ -39,7 +39,6 @@ struct PreviewStoriesView: View {
                     )
                 }
             }
-//            .environmentObject(viewModel)
             .padding(.leading, 16)
             .frame(height: storiesHeight)
             .frame(maxWidth: .infinity)

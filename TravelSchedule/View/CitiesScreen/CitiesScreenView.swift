@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct CitiesScreenView: View {
-    @ObservedObject var mainSearchViewModel = MainSearchViewModel()
-    @ObservedObject var viewModel = CitiesViewModel()
+    @ObservedObject var mainSearchViewModel: MainSearchViewModel
+    @ObservedObject var viewModel: CitiesViewModel
     @Binding var path: [Destination]
     @State private var searchTextString = ""
     @Environment(\.dismiss) private var dismiss
@@ -72,7 +72,6 @@ struct CitiesScreenView: View {
                 ErrorView(errorType: viewModel.errorType)
             }
         }
-//        .environmentObject(mainSearchViewModel)
         .toolbar(.hidden, for: .tabBar)
         .navigationTitle(selectCityText)
         .navigationBarTitleDisplayMode(.inline)
@@ -94,6 +93,10 @@ struct CitiesScreenView: View {
 
 #Preview {
     NavigationStack {
-        CitiesScreenView(path: .constant([]))
+        CitiesScreenView(
+            mainSearchViewModel: MainSearchViewModel(), 
+            viewModel: CitiesViewModel(),
+            path: .constant([])
+        )
     }
 }

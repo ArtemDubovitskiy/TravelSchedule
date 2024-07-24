@@ -21,7 +21,7 @@ final class ScheduleViewModel: ObservableObject, Sendable {
     // MARK: - Private properties
     private let searchService = SearchService()
 //    private let currentDate = Date()
-    private let currentDate = DateFormatter.dateFormatter.string(from: Date())
+//    private let currentDate = DateFormatter.dateFormatter.string(from: Date())
     // MARK: - Public Methods
     func getSchedule(departure: String, arrival: String) async {
         do {
@@ -29,8 +29,7 @@ final class ScheduleViewModel: ObservableObject, Sendable {
             filterSchedule.removeAll()
             let scheduleSearch = try await searchService.search(
                 from: departure,
-                to: arrival,
-                date: "2024-07-23"
+                to: arrival
             )
             
             let sortedSchedule = scheduleSearch.sorted { $0.date < $1.date }

@@ -97,26 +97,26 @@ struct MainSearchView: View {
                 }
             }
         }
-//        .environmentObject(mainSearchViewModel)
         .navigationDestination(for: Destination.self) { destination in
             switch destination {
             case .cities:
                 CitiesScreenView(
+                    mainSearchViewModel: mainSearchViewModel, 
+                    viewModel: mainSearchViewModel.citiesViewModel,
                     path: $path
                 )
-//                .environmentObject(mainSearchViewModel)
                 
             case .stations:
                 StationsScreenView(
+                    mainSearchViewModel: mainSearchViewModel,
                     path: $path
                 )
-//                .environmentObject(mainSearchViewModel)
                 
             case .schuedel:
                 ScheduleScreenView(
+                    mainSearchViewModel: mainSearchViewModel,
                     path: $path
                 )
-//                .environmentObject(mainSearchViewModel)
             }
         }
     }

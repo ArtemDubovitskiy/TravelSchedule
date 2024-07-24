@@ -18,14 +18,13 @@ final class CitiesViewModel: ObservableObject, Sendable {
     // MARK: - Public Methods
     func getCities() async {
         do {
-//            state = .loading
             let cities = try await stationService.stationsList()
             let sortedCity = cities.sorted { $0.title < $1.title }
             self.cities = sortedCity
             state = .content
         } catch {
             self.cities = []
-            state = .error
+            self.state = .error
         }
     }
 }

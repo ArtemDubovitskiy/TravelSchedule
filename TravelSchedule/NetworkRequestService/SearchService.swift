@@ -9,7 +9,7 @@ import OpenAPIURLSession
 
 actor SearchService: Sendable {
     
-    func search(from: String, to: String, date: String) async throws -> [Schedule] {
+    func search(from: String, to: String) async throws -> [Schedule] {
         guard let serverURL = try? Servers.server1() else {
             return []
         }
@@ -26,12 +26,11 @@ actor SearchService: Sendable {
         
         let search = try await service.getSearch(
             from: from,
-            to: to,
-            date: date
+            to: to
         )
         
         let schudule = search.segments?.compactMap { segment -> Schedule? in
-//            let date = segment.start_date
+            let date = segment.start_date
             let departure = segment.departure
             let arrival = segment.arrival
             let transfers = segment.has_transfers ?? false
@@ -40,7 +39,7 @@ actor SearchService: Sendable {
             guard let carrier = segment.thread?.carrier else { return nil }
             
             return Schedule(
-                date: departure ?? "",
+                date: date ?? "",
                 departureTime: timeToHour(from: departure),
                 arrivalTime: timeToHour(from: arrival),
                 durationTime: durationToTime(from: duration),
@@ -58,7 +57,6 @@ actor SearchService: Sendable {
         return schudules
     }
     // MARK: - Private Methods
-    // TODO: исправить методы
     private func timeToHour(from: String?) -> String {
         guard let from else { return "" }
         let time = String(from.dropLast(3))

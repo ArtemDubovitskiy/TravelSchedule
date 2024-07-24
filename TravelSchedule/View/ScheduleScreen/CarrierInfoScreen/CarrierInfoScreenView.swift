@@ -8,12 +8,10 @@
 import SwiftUI
 
 struct CarrierInfoScreenView: View {
-    
-    var carrier: Carrier
-    
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
-    @ObservedObject var viewModel = MainSearchViewModel()
+    
+    var carrier: Carrier
     
     // TODO: Добавить локализацию
     private let carrierInfoText = "Информация о перевозчике"
@@ -71,7 +69,6 @@ struct CarrierInfoScreenView: View {
             
             Spacer()
         }
-        .environmentObject(viewModel)
         .padding(.horizontal, 16)
         .toolbar(.hidden, for: .tabBar)
         .navigationTitle(carrierInfoText)
@@ -93,7 +90,8 @@ struct CarrierInfoScreenView: View {
 
 #Preview {
     NavigationStack {
-        CarrierInfoScreenView(carrier: MockData.mockCarrier[0])
-//            .environmentObject(MainSearchViewModel())
+        CarrierInfoScreenView(
+            carrier: MockData.mockCarrier[0]
+        )
     }
 }

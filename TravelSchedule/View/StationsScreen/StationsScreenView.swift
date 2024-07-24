@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct StationsScreenView: View {
+    @ObservedObject var mainSearchViewModel: MainSearchViewModel
     @Binding var path: [Destination]
     @State private var searchTextString = ""
-    @ObservedObject var viewModel = MainSearchViewModel()
     @Environment(\.dismiss) private var dismiss
     
     // TODO: Добавить локализацию
@@ -18,20 +18,20 @@ struct StationsScreenView: View {
     private let stationNotFoundText = "Станция не найдена"
     
     private var searchResults: [Station] {
-        switch viewModel.currentRote {
+        switch mainSearchViewModel.currentRote {
         case .departure:
             if searchTextString.isEmpty {
-                return viewModel.departureCity?.stations ?? []
+                return mainSearchViewModel.departureCity?.stations ?? []
             } else {
-                return viewModel.departureCity?.stations.filter {
+                return mainSearchViewModel.departureCity?.stations.filter {
                     $0.title.lowercased().contains(searchTextString.lowercased())
                 } ?? []
             }
         case .arrival:
             if searchTextString.isEmpty {
-                return viewModel.arrivalCity?.stations ?? []
+                return mainSearchViewModel.arrivalCity?.stations ?? []
             } else {
-                return viewModel.arrivalCity?.stations.filter {
+                return mainSearchViewModel.arrivalCity?.stations.filter {
                     $0.title.lowercased().contains(searchTextString.lowercased())
                 } ?? []
             }
@@ -58,13 +58,13 @@ struct StationsScreenView: View {
                     ForEach(searchResults) { station in
                         StationCellView(station: station)
                             .onTapGesture {
-                                switch viewModel.currentRote {
+                                switch mainSearchViewModel.currentRote {
                                 case .departure:
-                                    viewModel.departureStation = station
-                                    viewModel.createDepartureText()
+                                    mainSearchViewModel.departureStation = station
+                                    mainSearchViewModel.createDepartureText()
                                 case .arrival:
-                                    viewModel.arrivalStation = station
-                                    viewModel.createArrivalText()
+                                    mainSearchViewModel.arrivalStation = station
+                                    mainSearchViewModel.createArrivalText()
                                 case .empty:
                                     break
                                 }
@@ -76,7 +76,6 @@ struct StationsScreenView: View {
                 Spacer()
             }
         }
-        .environmentObject(viewModel)
         .toolbar(.hidden, for: .tabBar)
         .navigationTitle(selectStationText)
         .navigationBarTitleDisplayMode(.inline)
@@ -98,6 +97,9 @@ struct StationsScreenView: View {
 
 #Preview {
     NavigationStack {
-        StationsScreenView(path: .constant([]))
+        StationsScreenView(
+            mainSearchViewModel: MainSearchViewModel(),
+            path: .constant([])
+        )
     }
 }
