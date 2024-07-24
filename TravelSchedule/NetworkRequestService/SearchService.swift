@@ -67,7 +67,7 @@ actor SearchService: Sendable {
         guard let duration = duration_seconds else { return "" }
         let durationDouble = Double(duration)
         guard 
-            let time = DateComponentsFormatter.formatter.string(from: durationDouble)
+            let time = DateFormatterHelper.componentsFormatter.string(from: durationDouble)
         else { return "" }
         return time
     }

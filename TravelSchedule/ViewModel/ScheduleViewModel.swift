@@ -8,6 +8,7 @@ import Foundation
 
 @MainActor
 final class ScheduleViewModel: ObservableObject, Sendable {
+    // MARK: - Public Properties
     @Published var state: AppState = .loading
     @Published var errorType: ErrorType = .serverError
     
@@ -20,8 +21,7 @@ final class ScheduleViewModel: ObservableObject, Sendable {
     
     // MARK: - Private properties
     private let searchService = SearchService()
-//    private let currentDate = Date()
-//    private let currentDate = DateFormatter.dateFormatter.string(from: Date())
+    
     // MARK: - Public Methods
     func getSchedule(departure: String, arrival: String) async {
         do {
@@ -63,6 +63,7 @@ final class ScheduleViewModel: ObservableObject, Sendable {
         self.selectedTransferOptions = nil
         self.isFilteredSchedule = false
     }
+    
     // MARK: - Private Methods
     private func roteTransfers(
         _ schedule: Schedule,
@@ -71,9 +72,9 @@ final class ScheduleViewModel: ObservableObject, Sendable {
         let transferPoint = schedule.transferPoint
         switch transferFilter {
         case .yes:
-            return transferPoint != nil
-        case .no:
             return transferPoint == nil
+        case .no:
+            return transferPoint != nil
         }
     }
     

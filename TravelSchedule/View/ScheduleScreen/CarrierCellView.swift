@@ -32,8 +32,7 @@ struct CarrierCellView: View {
                                 .font(.regular17)
                                 .foregroundStyle(.ypBlack)
                             Spacer()
-                            // Прошу не считать формат даты критическим замечанием:
-                            Text(schedule.date.parceStringToDateToStrimg())
+                            Text(DateFormatterHelper.stringFormatter(schedule.date))
                                 .font(.regular12)
                                 .foregroundStyle(.ypBlack)
                                 .padding(.trailing, 7)

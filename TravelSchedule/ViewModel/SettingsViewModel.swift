@@ -8,14 +8,17 @@ import SwiftUI
 
 @MainActor
 final class SettingsViewModel: ObservableObject, Sendable {
+    // MARK: - Public Properties
     @AppStorage("isDarkScheme") private var isDarkScheme: Bool = false
     @Published var isDarkSchemeOn: Bool = false
     @Published var copyrightText: String = ""
     @Published var state: AppState = .loading
     
+    // MARK: - Private properties
     private let service = CopyrightService()
     private let mock_copyright_text = "Приложение использует API «Яндекс.Расписания»"
     
+    // MARK: - Init
     init() {
         self.isDarkSchemeOn = isDarkScheme
     }

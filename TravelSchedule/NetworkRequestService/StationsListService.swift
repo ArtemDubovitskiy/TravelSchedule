@@ -41,6 +41,7 @@ actor StationsListService: Sendable {
                     let stationInCity = stations.compactMap { station -> Station? in
                         guard let stationTitle = station.title,
                               stationTitle != "",
+                              station.transport_type == "train",
                               let stationCode = station.codes?.yandex_code
                         else { return nil }
                         return Station(title: stationTitle, code: stationCode)
